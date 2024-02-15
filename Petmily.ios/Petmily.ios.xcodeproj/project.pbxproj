@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33BA6C492B7E60FB004AA232 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 33BA6C482B7E60FB004AA232 /* SnapKit */; };
+		33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */; };
+		33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C502B7E631B004AA232 /* UIColor+.swift */; };
 		560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DFC032B7E5B6B00487736 /* AppDelegate.swift */; };
 		560DFC062B7E5B6B00487736 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DFC052B7E5B6B00487736 /* SceneDelegate.swift */; };
 		560DFC082B7E5B6B00487736 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DFC072B7E5B6B00487736 /* ViewController.swift */; };
@@ -16,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
+		33BA6C502B7E631B004AA232 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		560DFC002B7E5B6B00487736 /* Petmily.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petmily.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		560DFC032B7E5B6B00487736 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		560DFC052B7E5B6B00487736 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,12 +36,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33BA6C492B7E60FB004AA232 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33BA6C4F2B7E6309004AA232 /* DesignSource */ = {
+			isa = PBXGroup;
+			children = (
+				33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */,
+			);
+			path = DesignSource;
+			sourceTree = "<group>";
+		};
+		33BA6C522B7E6322004AA232 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				33BA6C502B7E631B004AA232 /* UIColor+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		560DFBF72B7E5B6B00487736 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +81,8 @@
 				560DFC032B7E5B6B00487736 /* AppDelegate.swift */,
 				560DFC052B7E5B6B00487736 /* SceneDelegate.swift */,
 				560DFC072B7E5B6B00487736 /* ViewController.swift */,
+				33BA6C4F2B7E6309004AA232 /* DesignSource */,
+				33BA6C522B7E6322004AA232 /* Extension */,
 				560DFC092B7E5B6B00487736 /* Main.storyboard */,
 				560DFC0C2B7E5B7000487736 /* Assets.xcassets */,
 				560DFC0E2B7E5B7000487736 /* LaunchScreen.storyboard */,
@@ -83,6 +107,9 @@
 			dependencies = (
 			);
 			name = Petmily.ios;
+			packageProductDependencies = (
+				33BA6C482B7E60FB004AA232 /* SnapKit */,
+			);
 			productName = Petmily.ios;
 			productReference = 560DFC002B7E5B6B00487736 /* Petmily.ios.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +138,9 @@
 				Base,
 			);
 			mainGroup = 560DFBF72B7E5B6B00487736;
+			packageReferences = (
+				33BA6C472B7E60FB004AA232 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 560DFC012B7E5B6B00487736 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +169,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				560DFC082B7E5B6B00487736 /* ViewController.swift in Sources */,
+				33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				560DFC062B7E5B6B00487736 /* SceneDelegate.swift in Sources */,
+				33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +397,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		33BA6C472B7E60FB004AA232 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		33BA6C482B7E60FB004AA232 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33BA6C472B7E60FB004AA232 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 560DFBF82B7E5B6B00487736 /* Project object */;
 }
