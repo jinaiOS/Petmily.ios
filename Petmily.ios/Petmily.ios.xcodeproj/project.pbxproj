@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		261BF10CB748686CCE12864E /* Pods_Petmily_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D75A82791487AEDC2EAC10E0 /* Pods_Petmily_ios.framework */; };
-		33BA6C492B7E60FB004AA232 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 33BA6C482B7E60FB004AA232 /* SnapKit */; };
 		33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */; };
 		33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C502B7E631B004AA232 /* UIColor+.swift */; };
 		560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DFC032B7E5B6B00487736 /* AppDelegate.swift */; };
@@ -75,8 +73,6 @@
 		560DFC0C2B7E5B7000487736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		560DFC0F2B7E5B7000487736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		560DFC112B7E5B7000487736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		97BFD7E783A7696EF0F223A3 /* Pods-Petmily.ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petmily.ios.release.xcconfig"; path = "Target Support Files/Pods-Petmily.ios/Pods-Petmily.ios.release.xcconfig"; sourceTree = "<group>"; };
-		D75A82791487AEDC2EAC10E0 /* Pods_Petmily_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Petmily_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
@@ -96,7 +92,6 @@
 		DBA97B052B7EF86600C4D6BB /* CommonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		DBDBA40B2B7EFB18004C10C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBDBA4142B7F03F2004C10C3 /* launch-screen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "launch-screen.gif"; sourceTree = "<group>"; };
-		EC3E1F03337EC00F7DEC99D7 /* Pods-Petmily.ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Petmily.ios.debug.xcconfig"; path = "Target Support Files/Pods-Petmily.ios/Pods-Petmily.ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,21 +127,12 @@
 				DBA97AD32B7EEF5300C4D6BB /* FirebaseDynamicLinks in Frameworks */,
 				DBA97AD52B7EEF5300C4D6BB /* FirebaseFirestore in Frameworks */,
 				DBA97AED2B7EEF5300C4D6BB /* FirebaseRemoteConfigSwift in Frameworks */,
-				261BF10CB748686CCE12864E /* Pods_Petmily_ios.framework in Frameworks */,
-				33BA6C492B7E60FB004AA232 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		27FE102B9CBC8F7FA17F1E29 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EC3E1F03337EC00F7DEC99D7 /* Pods-Petmily.ios.debug.xcconfig */,
-				97BFD7E783A7696EF0F223A3 /* Pods-Petmily.ios.release.xcconfig */,
-			);
-			path = Pods;
 		33BA6C4F2B7E6309004AA232 /* DesignSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,8 +154,6 @@
 			children = (
 				560DFC022B7E5B6B00487736 /* Petmily.ios */,
 				560DFC012B7E5B6B00487736 /* Products */,
-				27FE102B9CBC8F7FA17F1E29 /* Pods */,
-				D77720493290747A83B74138 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,7 +174,6 @@
 				DBDBA4122B7F02CD004C10C3 /* Base */,
 				DBDBA40E2B7F0219004C10C3 /* Util */,
 				DBDBA40D2B7F020F004C10C3 /* Model */,
-				560DFC072B7E5B6B00487736 /* ViewController.swift */,
 				33BA6C4F2B7E6309004AA232 /* DesignSource */,
 				33BA6C522B7E6322004AA232 /* Extension */,
 				560DFC092B7E5B6B00487736 /* Main.storyboard */,
@@ -201,14 +184,6 @@
 				DBDBA4142B7F03F2004C10C3 /* launch-screen.gif */,
 			);
 			path = Petmily.ios;
-			sourceTree = "<group>";
-		};
-		D77720493290747A83B74138 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D75A82791487AEDC2EAC10E0 /* Pods_Petmily_ios.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DBDBA40D2B7F020F004C10C3 /* Model */ = {
@@ -326,7 +301,6 @@
 				DBA97AEC2B7EEF5300C4D6BB /* FirebaseRemoteConfigSwift */,
 				DBA97AEE2B7EEF5300C4D6BB /* FirebaseStorage */,
 				DBA97AF02B7EEF5300C4D6BB /* FirebaseStorageCombine-Community */,
-				33BA6C482B7E60FB004AA232 /* SnapKit */,
 			);
 			productName = Petmily.ios;
 			productReference = 560DFC002B7E5B6B00487736 /* Petmily.ios.app */;
@@ -359,7 +333,6 @@
 			packageReferences = (
 				DBA97AAA2B7E670600C4D6BB /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DBA97ABB2B7EEF5300C4D6BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				33BA6C472B7E60FB004AA232 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 560DFC012B7E5B6B00487736 /* Products */;
 			projectDirPath = "";
@@ -425,7 +398,6 @@
 				DBA97AB42B7EEC9F00C4D6BB /* InfoViewController.swift in Sources */,
 				DBA97AFA2B7EF25F00C4D6BB /* Pet.swift in Sources */,
 				DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */,
-				560DFC082B7E5B6B00487736 /* ViewController.swift in Sources */,
 				33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
@@ -583,7 +555,6 @@
 		};
 		560DFC152B7E5B7000487736 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC3E1F03337EC00F7DEC99D7 /* Pods-Petmily.ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -613,7 +584,6 @@
 		};
 		560DFC162B7E5B7000487736 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97BFD7E783A7696EF0F223A3 /* Pods-Petmily.ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -668,13 +638,6 @@
 		DBA97AAA2B7E670600C4D6BB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-		33BA6C472B7E60FB004AA232 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.0;
-			};
 		};
 		DBA97ABB2B7EEF5300C4D6BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -826,14 +789,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DBA97ABB2B7EEF5300C4D6BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		33BA6C482B7E60FB004AA232 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33BA6C472B7E60FB004AA232 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
