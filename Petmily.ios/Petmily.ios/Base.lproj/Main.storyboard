@@ -12,9 +12,8 @@
         <!--Navigation Controller-->
         <scene sceneID="QMS-HH-OjG">
             <objects>
-                <navigationController id="ZLc-DH-afm" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="ZLc-DH-afm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SC7-hc-O8O">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
