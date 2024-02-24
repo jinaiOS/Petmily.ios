@@ -7,23 +7,70 @@
 
 import UIKit
 
-class DailyViewController: UIViewController {
+class DailyViewController: BaseViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
-        // Do any additional setup after loading the view.
+    private let dailyView = DailyView()
+    
+    override func loadView() {
+        super.loadView()
+        
+        view.addSubview(dailyView)
+        
+        dailyView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+        dailyView.btnLike.addTarget(self, action: #selector(toggleLikeButton), for: .touchUpInside)
+        dailyView.btnApply.addTarget(self, action: #selector(commentButtonPressed), for: .touchUpInside)
     }
-    */
+    
+}
 
+private extension DailyViewController {
+    func configure() {
+        dailyView.cvMain.delegate = self
+        dailyView.cvMain.dataSource = self
+    }
+    
+    @objc func toggleLikeButton() {
+        dailyView.btnLike.isSelected = !dailyView.btnLike.isSelected
+        dailyView.btnLike.configurationUpdateHandler?(dailyView.btnLike)
+    }
+    
+    @objc func commentButtonPressed() {
+        let vc = CommentViewController()
+        guard let sheet = vc.presentationController as? UISheetPresentationController else {
+            return
+        }
+        sheet.detents = [.medium(), .large()]
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        self.present(vc, animated: true, completion: nil)
+    }
+}
+
+extension DailyViewController: UICollectionViewDataSource, UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: DailyCollectionViewCell.identifier,
+            for: indexPath) as? DailyCollectionViewCell else { return UICollectionViewCell() }
+        cell.backgroundColor = .red
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
 }
