@@ -60,7 +60,7 @@ final class InfoDetailContentView: UIView {
     
     private lazy var moreButon: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.setImage(PetmilyImage.ellipsis, for: .normal)
         button.tintColor = .black
         button.contentHorizontalAlignment = .right
         

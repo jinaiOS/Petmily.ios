@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		330241802B805A070045F56E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3302417F2B805A070045F56E /* SnapKit */; };
+		332607602B8A46BE00A66DC5 /* PetmilyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */; };
 		33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33946F892B89F56E00C0EDF3 /* Kingfisher */; };
 		33946F8C2B89F59B00C0EDF3 /* AppConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */; };
 		33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */; };
@@ -129,6 +130,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetmilyImage.swift; sourceTree = "<group>"; };
 		33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstraint.swift; sourceTree = "<group>"; };
 		33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			children = (
 				33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */,
 				33FE533D2B89F4B400BF1E98 /* ThemeFont.swift */,
+				3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */,
 			);
 			path = DesignSource;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				33FE532D2B89F49000BF1E98 /* InfoSearchViewController.swift in Sources */,
 				33FE53332B89F49000BF1E98 /* InfoSection.swift in Sources */,
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
+				332607602B8A46BE00A66DC5 /* PetmilyImage.swift in Sources */,
 				DBA97B022B7EF47600C4D6BB /* Common.swift in Sources */,
 				77DAE4F12B8A33D10020B4AA /* MyPageInfoCell.swift in Sources */,
 				DBA97AF62B7EF20F00C4D6BB /* DataManager.swift in Sources */,

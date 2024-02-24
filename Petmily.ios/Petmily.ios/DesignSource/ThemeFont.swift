@@ -7,6 +7,6 @@
 
 import UIKit
 
-struct ThemeFont {
+enum ThemeFont {
     static let infoSearchCategory: UIFont = .systemFont(ofSize: 16, weight: .bold)
 }

@@ -27,7 +27,7 @@ final class InfoView: UIView {
     
     lazy var searchButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.setImage(PetmilyImage.search, for: .normal)
         button.tintColor = .black
         return button
     }()
