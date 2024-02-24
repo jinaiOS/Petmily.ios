@@ -70,8 +70,6 @@ private extension TabBarController {
         view.addSubview(locationVC.view)
         setLayout()
         changeTintColor(buttonType: tabBarView.locationBtn)
-        
-//        locationVC.authenticationSucceeded()
     }
     
     @objc func didTappedMyPage() {
