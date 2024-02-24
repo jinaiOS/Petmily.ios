@@ -40,8 +40,30 @@ class DailyView: UIView {
     /** @brief 좋아요 button */
     lazy var btnLike: UIButton = {
        let button = UIButton()
-        button.setImage(UIImage(named: "btn_unlike"), for: .normal)
-        button.setTitle("0", for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.imagePlacement = .top
+        config.image = UIImage(named: "btn_unlike")
+        config.title = "0"
+        config.imagePadding = 5
+        config.baseForegroundColor = .white
+        button.contentVerticalAlignment = .bottom
+        button.tintColor = .clear
+        button.configuration = config
+        
+        /// select handler
+        let likeImg = UIImage(named: "btn_like")?.resize(newWidth: 40)
+        
+        button.configurationUpdateHandler = { button in
+            switch button.state {
+            case .selected:
+                config.image = likeImg
+                config.title = "1"
+            default:
+                config.image = UIImage(named: "btn_unlike")
+                config.title = "0"
+            }
+            button.configuration = config
+        }
         return button
     }()
     /** @brief 댓글 button */
@@ -70,9 +92,16 @@ class DailyView: UIView {
     private func setLayout() {
         [cvMain, lblHeader, stvButtons].forEach { addSubview($0) }
         
-        lblHeader.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).inset(31)
-            $0.leading.equalToSuperview().inset(15)
+        if Common.hasSafeArea {
+            lblHeader.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(51)
+                $0.leading.equalToSuperview().inset(15)
+            }
+        } else {
+            lblHeader.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(31)
+                $0.leading.equalToSuperview().inset(15)
+            }
         }
         
         cvMain.snp.makeConstraints {

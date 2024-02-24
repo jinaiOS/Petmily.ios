@@ -13,6 +13,7 @@ class DailyViewController: BaseViewController {
     
     override func loadView() {
         super.loadView()
+        
         view.addSubview(dailyView)
         
         dailyView.snp.makeConstraints {
@@ -23,6 +24,7 @@ class DailyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        dailyView.btnLike.addTarget(self, action: #selector(toggleLikeButton), for: .touchUpInside)
     }
     
 }
@@ -31,6 +33,11 @@ private extension DailyViewController {
     func configure() {
         dailyView.cvMain.delegate = self
         dailyView.cvMain.dataSource = self
+    }
+    
+    @objc func toggleLikeButton() {
+        dailyView.btnLike.isSelected = !dailyView.btnLike.isSelected
+        dailyView.btnLike.configurationUpdateHandler?(dailyView.btnLike)
     }
 }
 
