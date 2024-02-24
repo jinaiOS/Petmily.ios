@@ -63,6 +63,9 @@
 		560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560DFC032B7E5B6B00487736 /* AppDelegate.swift */; };
 		560DFC0D2B7E5B7000487736 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC0C2B7E5B7000487736 /* Assets.xcassets */; };
 		560DFC102B7E5B7000487736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC0E2B7E5B7000487736 /* LaunchScreen.storyboard */; };
+		CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */; };
+		CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */; };
+		CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */; };
 		562351542B80FD61005B2071 /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562351532B80FD61005B2071 /* DailyCollectionViewCell.swift */; };
 		563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617D2B896850006FC307 /* UIImage+Extension.swift */; };
 		563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617F2B896B88006FC307 /* UIColor+Extension.swift */; };
@@ -158,6 +161,9 @@
 		560DFC0C2B7E5B7000487736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		560DFC0F2B7E5B7000487736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		560DFC112B7E5B7000487736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addpageViewController.swift; sourceTree = "<group>"; };
+		CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registViewController.swift; sourceTree = "<group>"; };
 		562351532B80FD61005B2071 /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
 		563E617D2B896850006FC307 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		563E617F2B896B88006FC307 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -413,6 +419,9 @@
 		560DFC022B7E5B6B00487736 /* Petmily.ios */ = {
 			isa = PBXGroup;
 			children = (
+				CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */,
+				CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */,
+				CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */,
 				560DFC032B7E5B6B00487736 /* AppDelegate.swift */,
 				DBDBA40F2B7F0220004C10C3 /* ViewController */,
 				DBDBA4122B7F02CD004C10C3 /* Base */,
@@ -664,6 +673,8 @@
 				33FE53222B89F49000BF1E98 /* InfoView.swift in Sources */,
 				33FE532A2B89F49000BF1E98 /* InfoSearchView.swift in Sources */,
 				DBA97AF82B7EF23400C4D6BB /* UserModel.swift in Sources */,
+				DBA97AB42B7EEC9F00C4D6BB /* InfoViewController.swift in Sources */,
+				CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */,
 				33FE53342B89F49000BF1E98 /* InfoDetailView.swift in Sources */,
 				33FE53322B89F49000BF1E98 /* PopularInfo.swift in Sources */,
 				33FE533A2B89F49000BF1E98 /* InfoDetailCommentHeader.swift in Sources */,
@@ -680,6 +691,7 @@
 				DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */,
 				33FE533E2B89F4B400BF1E98 /* ThemeFont.swift in Sources */,
 				33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */,
+				CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */,
 				33FE532E2B89F49000BF1E98 /* InfoSearchTopicHeader.swift in Sources */,
 				33FE53282B89F49000BF1E98 /* InfoSearchViewModel.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
@@ -694,6 +706,7 @@
 				563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */,
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
+				CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */,
 				DBA97AF42B7EF1BA00C4D6BB /* IntroViewController.swift in Sources */,
 				33FE533B2B89F49000BF1E98 /* InfoShareHeader.swift in Sources */,
 				563E61862B89A0A0006FC307 /* CommentView.swift in Sources */,
