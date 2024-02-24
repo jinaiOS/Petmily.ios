@@ -36,6 +36,7 @@
 		560DFC102B7E5B7000487736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC0E2B7E5B7000487736 /* LaunchScreen.storyboard */; };
 		CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */; };
 		CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */; };
+		CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */; };
 		DBA97AAC2B7E670600C4D6BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97AAB2B7E670600C4D6BB /* SnapKit */; };
 		DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */; };
 		DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */; };
@@ -97,6 +98,7 @@
 		560DFC112B7E5B7000487736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addpageViewController.swift; sourceTree = "<group>"; };
+		CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registViewController.swift; sourceTree = "<group>"; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */,
+				CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */,
 				CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */,
 				560DFC032B7E5B6B00487736 /* AppDelegate.swift */,
 				560DFC052B7E5B6B00487736 /* SceneDelegate.swift */,
@@ -441,6 +444,7 @@
 				DBA97AFA2B7EF25F00C4D6BB /* Pet.swift in Sources */,
 				DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */,
 				33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */,
+				CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
 				DBA97B042B7EF82C00C4D6BB /* UIView+Extension.swift in Sources */,
