@@ -25,6 +25,7 @@ class DailyViewController: BaseViewController {
         super.viewDidLoad()
         configure()
         dailyView.btnLike.addTarget(self, action: #selector(toggleLikeButton), for: .touchUpInside)
+        dailyView.btnApply.addTarget(self, action: #selector(commentButtonPressed), for: .touchUpInside)
     }
     
 }
@@ -38,6 +39,17 @@ private extension DailyViewController {
     @objc func toggleLikeButton() {
         dailyView.btnLike.isSelected = !dailyView.btnLike.isSelected
         dailyView.btnLike.configurationUpdateHandler?(dailyView.btnLike)
+    }
+    
+    @objc func commentButtonPressed() {
+        let vc = CommentViewController()
+        guard let sheet = vc.presentationController as? UISheetPresentationController else {
+            return
+        }
+        sheet.detents = [.medium(), .large()]
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
