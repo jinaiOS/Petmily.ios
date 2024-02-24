@@ -70,6 +70,7 @@
 		563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61872B89A0A8006FC307 /* CommentViewController.swift */; };
 		563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
+		77DAE4E32B8A308D0020B4AA /* MyPage in Resources */ = {isa = PBXBuildFile; fileRef = 77DAE4E22B8A308D0020B4AA /* MyPage */; };
 		CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */; };
 		CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */; };
 		CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */; };
@@ -80,7 +81,6 @@
 		DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */; };
 		DBA97AB22B7EEC8900C4D6BB /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */; };
 		DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB52B7EECAB00C4D6BB /* LocationViewController.swift */; };
-		DBA97AB82B7EECB900C4D6BB /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB72B7EECB900C4D6BB /* MyPageViewController.swift */; };
 		DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */; };
 		DBA97ABD2B7EEF5300C4D6BB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97ABC2B7EEF5300C4D6BB /* FirebaseAnalytics */; };
 		DBA97ABF2B7EEF5300C4D6BB /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97ABE2B7EEF5300C4D6BB /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -168,6 +168,7 @@
 		563E61872B89A0A8006FC307 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		77DAE4E22B8A308D0020B4AA /* MyPage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MyPage; sourceTree = "<group>"; };
 		CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addpageViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
 		DBA97AB52B7EECAB00C4D6BB /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
-		DBA97AB72B7EECB900C4D6BB /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DBA97AF32B7EF1BA00C4D6BB /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		DBA97AF52B7EF20F00C4D6BB /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -514,10 +514,10 @@
 		DBDBA4132B7F032C004C10C3 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				77DAE4E22B8A308D0020B4AA /* MyPage */,
 				56FD90712B80F44100AAD29B /* Daily */,
 				33FE52FA2B89F49000BF1E98 /* Info */,
 				DBA97AB52B7EECAB00C4D6BB /* LocationViewController.swift */,
-				DBA97AB72B7EECB900C4D6BB /* MyPageViewController.swift */,
 				DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */,
 				DBA97AF32B7EF1BA00C4D6BB /* IntroViewController.swift */,
 				DB4E6A5A2B8A01BF00624E8C /* KakaoMapViewController.swift */,
@@ -643,6 +643,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				560DFC102B7E5B7000487736 /* LaunchScreen.storyboard in Resources */,
+				77DAE4E32B8A308D0020B4AA /* MyPage in Resources */,
 				DBDBA4152B7F03F2004C10C3 /* launch-screen.gif in Resources */,
 				560DFC0D2B7E5B7000487736 /* Assets.xcassets in Resources */,
 				DBDBA40C2B7EFB18004C10C3 /* GoogleService-Info.plist in Resources */,
@@ -662,7 +663,6 @@
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
 				DBA97B022B7EF47600C4D6BB /* Common.swift in Sources */,
 				DBA97AF62B7EF20F00C4D6BB /* DataManager.swift in Sources */,
-				DBA97AB82B7EECB900C4D6BB /* MyPageViewController.swift in Sources */,
 				33FE53252B89F49000BF1E98 /* InfoViewController.swift in Sources */,
 				DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */,
 				562351542B80FD61005B2071 /* DailyCollectionViewCell.swift in Sources */,
