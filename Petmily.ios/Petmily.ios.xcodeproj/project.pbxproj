@@ -36,6 +36,7 @@
 		560DFC102B7E5B7000487736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC0E2B7E5B7000487736 /* LaunchScreen.storyboard */; };
 		562351542B80FD61005B2071 /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562351532B80FD61005B2071 /* DailyCollectionViewCell.swift */; };
 		563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617D2B896850006FC307 /* UIImage+Extension.swift */; };
+		563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617F2B896B88006FC307 /* UIColor+Extension.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
 		DBA97AAC2B7E670600C4D6BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97AAB2B7E670600C4D6BB /* SnapKit */; };
 		DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */; };
@@ -98,6 +99,7 @@
 		560DFC112B7E5B7000487736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562351532B80FD61005B2071 /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
 		563E617D2B896850006FC307 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		563E617F2B896B88006FC307 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				DBA97B032B7EF82C00C4D6BB /* UIView+Extension.swift */,
 				563E617D2B896850006FC307 /* UIImage+Extension.swift */,
+				563E617F2B896B88006FC307 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
 				DBA97B042B7EF82C00C4D6BB /* UIView+Extension.swift in Sources */,
+				563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
 				DBA97AF42B7EF1BA00C4D6BB /* IntroViewController.swift in Sources */,
 				560DFC062B7E5B6B00487736 /* SceneDelegate.swift in Sources */,
