@@ -131,7 +131,7 @@ final class InfoDetailContentView: UIView {
     
     private lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(resource: .comment), for: .normal)
+        button.setImage(UIImage(named: "comment"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = .darkGray
         

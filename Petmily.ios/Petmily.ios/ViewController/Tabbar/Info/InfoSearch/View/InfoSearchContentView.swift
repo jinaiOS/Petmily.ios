@@ -18,7 +18,7 @@ final class InfoSearchContentView: UIView {
     
     private let searchButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(resource: .search), for: .normal)
+        button.setImage(UIImage(named: "search"), for: .normal)
         
         button.snp.makeConstraints {
             $0.width.height.equalTo(33)

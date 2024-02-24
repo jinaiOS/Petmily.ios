@@ -21,7 +21,7 @@ final class InfoShareHeader: UICollectionReusableView {
     
     private lazy var editButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(resource: .pencil), for: .normal)
+        button.setImage(UIImage(named: "pencil"), for: .normal)
         button.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
             didTapEditbutton?.send()
