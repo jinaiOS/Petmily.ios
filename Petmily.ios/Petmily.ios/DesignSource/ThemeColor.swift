@@ -9,4 +9,5 @@ import UIKit
 
 enum ThemeColor {
     static let pink = UIColor(hexString: "FFB6C7")
+    static let categoryPink = UIColor(hexString: "FFB9B9")
 }
