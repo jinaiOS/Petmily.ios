@@ -263,6 +263,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3326075D2B8A43AF00A66DC5 /* InfoRoot */ = {
+			isa = PBXGroup;
+			children = (
+				33FE52FC2B89F49000BF1E98 /* Cell */,
+				33FE531F2B89F49000BF1E98 /* Header */,
+				33FE53102B89F49000BF1E98 /* Model */,
+				33FE52FB2B89F49000BF1E98 /* InfoView.swift */,
+				33FE530F2B89F49000BF1E98 /* InfoViewModel.swift */,
+				33FE52FF2B89F49000BF1E98 /* InfoViewController.swift */,
+			);
+			path = InfoRoot;
+			sourceTree = "<group>";
+		};
+		3326075E2B8A44C800A66DC5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				33FE53152B89F49000BF1E98 /* InfoDetailView.swift */,
+				33FE531C2B89F49000BF1E98 /* InfoDetailContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		33BA6C4F2B7E6309004AA232 /* DesignSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,14 +305,9 @@
 		33FE52FA2B89F49000BF1E98 /* Info */ = {
 			isa = PBXGroup;
 			children = (
-				33FE52FC2B89F49000BF1E98 /* Cell */,
-				33FE52FB2B89F49000BF1E98 /* InfoView.swift */,
-				33FE52FF2B89F49000BF1E98 /* InfoViewController.swift */,
+				3326075D2B8A43AF00A66DC5 /* InfoRoot */,
 				33FE53002B89F49000BF1E98 /* InfoSearch */,
-				33FE530F2B89F49000BF1E98 /* InfoViewModel.swift */,
-				33FE53102B89F49000BF1E98 /* Model */,
 				33FE53142B89F49000BF1E98 /* InfoDetail */,
-				33FE531F2B89F49000BF1E98 /* Header */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -308,11 +325,11 @@
 			isa = PBXGroup;
 			children = (
 				33FE53012B89F49000BF1E98 /* Cell */,
-				33FE53042B89F49000BF1E98 /* InfoSearchViewModel.swift */,
+				33FE530C2B89F49000BF1E98 /* Header */,
 				33FE53052B89F49000BF1E98 /* Model */,
 				33FE53072B89F49000BF1E98 /* View */,
+				33FE53042B89F49000BF1E98 /* InfoSearchViewModel.swift */,
 				33FE530B2B89F49000BF1E98 /* InfoSearchViewController.swift */,
-				33FE530C2B89F49000BF1E98 /* Header */,
 			);
 			path = InfoSearch;
 			sourceTree = "<group>";
@@ -366,13 +383,12 @@
 		33FE53142B89F49000BF1E98 /* InfoDetail */ = {
 			isa = PBXGroup;
 			children = (
-				33FE53152B89F49000BF1E98 /* InfoDetailView.swift */,
+				33FE53182B89F49000BF1E98 /* Cell */,
+				33FE531D2B89F49000BF1E98 /* Header */,
+				33FE531A2B89F49000BF1E98 /* Model */,
+				3326075E2B8A44C800A66DC5 /* View */,
 				33FE53162B89F49000BF1E98 /* InfoDetailViewModel.swift */,
 				33FE53172B89F49000BF1E98 /* InfoDetailViewController.swift */,
-				33FE53182B89F49000BF1E98 /* Cell */,
-				33FE531A2B89F49000BF1E98 /* Model */,
-				33FE531C2B89F49000BF1E98 /* InfoDetailContentView.swift */,
-				33FE531D2B89F49000BF1E98 /* Header */,
 			);
 			path = InfoDetail;
 			sourceTree = "<group>";
