@@ -46,7 +46,10 @@ class addpageViewController: UIViewController {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        
+        let newColor = UIColor(hexString: "FD9B9B")
+        button.backgroundColor = newColor
+        
         button.layer.cornerRadius = 10
         return button
     }()
