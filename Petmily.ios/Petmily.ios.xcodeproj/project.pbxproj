@@ -34,6 +34,8 @@
 		560DFC0B2B7E5B6B00487736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC092B7E5B6B00487736 /* Main.storyboard */; };
 		560DFC0D2B7E5B7000487736 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC0C2B7E5B7000487736 /* Assets.xcassets */; };
 		560DFC102B7E5B7000487736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560DFC0E2B7E5B7000487736 /* LaunchScreen.storyboard */; };
+		DB25E6DF2B88DCFB0098CDFE /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB25E6DE2B88DCFB0098CDFE /* KakaoMapViewController.swift */; };
+		DB9013912B87ABE60043899A /* KakaoMapsSDK_SPM in Frameworks */ = {isa = PBXBuildFile; productRef = DB9013902B87ABE60043899A /* KakaoMapsSDK_SPM */; };
 		DBA97AAC2B7E670600C4D6BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97AAB2B7E670600C4D6BB /* SnapKit */; };
 		DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */; };
 		DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */; };
@@ -93,6 +95,7 @@
 		560DFC0C2B7E5B7000487736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		560DFC0F2B7E5B7000487736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		560DFC112B7E5B7000487736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB25E6DE2B88DCFB0098CDFE /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +167,7 @@
 				DBA97AC92B7EEF5300C4D6BB /* FirebaseAuth in Frameworks */,
 				DBA97AD32B7EEF5300C4D6BB /* FirebaseDynamicLinks in Frameworks */,
 				DBA97AD52B7EEF5300C4D6BB /* FirebaseFirestore in Frameworks */,
+				DB9013912B87ABE60043899A /* KakaoMapsSDK_SPM in Frameworks */,
 				33F774752B8059D60044DF28 /* FirebaseAppDistribution-Beta in Frameworks */,
 				33F7746B2B8059D60044DF28 /* FirebaseAnalytics in Frameworks */,
 				DBA97AED2B7EEF5300C4D6BB /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -291,6 +295,7 @@
 				DBA97AB72B7EECB900C4D6BB /* MyPageViewController.swift */,
 				DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */,
 				DBA97AF32B7EF1BA00C4D6BB /* IntroViewController.swift */,
+				DB25E6DE2B88DCFB0098CDFE /* KakaoMapViewController.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				33F7748C2B8059D60044DF28 /* FirebaseInAppMessaging-Beta */,
 				33F7748E2B8059D60044DF28 /* FirebaseInAppMessagingSwift-Beta */,
 				3302417F2B805A070045F56E /* SnapKit */,
+				DB9013902B87ABE60043899A /* KakaoMapsSDK_SPM */,
 			);
 			productName = Petmily.ios;
 			productReference = 560DFC002B7E5B6B00487736 /* Petmily.ios.app */;
@@ -393,6 +399,7 @@
 				DBA97AAA2B7E670600C4D6BB /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DBA97ABB2B7EEF5300C4D6BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3302417E2B805A070045F56E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DB90138F2B87ABE60043899A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
 			);
 			productRefGroup = 560DFC012B7E5B6B00487736 /* Products */;
 			projectDirPath = "";
@@ -437,6 +444,7 @@
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
 				DBA97B042B7EF82C00C4D6BB /* UIView+Extension.swift in Sources */,
+				DB25E6DF2B88DCFB0098CDFE /* KakaoMapViewController.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
 				DBA97AF42B7EF1BA00C4D6BB /* IntroViewController.swift in Sources */,
 				560DFC062B7E5B6B00487736 /* SceneDelegate.swift in Sources */,
@@ -521,7 +529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -578,7 +586,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -595,7 +603,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YRZW7MZ3P5;
+				DEVELOPMENT_TEAM = NNZY5VCJT4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Petmily.ios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -624,7 +632,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YRZW7MZ3P5;
+				DEVELOPMENT_TEAM = NNZY5VCJT4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Petmily.ios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -676,6 +684,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.7.0;
+			};
+		};
+		DB90138F2B87ABE60043899A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM";
+			requirement = {
+				kind = exactVersion;
+				version = 2.6.3;
 			};
 		};
 		DBA97AAA2B7E670600C4D6BB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -773,6 +789,11 @@
 		33F7748E2B8059D60044DF28 /* FirebaseInAppMessagingSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "FirebaseInAppMessagingSwift-Beta";
+		};
+		DB9013902B87ABE60043899A /* KakaoMapsSDK_SPM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB90138F2B87ABE60043899A /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */;
+			productName = KakaoMapsSDK_SPM;
 		};
 		DBA97AAB2B7E670600C4D6BB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
