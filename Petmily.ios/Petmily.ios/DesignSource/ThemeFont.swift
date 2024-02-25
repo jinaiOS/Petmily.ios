@@ -9,4 +9,5 @@ import UIKit
 
 enum ThemeFont {
     static let infoSearchCategory: UIFont = .systemFont(ofSize: 16, weight: .bold)
+    static let header: UIFont = .systemFont(ofSize: 24, weight: .bold)
 }

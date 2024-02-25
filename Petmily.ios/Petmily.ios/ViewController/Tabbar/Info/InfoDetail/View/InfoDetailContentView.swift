@@ -12,6 +12,12 @@ import UIKit
 final class InfoDetailContentView: UIView {
     private let shareInfo: ShareInfo
     
+    private let spacerView1 = UIView()
+    private let spacerView2 = UIView()
+    private let spacerView3 = UIView()
+    private let spacerView4 = UIView()
+    private let spacerView5 = UIView()
+    
     private lazy var profileImageView: UIImageView = {
         let imageSize: CGFloat = 50
         let view = UIImageView()
@@ -115,37 +121,38 @@ final class InfoDetailContentView: UIView {
         return label
     }()
     
-    private lazy var commentTextField: UITextField = {
-        let textField = UITextField()
-        textField.cornerRadius = 17.5
-        textField.borderStyle = .none
-        textField.borderColor = .darkGray
-        textField.borderWidth = 2
-        textField.placeholder = "텍스트 입력"
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
-        textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width:50, height: 0))
-        textField.leftViewMode = .always
-        textField.rightViewMode = .always
-        return textField
-    }()
-    
-    private lazy var commentButton: UIButton = {
+    private lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "comment"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = .darkGray
+        button.setImage(PetmilyImage.like, for: .normal)
         
-        button.imageView?.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        button.snp.makeConstraints {
+            $0.width.height.equalTo(42)
         }
         return button
     }()
     
-    private let emptyView1 = UIView()
-    private let emptyView2 = UIView()
-    private let emptyView3 = UIView()
-    private let emptyView4 = UIView()
-    private let emptyView5 = UIView()
+    private lazy var showCommentButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(PetmilyImage.union, for: .normal)
+        
+        button.snp.makeConstraints {
+            $0.width.height.equalTo(42)
+        }
+        return button
+    }()
+    
+    private lazy var buttonHStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 11
+        
+        [likeButton, showCommentButton, spacerView5].forEach {
+            stack.addArrangedSubview($0)
+        }
+        return stack
+    }()
     
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()
@@ -153,8 +160,8 @@ final class InfoDetailContentView: UIView {
         stack.alignment = .fill
         stack.distribution = .fill
         
-        [hStack, emptyView1, contentImageView, emptyView2, contentLabel,
-         emptyView3, hashtagLabel, emptyView4, commentTextField, emptyView5].forEach {
+        [hStack, spacerView1, contentImageView, spacerView2, contentLabel,
+         spacerView3, hashtagLabel, spacerView4, buttonHStack].forEach {
             stack.addArrangedSubview($0)
         }
         return stack
@@ -175,48 +182,31 @@ final class InfoDetailContentView: UIView {
 private extension InfoDetailContentView {
     func setLayout() {
         let insetSpacing: CGFloat = 24
-        
-        [vStack, commentButton].forEach {
-            addSubview($0)
-        }
+        addSubview(vStack)
         
         vStack.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(insetSpacing)
         }
         
-        emptyView1.snp.makeConstraints {
+        spacerView1.snp.makeConstraints {
             $0.height.equalTo(8)
         }
         
-        emptyView2.snp.makeConstraints {
+        spacerView2.snp.makeConstraints {
             $0.height.equalTo(20)
         }
         
-        emptyView3.snp.makeConstraints {
+        spacerView3.snp.makeConstraints {
             $0.height.equalTo(26)
         }
         
-        emptyView4.snp.makeConstraints {
+        spacerView4.snp.makeConstraints {
             $0.height.greaterThanOrEqualTo(26)
-        }
-        
-        emptyView5.snp.makeConstraints {
-            $0.height.equalTo(16)
         }
         
         contentImageView.snp.makeConstraints {
             $0.height.equalTo(contentImageView.snp.width)
-        }
-        
-        commentTextField.snp.makeConstraints {
-            $0.height.equalTo(35)
-        }
-        
-        commentButton.snp.makeConstraints {
-            $0.width.height.equalTo(24)
-            $0.centerY.equalTo(commentTextField)
-            $0.trailing.equalTo(commentTextField.snp.trailing).inset(17)
         }
     }
 }

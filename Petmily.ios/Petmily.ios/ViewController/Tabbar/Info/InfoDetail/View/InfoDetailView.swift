@@ -11,19 +11,8 @@ import UIKit
 final class InfoDetailView: UIView {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+    private let spacerView = UIView()
     private let infoDetailShareView: InfoDetailContentView
-    
-    lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        collectionView.register(InfoDetailCommentCell.self,
-                                forCellWithReuseIdentifier: InfoDetailCommentCell.identifier)
-        collectionView.register(InfoDetailCommentHeader.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: InfoDetailCommentHeader.identifier)
-        collectionView.isScrollEnabled = false
-        collectionView.setCollectionViewLayout(collectionViewLayout(), animated: true)
-        return collectionView
-    }()
     
     init(info: ShareInfo) {
         infoDetailShareView = InfoDetailContentView(info: info)
@@ -37,41 +26,28 @@ final class InfoDetailView: UIView {
     }
 }
 
-private extension InfoDetailView {
-    /**
-     @brief Section에 따른 Layout 설정
-     */
-    func collectionViewLayout() -> UICollectionViewCompositionalLayout {
-        UICollectionViewCompositionalLayout { sectionNum, _ in
-            switch sectionNum {
-            case 0:
-                return InfoDetailCommentCell.commentSection()
-                
-            default: return nil
-            }
-        }
-    }
-}
-
-extension InfoDetailView {
-    func remakeConstraints(cellCount: Int) {
-        let cellSize: CGFloat = 121
-        let headerSize: CGFloat = 45
-        collectionView.snp.remakeConstraints {
-            $0.top.equalTo(infoDetailShareView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(headerSize + cellSize * CGFloat(cellCount))
-        }
-    }
-}
+//private extension InfoDetailView {
+//    /**
+//     @brief Section에 따른 Layout 설정
+//     */
+//    func collectionViewLayout() -> UICollectionViewCompositionalLayout {
+//        UICollectionViewCompositionalLayout { sectionNum, _ in
+//            switch sectionNum {
+//            case 0:
+//                return InfoDetailCommentCell.commentSection()
+//                
+//            default: return nil
+//            }
+//        }
+//    }
+//}
 
 private extension InfoDetailView {
     func setLayout() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [infoDetailShareView, collectionView].forEach {
+        [spacerView, infoDetailShareView].forEach {
             contentView.addSubview($0)
         }
         
@@ -85,17 +61,14 @@ private extension InfoDetailView {
             $0.edges.equalToSuperview()
         }
         
-        infoDetailShareView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+        spacerView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.height.equalTo(infoDetailShareView.snp.height)
+            $0.height.equalTo(12)
         }
         
-        collectionView.snp.makeConstraints {
-            $0.top.equalTo(infoDetailShareView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(collectionView.contentSize.height)
+        infoDetailShareView.snp.makeConstraints {
+            $0.top.equalTo(spacerView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

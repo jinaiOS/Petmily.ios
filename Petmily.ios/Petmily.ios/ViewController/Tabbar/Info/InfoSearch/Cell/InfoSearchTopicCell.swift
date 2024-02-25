@@ -95,8 +95,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         view.cornerRadius = 5
         
         view.snp.makeConstraints {
-            $0.width.equalTo(95)
-            $0.height.equalTo(75)
+            $0.width.height.equalTo(75)
         }
         return view
     }()

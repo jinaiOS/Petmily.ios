@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		330241802B805A070045F56E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3302417F2B805A070045F56E /* SnapKit */; };
 		332607602B8A46BE00A66DC5 /* PetmilyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */; };
+		332607622B8A4FDB00A66DC5 /* SpacerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332607612B8A4FDB00A66DC5 /* SpacerCell.swift */; };
 		33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33946F892B89F56E00C0EDF3 /* Kingfisher */; };
 		33946F8C2B89F59B00C0EDF3 /* AppConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */; };
 		33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */; };
@@ -131,6 +132,7 @@
 
 /* Begin PBXFileReference section */
 		3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetmilyImage.swift; sourceTree = "<group>"; };
+		332607612B8A4FDB00A66DC5 /* SpacerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCell.swift; sourceTree = "<group>"; };
 		33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstraint.swift; sourceTree = "<group>"; };
 		33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			children = (
 				33FE52FD2B89F49000BF1E98 /* InfoPopularCell.swift */,
 				33FE52FE2B89F49000BF1E98 /* InfoShareCell.swift */,
+				332607612B8A4FDB00A66DC5 /* SpacerCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				563E61862B89A0A0006FC307 /* CommentView.swift in Sources */,
 				DBA97AFE2B7EF3BB00C4D6BB /* CommonHeaderView.swift in Sources */,
 				563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */,
+				332607622B8A4FDB00A66DC5 /* SpacerCell.swift in Sources */,
 				DBA97B062B7EF86600C4D6BB /* CommonUtil.swift in Sources */,
 				77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */,
 				56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */,

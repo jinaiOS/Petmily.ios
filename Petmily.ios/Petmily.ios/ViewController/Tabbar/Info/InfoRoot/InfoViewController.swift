@@ -47,14 +47,15 @@ private extension InfoViewController {
         view.addSubview(infoView)
         
         infoView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(AppConstraint.headerViewHeight)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
     func setBaseHeaderView() {
         let title = NSMutableAttributedString(
             string: "반려in",
-            attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold)])
+            attributes: [.font: ThemeFont.header])
         headerView.titleLabel.attributedText = title
         
         backButtonHidden()
@@ -98,7 +99,8 @@ private extension InfoViewController {
 
 private extension InfoViewController {
     @objc func didTapSearchButton() {
-        
+        let searchVC = InfoSearchViewController()
+        present(searchVC, animated: true)
     }
 }
 
@@ -112,6 +114,9 @@ private extension InfoViewController {
             cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
                 guard let self else { return UICollectionViewCell() }
                 switch itemIdentifier {
+                case .spacer:
+                    return self.setSpacerCell(collectionView, indexPath)
+                    
                 case .popular(let item):
                     return self.setPopularCell(collectionView, indexPath, item)
                     
@@ -128,6 +133,9 @@ private extension InfoViewController {
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let self else { return UICollectionReusableView() }
             switch InfoSection(rawValue: indexPath.section) {
+            case .spacer:
+                return nil
+                
             case .popular:
                 return setPopularHeader(collectionView, indexPath)
                 
@@ -149,6 +157,8 @@ private extension InfoViewController {
             snapShot.appendSections([$0])
         }
         
+        snapShot.appendItems([InfoItem.spacer], toSection: .spacer)
+        
         if let popularItems = infoViewModel.collectionViewModels.popularItems {
             snapShot.appendItems(popularItems, toSection: .popular)
         }
@@ -165,6 +175,14 @@ private extension InfoViewController {
  @param collectionView: UICollectionView, indexPath: IndexPath, item: 각각의 cell에 맞는 item
  */
 private extension InfoViewController {
+    func setSpacerCell(_ collectionView: UICollectionView,
+                       _ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SpacerCell.identifier,
+            for: indexPath) as? SpacerCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
     func setPopularCell(_ collectionView: UICollectionView,
                         _ indexPath: IndexPath,
                         _ item: PopularInfo) -> UICollectionViewCell {

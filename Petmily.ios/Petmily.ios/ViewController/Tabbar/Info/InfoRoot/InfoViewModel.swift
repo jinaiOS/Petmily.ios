@@ -28,6 +28,9 @@ extension InfoViewModel {
         if let items = collectionViewModels.shareItems {
             return items.compactMap { infoItem -> ShareInfo? in
                 switch infoItem {
+                case .spacer:
+                    return nil
+                    
                 case .popular(_):
                     return nil
                     
