@@ -13,8 +13,8 @@ final class InfoSearchCategoryCell: UICollectionViewCell {
     
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = ThemeFont.infoSearchCategory
-        label.textColor = ThemeColor.categoryPink
+        label.font = ThemeFont.b16
+        label.textColor = ThemeColor.lightPink
         label.textAlignment = .center
         return label
     }()
@@ -33,18 +33,21 @@ final class InfoSearchCategoryCell: UICollectionViewCell {
 
 extension InfoSearchCategoryCell {
     static func categorySection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(Constants.Size.size100),
+                                              heightDimension: .fractionalHeight(Constants.Size.size1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .estimated(30))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                               heightDimension: .estimated(Constants.Size.size30))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .flexible(2)
+        group.interItemSpacing = .flexible(Constants.Size.size2)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 24, bottom: 24, trailing: 24)
-        section.interGroupSpacing = 8
+        section.contentInsets = .init(top: 0,
+                                      leading: Constants.Size.size24,
+                                      bottom: Constants.Size.size24,
+                                      trailing: Constants.Size.size24)
+        section.interGroupSpacing = Constants.Spacing.spacing8
         
         let sectionHeader = InfoSearchCategoryHeader.categoryHeader()
         section.boundarySupplementaryItems = [sectionHeader]
@@ -58,9 +61,9 @@ extension InfoSearchCategoryCell {
 
 private extension InfoSearchCategoryCell {
     func configure() {
-        contentView.layer.borderColor = ThemeColor.categoryPink.cgColor
-        contentView.borderWidth = 2
-        contentView.cornerRadius = 14
+        contentView.layer.borderColor = ThemeColor.lightPink.cgColor
+        contentView.borderWidth = Constants.Size.size2
+        contentView.cornerRadius = Constants.Size.size14
     }
     
     func setLayout() {
@@ -68,7 +71,7 @@ private extension InfoSearchCategoryCell {
         
         categoryLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size20)
         }
     }
 }

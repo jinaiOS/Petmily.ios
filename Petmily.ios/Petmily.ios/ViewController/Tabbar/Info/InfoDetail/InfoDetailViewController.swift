@@ -48,13 +48,13 @@ final class InfoDetailViewController: BaseHeaderViewController {
 
 private extension InfoDetailViewController {
     func configure() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ThemeColor.systemBackground
     }
     
     func setBaseHeaderView() {
         let title = NSMutableAttributedString(
             string: "반려in",
-            attributes: [.font: ThemeFont.header])
+            attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
     }
     

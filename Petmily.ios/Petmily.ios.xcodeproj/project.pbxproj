@@ -11,7 +11,7 @@
 		332607602B8A46BE00A66DC5 /* PetmilyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */; };
 		332607622B8A4FDB00A66DC5 /* SpacerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332607612B8A4FDB00A66DC5 /* SpacerCell.swift */; };
 		33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33946F892B89F56E00C0EDF3 /* Kingfisher */; };
-		33946F8C2B89F59B00C0EDF3 /* AppConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */; };
+		33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* Constants.swift */; };
 		33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */; };
 		33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */; };
 		33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C502B7E631B004AA232 /* UIColor+.swift */; };
@@ -133,7 +133,7 @@
 /* Begin PBXFileReference section */
 		3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetmilyImage.swift; sourceTree = "<group>"; };
 		332607612B8A4FDB00A66DC5 /* SpacerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCell.swift; sourceTree = "<group>"; };
-		33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstraint.swift; sourceTree = "<group>"; };
+		33946F8B2B89F59B00C0EDF3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		33BA6C502B7E631B004AA232 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -532,7 +532,7 @@
 		DBDBA40E2B7F0219004C10C3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				33946F8B2B89F59B00C0EDF3 /* AppConstraint.swift */,
+				33946F8B2B89F59B00C0EDF3 /* Constants.swift */,
 				DBA97B012B7EF47600C4D6BB /* Common.swift */,
 				DBA97B052B7EF86600C4D6BB /* CommonUtil.swift */,
 				DBA97AF52B7EF20F00C4D6BB /* DataManager.swift */,
@@ -770,7 +770,7 @@
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,
 				77DAE4F42B8A33D80020B4AA /* MyPageProfileView.swift in Sources */,
-				33946F8C2B89F59B00C0EDF3 /* AppConstraint.swift in Sources */,
+				33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */,
 				33FE53292B89F49000BF1E98 /* InfoSearchSection.swift in Sources */,
 				DBA97B042B7EF82C00C4D6BB /* UIView+Extension.swift in Sources */,
 				77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */,

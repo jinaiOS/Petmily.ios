@@ -13,16 +13,16 @@ final class InfoSearchTopicHeader: UICollectionReusableView {
     
     private lazy var mainTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.textColor = UIColor(hexString: "FF7373")
+        label.font = ThemeFont.b16
+        label.textColor = ThemeColor.deepPink
         label.numberOfLines = 1
         return label
     }()
     
     private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.textColor = .black
+        label.font = ThemeFont.b16
+        label.textColor = ThemeColor.black
         label.numberOfLines = 1
         return label
     }()
@@ -56,8 +56,8 @@ extension InfoSearchTopicHeader {
      @brief topicHeaderSection
      */
     static func topicHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .absolute(49))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                                heightDimension: .absolute(Constants.Size.size49))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,

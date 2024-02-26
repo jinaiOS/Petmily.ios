@@ -19,24 +19,23 @@ final class InfoDetailContentView: UIView {
     private let spacerView5 = UIView()
     
     private lazy var profileImageView: UIImageView = {
-        let imageSize: CGFloat = 50
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.cornerRadius = imageSize / 2
+        view.cornerRadius = Constants.Size.size50 / 2
         view.clipsToBounds = true
         let profileUrl = URL(string: shareInfo.profileUrl)
         view.kf.setImage(with: profileUrl)
         
         view.snp.makeConstraints {
-            $0.width.height.equalTo(imageSize)
+            $0.width.height.equalTo(Constants.Size.size50)
         }
         return view
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .black
+        label.font = ThemeFont.b22
+        label.textColor = ThemeColor.black
         label.textAlignment = .left
         label.text = shareInfo.title
         return label
@@ -44,8 +43,8 @@ final class InfoDetailContentView: UIView {
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .darkGray
+        label.font = ThemeFont.r16
+        label.textColor = ThemeColor.darkGray
         label.textAlignment = .left
         label.text = shareInfo.author
         return label
@@ -56,7 +55,7 @@ final class InfoDetailContentView: UIView {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 4
+        stack.spacing = Constants.Spacing.spacing4
         
         [titleLabel, authorLabel].forEach {
             stack.addArrangedSubview($0)
@@ -67,11 +66,11 @@ final class InfoDetailContentView: UIView {
     private lazy var moreButon: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.ellipsis, for: .normal)
-        button.tintColor = .black
+        button.tintColor = ThemeColor.black
         button.contentHorizontalAlignment = .right
         
         button.snp.makeConstraints {
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(Constants.Size.size50)
         }
         return button
     }()
@@ -86,8 +85,8 @@ final class InfoDetailContentView: UIView {
             stack.addArrangedSubview($0)
         }
         labelVStack.snp.makeConstraints {
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
-            $0.trailing.equalTo(moreButon.snp.leading).offset(-10)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(Constants.Size.size10)
+            $0.trailing.equalTo(moreButon.snp.leading).offset(-Constants.Size.size10)
         }
         return stack
     }()
@@ -96,7 +95,7 @@ final class InfoDetailContentView: UIView {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.cornerRadius = 13
+        view.cornerRadius = Constants.Radius.radius13
         let contentImageUrl = URL(string: shareInfo.contentImageUrl)
         view.kf.setImage(with: contentImageUrl)
         return view
@@ -105,8 +104,8 @@ final class InfoDetailContentView: UIView {
     private lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = ThemeColor.black
+        label.font = ThemeFont.m18
         label.text = shareInfo.content
         return label
     }()
@@ -114,9 +113,9 @@ final class InfoDetailContentView: UIView {
     private lazy var hashtagLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .black
+        label.textColor = ThemeColor.black
         label.textAlignment = .right
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = ThemeFont.r14
         label.text = shareInfo.hashtag
         return label
     }()
@@ -126,7 +125,7 @@ final class InfoDetailContentView: UIView {
         button.setImage(PetmilyImage.like, for: .normal)
         
         button.snp.makeConstraints {
-            $0.width.height.equalTo(42)
+            $0.width.height.equalTo(Constants.Size.size42)
         }
         return button
     }()
@@ -136,7 +135,7 @@ final class InfoDetailContentView: UIView {
         button.setImage(PetmilyImage.union, for: .normal)
         
         button.snp.makeConstraints {
-            $0.width.height.equalTo(42)
+            $0.width.height.equalTo(Constants.Size.size42)
         }
         return button
     }()
@@ -146,7 +145,7 @@ final class InfoDetailContentView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 11
+        stack.spacing = Constants.Spacing.spacing11
         
         [likeButton, showCommentButton, spacerView5].forEach {
             stack.addArrangedSubview($0)
@@ -181,28 +180,27 @@ final class InfoDetailContentView: UIView {
 
 private extension InfoDetailContentView {
     func setLayout() {
-        let insetSpacing: CGFloat = 24
         addSubview(vStack)
         
         vStack.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(insetSpacing)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing24)
         }
         
         spacerView1.snp.makeConstraints {
-            $0.height.equalTo(8)
+            $0.height.equalTo(Constants.Size.size8)
         }
         
         spacerView2.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalTo(Constants.Size.size20)
         }
         
         spacerView3.snp.makeConstraints {
-            $0.height.equalTo(26)
+            $0.height.equalTo(Constants.Size.size26)
         }
         
         spacerView4.snp.makeConstraints {
-            $0.height.greaterThanOrEqualTo(26)
+            $0.height.greaterThanOrEqualTo(Constants.Size.size26)
         }
         
         contentImageView.snp.makeConstraints {

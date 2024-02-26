@@ -47,7 +47,7 @@ private extension InfoViewController {
         view.addSubview(infoView)
         
         infoView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(AppConstraint.headerViewHeight)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.HeaderView.height)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -55,7 +55,7 @@ private extension InfoViewController {
     func setBaseHeaderView() {
         let title = NSMutableAttributedString(
             string: "반려in",
-            attributes: [.font: ThemeFont.header])
+            attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
         
         backButtonHidden()
@@ -67,8 +67,8 @@ private extension InfoViewController {
         
         infoView.searchButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
-            $0.width.height.equalTo(30)
+            $0.trailing.equalToSuperview().inset(Constants.Size.size16)
+            $0.width.height.equalTo(Constants.Size.size30)
         }
     }
     

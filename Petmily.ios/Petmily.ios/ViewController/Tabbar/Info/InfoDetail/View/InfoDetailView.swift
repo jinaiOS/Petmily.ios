@@ -26,22 +26,6 @@ final class InfoDetailView: UIView {
     }
 }
 
-//private extension InfoDetailView {
-//    /**
-//     @brief Section에 따른 Layout 설정
-//     */
-//    func collectionViewLayout() -> UICollectionViewCompositionalLayout {
-//        UICollectionViewCompositionalLayout { sectionNum, _ in
-//            switch sectionNum {
-//            case 0:
-//                return InfoDetailCommentCell.commentSection()
-//                
-//            default: return nil
-//            }
-//        }
-//    }
-//}
-
 private extension InfoDetailView {
     func setLayout() {
         addSubview(scrollView)
@@ -52,7 +36,7 @@ private extension InfoDetailView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(AppConstraint.headerViewHeight)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(Constants.HeaderView.height)
             $0.leading.bottom.trailing.equalToSuperview()
         }
         
@@ -63,7 +47,7 @@ private extension InfoDetailView {
         
         spacerView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
-            $0.height.equalTo(12)
+            $0.height.equalTo(Constants.Size.size12)
         }
         
         infoDetailShareView.snp.makeConstraints {

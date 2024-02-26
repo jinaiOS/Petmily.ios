@@ -14,9 +14,9 @@ final class InfoSearchView: UIView {
     
     private let introLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = ThemeFont.b24
         label.textAlignment = .left
-        label.textColor = .black
+        label.textColor = ThemeColor.black
         label.text = "무엇을 찾으시나요?"
         return label
     }()
@@ -36,13 +36,14 @@ final class InfoSearchView: UIView {
 }
 
 extension InfoSearchView {
+    // TODO: - cell 크기 확정 후 수정하기
     func remakeConstraints(cellCount: Int) {
         collectionView.snp.remakeConstraints {
             let categorySize: CGFloat = 90
             let headerSize: CGFloat = 49
             let cellSize: CGFloat = 99
             let spacing: CGFloat = 14
-            $0.top.equalTo(searchContentView.snp.bottom).offset(52)
+            $0.top.equalTo(searchContentView.snp.bottom).offset(Constants.Size.size52)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(categorySize + headerSize + cellSize * CGFloat(cellCount) + spacing * CGFloat(cellCount - 1))
         }
@@ -69,18 +70,18 @@ private extension InfoSearchView {
         
         introLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview()
-            $0.leading.equalToSuperview().inset(24)
-            $0.height.equalTo(100)
+            $0.leading.equalToSuperview().inset(Constants.Size.size24)
+            $0.height.equalTo(Constants.Size.size100)
         }
         
         searchContentView.snp.makeConstraints {
-            $0.top.equalTo(introLabel.snp.bottom).offset(80)
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(41)
+            $0.top.equalTo(introLabel.snp.bottom).offset(Constants.Size.size80)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size24)
+            $0.height.equalTo(Constants.Size.size41)
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(searchContentView.snp.bottom).offset(52)
+            $0.top.equalTo(searchContentView.snp.bottom).offset(Constants.Size.size52)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(collectionView.contentSize.height)
         }

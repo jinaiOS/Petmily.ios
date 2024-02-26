@@ -14,8 +14,8 @@ final class InfoSearchTopicCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .black
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.black
         label.numberOfLines = 2
         return label
     }()
@@ -24,19 +24,18 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        let size: CGFloat = 20
-        view.cornerRadius = size / 2
+        view.cornerRadius = Constants.Size.size20 / 2
         
         view.snp.makeConstraints {
-            $0.width.height.equalTo(size)
+            $0.width.height.equalTo(Constants.Size.size20)
         }
         return view
     }()
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .medium)
-        label.textColor = UIColor(hexString: "525252")
+        label.font = ThemeFont.m10
+        label.textColor = ThemeColor.mediumGray
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -44,19 +43,19 @@ final class InfoSearchTopicCell: UICollectionViewCell {
     
     private let separateView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "525252")
+        view.backgroundColor = ThemeColor.mediumGray
         
         view.snp.makeConstraints {
-            $0.width.equalTo(1)
-            $0.height.equalTo(10)
+            $0.width.equalTo(Constants.Size.size1)
+            $0.height.equalTo(Constants.Size.size10)
         }
         return view
     }()
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .medium)
-        label.textColor = UIColor(hexString: "525252")
+        label.font = ThemeFont.m10
+        label.textColor = ThemeColor.mediumGray
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -67,7 +66,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 4
+        stack.spacing = Constants.Spacing.spacing4
         
         [profileImageView, authorLabel, separateView, dateLabel, UIView()].forEach {
             stack.addArrangedSubview($0)
@@ -80,7 +79,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 11
+        stack.spacing = Constants.Spacing.spacing11
         
         [titleLabel, labelHStack].forEach {
             stack.addArrangedSubview($0)
@@ -92,10 +91,10 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.cornerRadius = 5
+        view.cornerRadius = Constants.Radius.radius5
         
         view.snp.makeConstraints {
-            $0.width.height.equalTo(75)
+            $0.width.height.equalTo(Constants.Size.size75)
         }
         return view
     }()
@@ -105,7 +104,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 6
+        stack.spacing = Constants.Spacing.spacing6
         
         [labelVStack, contentImageView].forEach {
             stack.addArrangedSubview($0)
@@ -126,17 +125,20 @@ final class InfoSearchTopicCell: UICollectionViewCell {
 
 extension InfoSearchTopicCell {
     static func topicSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                              heightDimension: .fractionalHeight(Constants.Size.size1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(99))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                               heightDimension: .absolute(Constants.Size.size99))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 24, bottom: 0, trailing: 24)
-        section.interGroupSpacing = 14
+        section.contentInsets = .init(top: 0,
+                                      leading: Constants.Size.size24,
+                                      bottom: 0,
+                                      trailing: Constants.Size.size24)
+        section.interGroupSpacing = Constants.Spacing.spacing14
         
         let sectionHeader = InfoSearchTopicHeader.topicHeader()
         section.boundarySupplementaryItems = [sectionHeader]
@@ -156,19 +158,19 @@ extension InfoSearchTopicCell {
 
 private extension InfoSearchTopicCell {
     func setLayout() {
-        layer.cornerRadius = 9
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.cornerRadius = Constants.Radius.radius9
+        layer.borderWidth = Constants.Size.size1
+        layer.borderColor = ThemeColor.lightGray.cgColor
         
         contentView.addSubview(contentHStack)
         
         contentHStack.snp.makeConstraints {
-            $0.leading.top.bottom.equalToSuperview().inset(12)
-            $0.trailing.equalToSuperview().inset(14)
+            $0.leading.top.bottom.equalToSuperview().inset(Constants.Size.size12)
+            $0.trailing.equalToSuperview().inset(Constants.Size.size14)
         }
         
         labelHStack.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalTo(Constants.Size.size20)
         }
     }
 }

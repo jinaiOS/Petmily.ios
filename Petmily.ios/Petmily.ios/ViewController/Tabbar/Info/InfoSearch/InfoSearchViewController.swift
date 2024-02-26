@@ -31,7 +31,7 @@ final class InfoSearchViewController: UIViewController {
 
 private extension InfoSearchViewController {
     func configure() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ThemeColor.systemBackground
         infoSearchView.collectionView.dataSource = self
         infoSearchView.collectionView.delegate = self
     }

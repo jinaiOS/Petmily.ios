@@ -15,27 +15,26 @@ final class InfoPopularCell: UICollectionViewCell {
     private lazy var thumbnailImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 7
+        view.layer.cornerRadius = Constants.Radius.radius7
         view.clipsToBounds = true
         return view
     }()
     
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
-        let size: CGFloat = 24
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.cornerRadius = size / 2
+        view.cornerRadius = Constants.Size.size24 / 2
         view.snp.makeConstraints {
-            $0.width.height.equalTo(size)
+            $0.width.height.equalTo(Constants.Size.size24)
         }
         return view
     }()
     
     private var hashtagLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .white
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.white
         return label
     }()
     
@@ -52,18 +51,21 @@ final class InfoPopularCell: UICollectionViewCell {
 
 extension InfoPopularCell {
     static func popularSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                              heightDimension: .fractionalHeight(Constants.Size.size1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let gruopSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35),
-                                               heightDimension: .estimated(146))
+        let gruopSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.minor35),
+                                               heightDimension: .estimated(Constants.Size.size146))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: gruopSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 16, leading: 16, bottom: 45, trailing: 16)
+        section.contentInsets = .init(top: Constants.Size.size16,
+                                      leading: Constants.Size.size16,
+                                      bottom: Constants.Size.size45,
+                                      trailing: Constants.Size.size16)
         section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 16
+        section.interGroupSpacing = Constants.Spacing.spacing16
         
         let sectionHeader = InfoPopularHeader.popularHeader()
         section.boundarySupplementaryItems = [sectionHeader]
@@ -90,12 +92,12 @@ private extension InfoPopularCell {
         }
         
         profileImageView.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(10)
+            $0.top.trailing.equalToSuperview().inset(Constants.Size.size10)
         }
         
         hashtagLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(8)
-            $0.bottom.equalToSuperview().inset(12)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size8)
+            $0.bottom.equalToSuperview().inset(Constants.Size.size12)
         }
     }
 }

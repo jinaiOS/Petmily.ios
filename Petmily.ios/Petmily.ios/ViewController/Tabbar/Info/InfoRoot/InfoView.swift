@@ -30,7 +30,7 @@ final class InfoView: UIView {
     lazy var searchButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.search, for: .normal)
-        button.tintColor = .black
+        button.tintColor = ThemeColor.black
         return button
     }()
     

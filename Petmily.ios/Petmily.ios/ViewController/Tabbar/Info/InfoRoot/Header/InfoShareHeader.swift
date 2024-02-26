@@ -15,7 +15,7 @@ final class InfoShareHeader: UICollectionReusableView {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = ThemeFont.b22
         return label
     }()
     
@@ -45,8 +45,8 @@ extension InfoShareHeader {
      @brief shareHeaderSection
      */
     static func shareHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .estimated(30))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                                heightDimension: .estimated(Constants.Size.size30))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,
@@ -72,7 +72,7 @@ private extension InfoShareHeader {
         
         editButton.snp.makeConstraints {
             $0.trailing.bottom.equalToSuperview()
-            $0.width.height.equalTo(30)
+            $0.width.height.equalTo(Constants.Size.size30)
         }
     }
 }
