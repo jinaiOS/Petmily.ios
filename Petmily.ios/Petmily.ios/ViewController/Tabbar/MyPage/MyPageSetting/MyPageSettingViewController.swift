@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class MyPageSettingViewController: UIViewController {
+class MyPageSettingViewController: BaseHeaderViewController {
     //MARK: Properties
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -22,7 +22,7 @@ class MyPageSettingViewController: UIViewController {
     }()
     
     lazy var profileStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [nameStackView, ageStackView, breedStackView, completeButton])
+        let view = UIStackView(arrangedSubviews: [nameTextField, ageTextField, breedTextField, completeButton])
         view.axis = .vertical
         view.spacing = 20
         return view
@@ -40,12 +40,11 @@ class MyPageSettingViewController: UIViewController {
         return field
     }()
     
-    private let nameStackView = CustomStackView(text: "동물 이름", placeholder: "이름")
-    private let ageStackView = CustomStackView(text: "동물 나이", placeholder: "나이")
+    private let nameTextField = CustomTextField(type: .normal, header: "동물 이름", placeHolder: "이름")
+    private let ageTextField = CustomTextField(type: .normal, header: "동물 나이", placeHolder: "나이")
     
     // 성별
-    
-    private let breedStackView = CustomStackView(text: "종", placeholder: "종류")
+    private let breedTextField = CustomTextField(type: .normal, header: "종", placeHolder: "종류")
     
     private let completeButton: UIButton = {
         let button = UIButton()
@@ -59,11 +58,11 @@ class MyPageSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
-        // 백버튼
     }
     
     private func setupUI() {
+        setHeaderHidden(isHidden: false)
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(profileTitle)
@@ -72,7 +71,8 @@ class MyPageSettingViewController: UIViewController {
         contentView.addSubview(profileStackView)
         
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(headerView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         contentView.snp.makeConstraints {
@@ -99,56 +99,9 @@ class MyPageSettingViewController: UIViewController {
             $0.top.equalTo(profileNickName.snp.bottom)
             $0.leading.trailing.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
         }
-    }
-}
-
-class CustomStackView: UIStackView {
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .left
-        return label
-    }()
-    
-    lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.textColor = .black
-        textField.backgroundColor = .white
-        textField.textAlignment = .left
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: textField.frame.size.height))
-        textField.leftViewMode = .always
-        textField.borderStyle = .line
-        textField.layer.cornerRadius = 5
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.clipsToBounds = true
-        return textField
-    }()
-    
-    private func setupUI() {
         
-        addSubview(label)
-        addSubview(textField)
-        
-        label.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+        completeButton.snp.makeConstraints {
+            $0.height.equalTo(50)
         }
-        
-        textField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-    
-    init(text: String, placeholder: String) {
-        super.init(frame: .zero)
-        label.text = text
-        textField.placeholder = placeholder
-        setupUI()
-    }
-
-    @available(*, unavailable)
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

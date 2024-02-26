@@ -70,6 +70,7 @@
 		563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61872B89A0A8006FC307 /* CommentViewController.swift */; };
 		563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
+		77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */; };
 		77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */; };
 		77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */; };
 		77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EE2B8A33D10020B4AA /* MyPageCollectionViewCell.swift */; };
@@ -173,6 +174,7 @@
 		563E61872B89A0A8006FC307 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingViewController.swift; sourceTree = "<group>"; };
 		77DAE4EE2B8A33D10020B4AA /* MyPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */,
 				DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */,
 				DBDBA4112B7F0295004C10C3 /* CommonHeaderView */,
+				77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				33FE53392B89F49000BF1E98 /* InfoDetailContentView.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
+				77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */,
 				33FE532C2B89F49000BF1E98 /* InfoSearchCollectionView.swift in Sources */,
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,

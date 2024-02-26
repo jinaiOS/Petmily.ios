@@ -74,7 +74,7 @@ class MyPageViewController: BaseViewController {
     
     @objc func tappedEditButton() {
         let vc = MyPageSettingViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationPushController(viewController: vc, animated: true)
     }
     
     @objc private func didChangeValue(segment: UISegmentedControl) {
