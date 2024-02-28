@@ -13,8 +13,8 @@ final class InfoSearchCategoryHeader: UICollectionReusableView {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.textColor = .black
+        label.font = ThemeFont.b16
+        label.textColor = ThemeColor.black
         label.numberOfLines = 1
         return label
     }()
@@ -35,8 +35,8 @@ extension InfoSearchCategoryHeader {
      @brief categoryHeaderSection
      */
     static func categoryHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .absolute(36))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                                heightDimension: .absolute(Constants.Size.size36))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,

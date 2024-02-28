@@ -12,19 +12,19 @@ final class InfoDetailCommentHeader: UICollectionReusableView {
     static let identifier = "InfoDetailCommentHeader"
     
     private lazy var topSeparateView: UIView = {
-        return makeSeparateView(height: 6)
+        return makeSeparateView(height: Constants.Size.size6)
     }()
     
     private lazy var commentCountLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .darkGray
+        label.textColor = ThemeColor.darkGray
         label.textAlignment = .right
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = ThemeFont.m14
         return label
     }()
     
     private lazy var bottomSeparateView: UIView = {
-        return makeSeparateView(height: 2)
+        return makeSeparateView(height: Constants.Size.size2)
     }()
     
     private lazy var vStack: UIStackView = {
@@ -54,8 +54,8 @@ extension InfoDetailCommentHeader {
      @brief commentHeaderSection
      */
     static func commentHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .absolute(45))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                                heightDimension: .absolute(Constants.Size.size45))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,
@@ -77,13 +77,13 @@ private extension InfoDetailCommentHeader {
         }
         
         commentCountLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(13)
+            $0.trailing.equalToSuperview().inset(Constants.Size.size13)
         }
     }
     
-    func makeSeparateView(height: Int) -> UIView {
+    func makeSeparateView(height: CGFloat) -> UIView {
         let view = UIView()
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = ThemeColor.systemGray5
         
         view.snp.makeConstraints {
             $0.height.equalTo(height)

@@ -13,20 +13,20 @@ final class InfoDetailCommentCell: UICollectionViewCell {
     
     private lazy var stateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
-        label.backgroundColor = UIColor(hexString: "FFB9B9")
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = ThemeColor.white
+        label.backgroundColor = ThemeColor.lightPink
+        label.font = ThemeFont.m12
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.cornerRadius = 2
+        label.cornerRadius = Constants.Radius.radius2
         label.clipsToBounds = true
         return label
     }()
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .darkGray
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.darkGray
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -37,7 +37,7 @@ final class InfoDetailCommentCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 11
+        stack.spacing = Constants.Spacing.spacing11
         
         [stateLabel, authorLabel].forEach {
             stack.addArrangedSubview($0)
@@ -47,8 +47,8 @@ final class InfoDetailCommentCell: UICollectionViewCell {
     
     private lazy var commentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .black
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.black
         label.textAlignment = .left
         label.numberOfLines = 3
         return label
@@ -58,23 +58,23 @@ final class InfoDetailCommentCell: UICollectionViewCell {
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .darkGray
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.darkGray
         label.textAlignment = .right
         label.numberOfLines = 1
         
         label.snp.makeConstraints {
-            $0.height.equalTo(20)
+            $0.height.equalTo(Constants.Size.size20)
         }
         return label
     }()
     
     private lazy var separateView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = ThemeColor.systemGray5
         
         view.snp.makeConstraints {
-            $0.height.equalTo(2)
+            $0.height.equalTo(Constants.Size.size2)
         }
         return view
     }()
@@ -84,7 +84,7 @@ final class InfoDetailCommentCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillProportionally
-        stack.spacing = 8
+        stack.spacing = Constants.Spacing.spacing8
         
         [hStack, commentLabel, spacer, dateLabel].forEach {
             stack.addArrangedSubview($0)
@@ -97,8 +97,8 @@ final class InfoDetailCommentCell: UICollectionViewCell {
         view.addSubview(commentVStack)
         
         commentVStack.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(24)
-            $0.trailing.equalToSuperview().inset(14)
+            $0.leading.equalToSuperview().inset(Constants.Size.size24)
+            $0.trailing.equalToSuperview().inset(Constants.Size.size14)
         }
         return view
     }()
@@ -108,7 +108,7 @@ final class InfoDetailCommentCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = 16
+        stack.spacing = Constants.Spacing.spacing16
         
         [separateView, containerView].forEach {
             stack.addArrangedSubview($0)
@@ -129,12 +129,12 @@ final class InfoDetailCommentCell: UICollectionViewCell {
 
 extension InfoDetailCommentCell {
     static func commentSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                              heightDimension: .fractionalHeight(Constants.Size.size1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let gruopSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(121))
+        let gruopSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                               heightDimension: .absolute(Constants.Size.size121))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: gruopSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -162,8 +162,8 @@ private extension InfoDetailCommentCell {
         }
         
         stateLabel.snp.makeConstraints {
-            $0.width.equalTo(46)
-            $0.height.equalTo(16)
+            $0.width.equalTo(Constants.Size.size46)
+            $0.height.equalTo(Constants.Size.size16)
         }
     }
 }

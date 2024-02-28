@@ -9,14 +9,18 @@ import Combine
 import SwiftUI
 import UIKit
 
-final class InfoDetailViewController: UIViewController {
+final class InfoDetailViewController: BaseHeaderViewController {
     private let infoDetailView: InfoDetailView
     private let infoDetailViewModel: InfoDetailViewModel
+    private let didTapMoreButton = PassthroughSubject<MenuButtonType, Never>()
+    private let didTapSocialButton = PassthroughSubject<SocialButtonType, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     init(_ shareInfo: ShareInfo) {
         infoDetailViewModel = InfoDetailViewModel(shareInfo: shareInfo)
-        infoDetailView = InfoDetailView(info: infoDetailViewModel.shareInfo)
+        infoDetailView = InfoDetailView(infoDetailViewModel.shareInfo,
+                                        didTapMoreButton,
+                                        didTapSocialButton)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,17 +38,48 @@ final class InfoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
+        setBaseHeaderView()
+        bindButton()
         bindViewModel()
         Task {
             await infoDetailViewModel.setDummyData()
         }
     }
+    
+    deinit {
+        print("deinit - InfoDetailVC")
+    }
 }
 
 private extension InfoDetailViewController {
     func configure() {
-        infoDetailView.collectionView.dataSource = self
-        infoDetailView.collectionView.delegate = self
+        view.backgroundColor = ThemeColor.systemBackground
+    }
+    
+    func setBaseHeaderView() {
+        let title = NSMutableAttributedString(
+            string: "반려in",
+            attributes: [.font: ThemeFont.b24])
+        headerView.titleLabel.attributedText = title
+    }
+}
+
+private extension InfoDetailViewController {
+    func bindButton() {
+        didTapMoreButton
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] type in
+                guard let self else { return }
+                print("Button Type: \(type)")
+            }
+            .store(in: &cancellables)
+        
+        didTapSocialButton
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] type in
+                guard let self else { return }
+                print("Button Type: \(type)")
+            }.store(in: &cancellables)
     }
     
     func bindViewModel() {
@@ -52,43 +87,7 @@ private extension InfoDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                let count = infoDetailViewModel.commentViewModel.commentList.count
-                infoDetailView.remakeConstraints(cellCount: count)
-                self.infoDetailView.collectionView.reloadData()
             }.store(in: &cancellables)
-    }
-}
-
-extension InfoDetailViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        return infoDetailViewModel.commentViewModel.commentList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: InfoDetailCommentCell.identifier,
-            for: indexPath) as? InfoDetailCommentCell else { return UICollectionViewCell() }
-        cell.setViewModel(comment: infoDetailViewModel.commentViewModel.commentList[indexPath.row])
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: InfoDetailCommentHeader.identifier,
-            for: indexPath) as? InfoDetailCommentHeader else { return UICollectionReusableView() }
-        headerView.setViewModel(commentCount: infoDetailViewModel.commentViewModel.commentList.count)
-        return headerView
-    }
-}
-
-extension InfoDetailViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("====> \(infoDetailViewModel.commentViewModel.commentList.count)")
     }
 }
 
@@ -96,6 +95,7 @@ extension InfoDetailViewController: UICollectionViewDelegate {
 struct InfoDetailVC_PreView: PreviewProvider {
     static var previews: some View {
         let dummyInfo = ShareInfo(
+            shareID: UUID(),
             title: "우리집 강쥐 자랑",
             content: """
                 강아지 자랑 내용 첨부1

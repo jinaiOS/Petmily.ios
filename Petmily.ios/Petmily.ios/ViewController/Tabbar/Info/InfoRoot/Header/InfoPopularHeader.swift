@@ -13,7 +13,7 @@ final class InfoPopularHeader: UICollectionReusableView {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = ThemeFont.b22
         return label
     }()
     
@@ -33,8 +33,8 @@ extension InfoPopularHeader {
      @brief popularHeaderSection
      */
     static func popularHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .estimated(30))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                                heightDimension: .estimated(Constants.Size.size30))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,

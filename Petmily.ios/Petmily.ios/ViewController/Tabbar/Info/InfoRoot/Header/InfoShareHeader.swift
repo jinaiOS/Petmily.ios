@@ -11,22 +11,11 @@ import UIKit
 
 final class InfoShareHeader: UICollectionReusableView {
     static let identifier = "InfoShareHeader"
-    private var didTapEditbutton: PassthroughSubject<Void, Never>?
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = ThemeFont.b22
         return label
-    }()
-    
-    private lazy var editButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "pencil"), for: .normal)
-        button.addAction(UIAction(handler: { [weak self] _ in
-            guard let self else { return }
-            didTapEditbutton?.send()
-        }), for: .touchUpInside)
-        return button
     }()
     
     override init(frame: CGRect) {
@@ -45,8 +34,8 @@ extension InfoShareHeader {
      @brief shareHeaderSection
      */
     static func shareHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .estimated(30))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
+                                                heightDimension: .estimated(Constants.Size.size30))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,
@@ -54,25 +43,17 @@ extension InfoShareHeader {
         return sectionHeader
     }
     
-    func setViewModel(title: String, subject: PassthroughSubject<Void, Never>) {
+    func setViewModel(title: String) {
         titleLabel.text = title
-        didTapEditbutton = subject
     }
 }
 
 private extension InfoShareHeader {
     func setLayout() {
-        [titleLabel, editButton].forEach {
-            addSubview($0)
-        }
+        addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.leading.bottom.equalToSuperview()
-        }
-        
-        editButton.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview()
-            $0.width.height.equalTo(30)
+            $0.leading.top.bottom.equalToSuperview()
         }
     }
 }

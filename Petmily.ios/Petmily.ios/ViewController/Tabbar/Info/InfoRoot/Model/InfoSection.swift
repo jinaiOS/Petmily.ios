@@ -8,11 +8,13 @@
 import Foundation
 
 enum InfoSection: Int, CaseIterable {
+    case spacer
     case popular
     case share
 }
 
 enum InfoItem: Hashable {
-    case popular(PopularInfo)
+    case spacer
+    case popular(ShareInfo)
     case share(ShareInfo)
 }

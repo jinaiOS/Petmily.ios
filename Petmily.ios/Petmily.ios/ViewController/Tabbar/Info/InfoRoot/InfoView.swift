@@ -11,6 +11,8 @@ import UIKit
 final class InfoView: UIView {
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+        collectionView.register(SpacerCell.self,
+                                forCellWithReuseIdentifier: SpacerCell.identifier)
         collectionView.register(InfoPopularCell.self,
                                 forCellWithReuseIdentifier: InfoPopularCell.identifier)
         collectionView.register(InfoShareCell.self,
@@ -27,8 +29,8 @@ final class InfoView: UIView {
     
     lazy var searchButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = .black
+        button.setImage(PetmilyImage.search, for: .normal)
+        button.tintColor = ThemeColor.black
         return button
     }()
     
@@ -50,6 +52,9 @@ private extension InfoView {
     func collectionViewLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { sectionNum, _ in
             switch InfoSection(rawValue: sectionNum) {
+            case .spacer:
+                return SpacerCell.spacerSection()
+                
             case .popular:
                 return InfoPopularCell.popularSection()
                 

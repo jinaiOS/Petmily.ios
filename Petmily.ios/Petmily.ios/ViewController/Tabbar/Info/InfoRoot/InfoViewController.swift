@@ -14,7 +14,6 @@ final class InfoViewController: BaseHeaderViewController {
     private let infoView = InfoView()
     private let infoViewModel = InfoViewModel()
     private var dataSource: UICollectionViewDiffableDataSource<InfoSection, InfoItem>?
-    private var didTapEditButton = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     override func loadView() {
@@ -31,7 +30,6 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bindViewModel()
-        bindButton()
         Task {
             await infoViewModel.setDummyData()
         }
@@ -47,14 +45,15 @@ private extension InfoViewController {
         view.addSubview(infoView)
         
         infoView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Constants.HeaderView.height)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
     func setBaseHeaderView() {
         let title = NSMutableAttributedString(
             string: "반려in",
-            attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold)])
+            attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
         
         backButtonHidden()
@@ -66,8 +65,8 @@ private extension InfoViewController {
         
         infoView.searchButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
-            $0.width.height.equalTo(30)
+            $0.trailing.equalToSuperview().inset(Constants.Size.size16)
+            $0.width.height.equalTo(Constants.Size.size30)
         }
     }
     
@@ -82,23 +81,12 @@ private extension InfoViewController {
                 applyItems()
             }.store(in: &cancellables)
     }
-    
-    /**
-     @brief 수정 버튼 연결
-     */
-    func bindButton() {
-        didTapEditButton
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self else { return }
-                print("수정 버튼 눌림")
-            }.store(in: &cancellables)
-    }
 }
 
 private extension InfoViewController {
     @objc func didTapSearchButton() {
-        
+        let searchVC = InfoSearchViewController()
+        present(searchVC, animated: true)
     }
 }
 
@@ -112,11 +100,14 @@ private extension InfoViewController {
             cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
                 guard let self else { return UICollectionViewCell() }
                 switch itemIdentifier {
+                case .spacer:
+                    return setSpacerCell(collectionView, indexPath)
+                    
                 case .popular(let item):
-                    return self.setPopularCell(collectionView, indexPath, item)
+                    return setPopularCell(collectionView, indexPath, item)
                     
                 case .share(let item):
-                    return self.setShareCell(collectionView, indexPath, item)
+                    return setShareCell(collectionView, indexPath, item)
                 }
             })
     }
@@ -128,6 +119,9 @@ private extension InfoViewController {
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let self else { return UICollectionReusableView() }
             switch InfoSection(rawValue: indexPath.section) {
+            case .spacer:
+                return nil
+                
             case .popular:
                 return setPopularHeader(collectionView, indexPath)
                 
@@ -149,6 +143,8 @@ private extension InfoViewController {
             snapShot.appendSections([$0])
         }
         
+        snapShot.appendItems([InfoItem.spacer], toSection: .spacer)
+        
         if let popularItems = infoViewModel.collectionViewModels.popularItems {
             snapShot.appendItems(popularItems, toSection: .popular)
         }
@@ -165,9 +161,17 @@ private extension InfoViewController {
  @param collectionView: UICollectionView, indexPath: IndexPath, item: 각각의 cell에 맞는 item
  */
 private extension InfoViewController {
+    func setSpacerCell(_ collectionView: UICollectionView,
+                       _ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SpacerCell.identifier,
+            for: indexPath) as? SpacerCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
     func setPopularCell(_ collectionView: UICollectionView,
                         _ indexPath: IndexPath,
-                        _ item: PopularInfo) -> UICollectionViewCell {
+                        _ item: ShareInfo) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: InfoPopularCell.identifier,
             for: indexPath) as? InfoPopularCell else { return UICollectionViewCell() }
@@ -207,8 +211,7 @@ private extension InfoViewController {
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: InfoShareHeader.identifier,
             for: indexPath) as? InfoShareHeader else { return UICollectionReusableView() }
-        shareHeader.setViewModel(title: InfoViewModel.HeaderTitle.share.title,
-                                 subject: didTapEditButton)
+        shareHeader.setViewModel(title: InfoViewModel.HeaderTitle.share.title)
         return shareHeader
     }
 }
