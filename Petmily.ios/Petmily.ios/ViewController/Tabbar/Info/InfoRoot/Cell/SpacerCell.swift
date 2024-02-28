@@ -19,7 +19,7 @@ extension SpacerCell {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
-                                               heightDimension: .absolute(Constants.Size.size49))
+                                               heightDimension: .absolute(Constants.Size.size30))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

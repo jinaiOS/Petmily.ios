@@ -8,6 +8,7 @@
 import Foundation
 
 struct ShareInfo: Hashable {
+    let shareID: UUID
     let title: String
     let content: String
     let author: String

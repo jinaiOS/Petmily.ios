@@ -15,6 +15,6 @@ enum InfoSection: Int, CaseIterable {
 
 enum InfoItem: Hashable {
     case spacer
-    case popular(PopularInfo)
+    case popular(ShareInfo)
     case share(ShareInfo)
 }

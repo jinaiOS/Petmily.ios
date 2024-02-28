@@ -35,6 +35,7 @@ final class InfoPopularCell: UICollectionViewCell {
         let label = UILabel()
         label.font = ThemeFont.m14
         label.textColor = ThemeColor.white
+        label.numberOfLines = 2
         return label
     }()
     
@@ -72,10 +73,10 @@ extension InfoPopularCell {
         return section
     }
     
-    func setViewModel(info: PopularInfo) {
-        let thumbnailUrl = URL(string: info.thumbnailUrl)
+    func setViewModel(info: ShareInfo) {
+        let contentUrl = URL(string: info.contentImageUrl)
         let profileUlr = URL(string: info.profileUrl)
-        thumbnailImageView.kf.setImage(with: thumbnailUrl)
+        thumbnailImageView.kf.setImage(with: contentUrl)
         profileImageView.kf.setImage(with: profileUlr)
         hashtagLabel.text = info.hashtag
     }
