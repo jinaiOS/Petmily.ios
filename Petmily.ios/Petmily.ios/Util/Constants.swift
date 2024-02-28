@@ -71,6 +71,7 @@ extension Constants {
         static let size36: CGFloat = 36
         
         static let size41: CGFloat = 41
+        static let size40: CGFloat = 40
         static let size42: CGFloat = 42
         static let size45: CGFloat = 45
         static let size46: CGFloat = 46

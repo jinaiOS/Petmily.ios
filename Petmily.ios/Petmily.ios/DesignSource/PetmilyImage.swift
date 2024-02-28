@@ -14,4 +14,6 @@ enum PetmilyImage {
     static var like = UIImage(named: "btn_like")!
     static var union = UIImage(named: "Union")!
     static var ellipsis = UIImage(systemName: "ellipsis")!
+    static var trashFill = UIImage(systemName: "trash.fill")!
+    static var lightBeacon = UIImage(systemName: "light.beacon.max.fill")!
 }
