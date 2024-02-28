@@ -5,12 +5,14 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
+import Combine
 import Kingfisher
 import SnapKit
 import UIKit
 
 final class InfoDetailContentView: UIView {
-    private let shareInfo: ShareInfo
+    private var didTapMoreButton: PassthroughSubject<MenuButtonType, Never>
+    private var didTapSocialButton: PassthroughSubject<SocialButtonType, Never>
     
     private let spacerView1 = UIView()
     private let spacerView2 = UIView()
@@ -23,8 +25,6 @@ final class InfoDetailContentView: UIView {
         view.contentMode = .scaleAspectFill
         view.cornerRadius = Constants.Size.size50 / 2
         view.clipsToBounds = true
-        let profileUrl = URL(string: shareInfo.profileUrl)
-        view.kf.setImage(with: profileUrl)
         
         view.snp.makeConstraints {
             $0.width.height.equalTo(Constants.Size.size50)
@@ -37,7 +37,6 @@ final class InfoDetailContentView: UIView {
         label.font = ThemeFont.b22
         label.textColor = ThemeColor.black
         label.textAlignment = .left
-        label.text = shareInfo.title
         return label
     }()
     
@@ -46,7 +45,6 @@ final class InfoDetailContentView: UIView {
         label.font = ThemeFont.r16
         label.textColor = ThemeColor.darkGray
         label.textAlignment = .left
-        label.text = shareInfo.author
         return label
     }()
     
@@ -63,15 +61,49 @@ final class InfoDetailContentView: UIView {
         return stack
     }()
     
+    private lazy var editAction = UIAction(title: "수정",
+                                           image: PetmilyImage.pencil) { [weak self] _ in
+        guard let self else { return }
+        Task {
+            await self.moreBtnAction(buttonType: .edit)
+        }
+    }
+    
+    private lazy var deleteAction = UIAction(title: "삭제",
+                                             image: PetmilyImage.trashFill,
+                                             attributes: .destructive) { [weak self] _ in
+        guard let self else { return }
+        Task {
+            await self.moreBtnAction(buttonType: .delete)
+        }
+    }
+    
+    private lazy var reportAction = UIAction(title: "신고",
+                                             image: PetmilyImage.lightBeacon,
+                                             attributes: .hidden) { [weak self] _ in
+        guard let self else { return }
+        Task {
+            await self.moreBtnAction(buttonType: .report)
+        }
+    }
+    
+    private lazy var cancelAction = UIAction(title: "취소") { [weak self] _ in
+        guard let self else { return }
+        Task {
+            await self.moreBtnAction(buttonType: .cancel)
+        }
+    }
+    
+    private lazy var moreButton = UIMenu(title: "더보기",
+                                         children: [editAction, deleteAction, reportAction, cancelAction])
+    
     private lazy var moreButon: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.ellipsis, for: .normal)
         button.tintColor = ThemeColor.black
         button.contentHorizontalAlignment = .right
-        
-        button.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size50)
-        }
+        button.menu = moreButton
+        button.showsMenuAsPrimaryAction = true
         return button
     }()
     
@@ -96,8 +128,6 @@ final class InfoDetailContentView: UIView {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.cornerRadius = Constants.Radius.radius13
-        let contentImageUrl = URL(string: shareInfo.contentImageUrl)
-        view.kf.setImage(with: contentImageUrl)
         return view
     }()
     
@@ -106,7 +136,6 @@ final class InfoDetailContentView: UIView {
         label.numberOfLines = 0
         label.textColor = ThemeColor.black
         label.font = ThemeFont.m18
-        label.text = shareInfo.content
         return label
     }()
     
@@ -116,27 +145,30 @@ final class InfoDetailContentView: UIView {
         label.textColor = ThemeColor.black
         label.textAlignment = .right
         label.font = ThemeFont.r14
-        label.text = shareInfo.hashtag
         return label
     }()
     
     private lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.like, for: .normal)
-        
-        button.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size42)
-        }
+        button.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            Task {
+                await self.socialBtnAction(buttonType: .like)
+            }
+        }), for: .touchUpInside)
         return button
     }()
     
     private lazy var showCommentButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.union, for: .normal)
-        
-        button.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size42)
-        }
+        button.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            Task {
+                await self.socialBtnAction(buttonType: .comment)
+            }
+        }), for: .touchUpInside)
         return button
     }()
     
@@ -166,11 +198,15 @@ final class InfoDetailContentView: UIView {
         return stack
     }()
     
-    init(info: ShareInfo) {
-        shareInfo = info
+    init(_ info: ShareInfo,
+         _ menuBtnSubject: PassthroughSubject<MenuButtonType, Never>,
+         _ socialBtnSubject: PassthroughSubject<SocialButtonType, Never>) {
+        didTapMoreButton = menuBtnSubject
+        didTapSocialButton = socialBtnSubject
         super.init(frame: .zero)
         
         setLayout()
+        setViewModel(info: info)
     }
     
     required init?(coder: NSCoder) {
@@ -205,6 +241,66 @@ private extension InfoDetailContentView {
         
         contentImageView.snp.makeConstraints {
             $0.height.equalTo(contentImageView.snp.width)
+        }
+        
+        moreButon.snp.makeConstraints {
+            $0.width.height.equalTo(Constants.Size.size50)
+        }
+        
+        likeButton.snp.makeConstraints {
+            $0.width.height.equalTo(Constants.Size.size40)
+        }
+        
+        showCommentButton.snp.makeConstraints {
+            $0.width.height.equalTo(Constants.Size.size40)
+        }
+    }
+}
+
+private extension InfoDetailContentView {
+    func setViewModel(info: ShareInfo) {
+        let profileUrl = URL(string: info.profileUrl)
+        let contentImageUrl = URL(string: info.contentImageUrl)
+        
+        profileImageView.kf.setImage(with: profileUrl)
+        contentImageView.kf.setImage(with: contentImageUrl)
+        titleLabel.text = info.title
+        authorLabel.text = info.author
+        contentLabel.text = info.content
+        hashtagLabel.text = info.hashtag
+    }
+}
+
+private extension InfoDetailContentView {
+    @MainActor
+    func moreBtnAction(buttonType: MenuButtonType) async {
+        switch buttonType {
+        case .edit:
+            moreButon.setImage(PetmilyImage.pencil, for: .normal)
+            didTapMoreButton.send(.edit)
+            
+        case .delete:
+            moreButon.setImage(PetmilyImage.trashFill, for: .normal)
+            didTapMoreButton.send(.delete)
+            
+        case .report:
+            moreButon.setImage(PetmilyImage.lightBeacon, for: .normal)
+            didTapMoreButton.send(.report)
+            
+        case .cancel:
+            moreButon.setImage(PetmilyImage.ellipsis, for: .normal)
+            didTapMoreButton.send(.cancel)
+        }
+    }
+    
+    @MainActor
+    func socialBtnAction(buttonType: SocialButtonType) async {
+        switch buttonType {
+        case .like:
+            didTapSocialButton.send(.like)
+            
+        case .comment:
+            didTapSocialButton.send(.comment)
         }
     }
 }

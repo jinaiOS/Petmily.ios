@@ -12,11 +12,15 @@ import UIKit
 final class InfoDetailViewController: BaseHeaderViewController {
     private let infoDetailView: InfoDetailView
     private let infoDetailViewModel: InfoDetailViewModel
+    private let didTapMoreButton = PassthroughSubject<MenuButtonType, Never>()
+    private let didTapSocialButton = PassthroughSubject<SocialButtonType, Never>()
     private var cancellables = Set<AnyCancellable>()
     
     init(_ shareInfo: ShareInfo) {
         infoDetailViewModel = InfoDetailViewModel(shareInfo: shareInfo)
-        infoDetailView = InfoDetailView(info: infoDetailViewModel.shareInfo)
+        infoDetailView = InfoDetailView(infoDetailViewModel.shareInfo,
+                                        didTapMoreButton,
+                                        didTapSocialButton)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,6 +39,7 @@ final class InfoDetailViewController: BaseHeaderViewController {
         
         configure()
         setBaseHeaderView()
+        bindButton()
         bindViewModel()
         Task {
             await infoDetailViewModel.setDummyData()
@@ -57,6 +62,25 @@ private extension InfoDetailViewController {
             attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
     }
+}
+
+private extension InfoDetailViewController {
+    func bindButton() {
+        didTapMoreButton
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] type in
+                guard let self else { return }
+                print("Button Type: \(type)")
+            }
+            .store(in: &cancellables)
+        
+        didTapSocialButton
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] type in
+                guard let self else { return }
+                print("Button Type: \(type)")
+            }.store(in: &cancellables)
+    }
     
     func bindViewModel() {
         infoDetailViewModel.$commentViewModel
@@ -71,6 +95,7 @@ private extension InfoDetailViewController {
 struct InfoDetailVC_PreView: PreviewProvider {
     static var previews: some View {
         let dummyInfo = ShareInfo(
+            shareID: UUID(),
             title: "우리집 강쥐 자랑",
             content: """
                 강아지 자랑 내용 첨부1

@@ -5,6 +5,7 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
+import Combine
 import SnapKit
 import UIKit
 
@@ -14,8 +15,10 @@ final class InfoDetailView: UIView {
     private let spacerView = UIView()
     private let infoDetailShareView: InfoDetailContentView
     
-    init(info: ShareInfo) {
-        infoDetailShareView = InfoDetailContentView(info: info)
+    init(_ info: ShareInfo,
+         _ menuBtnSubject: PassthroughSubject<MenuButtonType, Never>,
+         _ socialBtnSubject: PassthroughSubject<SocialButtonType, Never>) {
+        infoDetailShareView = InfoDetailContentView(info, menuBtnSubject, socialBtnSubject)
         super.init(frame: .zero)
         
         setLayout()
