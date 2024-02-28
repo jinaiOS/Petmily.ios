@@ -145,14 +145,14 @@ extension InfoSearchTopicCell {
         return section
     }
     
-    func setViewModel(title: String, profileUrl: String, author: String, date: String, contentImageUrl: String) {
-        let profileUrl = URL(string: profileUrl)
-        let contentUrl = URL(string: contentImageUrl)
-        titleLabel.text = title
+    func setViewModel(info: TopicInfo) {
+        let profileUrl = URL(string: info.profileUrl)
+        let contentUrl = URL(string: info.contentUrl)
         profileImageView.kf.setImage(with: profileUrl)
-        authorLabel.text = author
-        dateLabel.text = date
         contentImageView.kf.setImage(with: contentUrl)
+        titleLabel.text = info.title
+        authorLabel.text = info.author
+        dateLabel.text = "\(info.date)"
     }
 }
 

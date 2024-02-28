@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 final class InfoSearchContentView: UIView {
-    private lazy var searchTextField: UITextField = {
+    lazy var searchTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .none
         field.placeholder = "검색어를 입력해주세요"

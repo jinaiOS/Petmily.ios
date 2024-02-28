@@ -13,6 +13,7 @@ import UIKit
 final class InfoSearchViewController: UIViewController {
     private let infoSearchView = InfoSearchView()
     private let infoSearchViewModel = InfoSearchViewModel()
+    private var dataSource: UICollectionViewDiffableDataSource<InfoSearchSection, infoSearchItem>?
     private var cancellable = Set<AnyCancellable>()
     
     override func loadView() {
@@ -24,15 +25,26 @@ final class InfoSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        infoSearchView.scrollView.delegate = self
+        
         configure()
+        setDataSource()
+        setHeaderView()
         bindViewModel()
+        bindTextField()
+        Task {
+            await infoSearchViewModel.setDummyData()
+        }
+    }
+    
+    deinit {
+        print("deinit - InfoSearchVC")
     }
 }
 
 private extension InfoSearchViewController {
     func configure() {
         view.backgroundColor = ThemeColor.systemBackground
-        infoSearchView.collectionView.dataSource = self
         infoSearchView.collectionView.delegate = self
     }
     
@@ -41,81 +53,87 @@ private extension InfoSearchViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                infoSearchView.remakeConstraints(cellCount: 10)
-            }
+                self.applyItems()
+                //                infoSearchView.remakeConstraints(cellCount: 5)
+            }.store(in: &cancellable)
+    }
+    
+    func bindTextField() {
+        infoSearchView.searchContentView.searchTextField
+            .myDebounceTextFieldPublisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.searchInput, on: infoSearchViewModel)
             .store(in: &cancellable)
     }
 }
 
-extension InfoSearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return InfoSearchSection.allCases.count
+private extension InfoSearchViewController {
+    func setDataSource() {
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: infoSearchView.collectionView,
+            cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
+                guard let self else { return UICollectionViewCell() }
+                switch itemIdentifier {
+                case .category(let item):
+                    return setCategoryCell(collectionView, indexPath, item)
+                    
+                case .topic(let item):
+                    return setTopicCell(collectionView, indexPath, item)
+                }
+            })
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        switch InfoSearchSection(rawValue: section) {
-        case .category:
-            return infoSearchViewModel.collectionViewModels.category.count
-            
-        case .topic:
-            return 9
-            
-        case .none:
-            return 0
+    func setHeaderView() {
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            guard let self else { return UICollectionReusableView() }
+            switch InfoSearchSection(rawValue: indexPath.section) {
+            case .category:
+                return setCategoryHeader(collectionView, indexPath)
+                
+            case .topic:
+                return setTopicHeader(collectionView, indexPath)
+                
+            case .none:
+                return nil
+            }
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch InfoSearchSection(rawValue: indexPath.section) {
-        case .category:
-            return setCategoryCell(collectionView, indexPath)
-            
-        case .topic:
-            return setTopicCell(collectionView, indexPath)
-            
-        case .none:
-            return UICollectionViewCell()
+    func applyItems() {
+        var snapShot = NSDiffableDataSourceSnapshot<InfoSearchSection, infoSearchItem>()
+        InfoSearchSection.allCases.forEach {
+            snapShot.appendSections([$0])
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        switch InfoSearchSection(rawValue: indexPath.section) {
-        case .category:
-            return setCategoryHeader(collectionView, indexPath)
-            
-        case .topic:
-            return setTopicHeader(collectionView, indexPath)
-            
-        case .none:
-            return UICollectionReusableView()
+        
+        if let categoryItems = infoSearchViewModel.collectionViewModels.categoryItems {
+            snapShot.appendItems(categoryItems, toSection: .category)
         }
+        
+        if let topicItems = infoSearchViewModel.collectionViewModels.topicItems {
+            snapShot.appendItems(topicItems, toSection: .topic)
+        }
+        dataSource?.apply(snapShot)
     }
 }
 
 private extension InfoSearchViewController {
     func setCategoryCell(_ collectionView: UICollectionView,
-                         _ indexPath: IndexPath) -> UICollectionViewCell {
+                         _ indexPath: IndexPath,
+                         _ item: String) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: InfoSearchCategoryCell.identifier,
             for: indexPath) as? InfoSearchCategoryCell else { return UICollectionViewCell() }
-        cell.setViewModel(category: infoSearchViewModel.collectionViewModels.category[indexPath.item])
+        cell.setViewModel(category: item)
         return cell
     }
     
     func setTopicCell(_ collectionView: UICollectionView,
-                      _ indexPath: IndexPath) -> UICollectionViewCell {
+                      _ indexPath: IndexPath,
+                      _ item: TopicInfo) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: InfoSearchTopicCell.identifier,
             for: indexPath) as? InfoSearchTopicCell else { return UICollectionViewCell() }
-        cell.setViewModel(title: infoSearchViewModel.collectionViewModels.title,
-                          profileUrl: infoSearchViewModel.collectionViewModels.profileUrl,
-                          author: infoSearchViewModel.collectionViewModels.author,
-                          date: infoSearchViewModel.collectionViewModels.date,
-                          contentImageUrl: infoSearchViewModel.collectionViewModels.contentImageUrl)
+        cell.setViewModel(info: item)
         return cell
     }
 }
@@ -137,10 +155,21 @@ private extension InfoSearchViewController {
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: InfoSearchTopicHeader.identifier,
             for: indexPath) as? InfoSearchTopicHeader else { return UICollectionReusableView() }
-        header.setViewModel(mainTitle: infoSearchViewModel.collectionViewModels.headerTitle,
-                            subTitle: infoSearchViewModel.collectionViewModels.subTitle)
+        header.setViewModel(mainTitle: "반려인은 전부 봤다", subTitle: "운영자 작성 글")
         return header
     }
+}
+
+extension InfoSearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        print("")
+    }
+}
+
+extension InfoSearchViewController: UIScrollViewDelegate {
+    
+    
 }
 
 // MARK: - Preview

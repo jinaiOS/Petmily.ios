@@ -33,7 +33,7 @@ private extension InfoSearchCollectionView {
                  forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                  withReuseIdentifier: InfoSearchTopicHeader.identifier)
         setCollectionViewLayout(collectionViewLayout(), animated: true)
-        isScrollEnabled = false
+//        isScrollEnabled = false
     }
     
     func collectionViewLayout() -> UICollectionViewCompositionalLayout {
