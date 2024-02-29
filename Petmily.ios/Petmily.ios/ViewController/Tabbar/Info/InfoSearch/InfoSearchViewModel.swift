@@ -13,8 +13,25 @@ final class InfoSearchViewModel: ObservableObject {
         var topicItems: [infoSearchItem]?
     }
     
+    private var loadDataTask: Task<Void, Never>?
     @Published private(set) var collectionViewModels = CollectionViewModels()
-    @Published var searchInput: String = ""
+    @Published var searchInput: String = "" {
+        didSet {
+            searchData(text: searchInput)
+        }
+    }
+    
+    deinit {
+        loadDataTask?.cancel()
+    }
+}
+
+private extension InfoSearchViewModel {
+    func searchData(text: String) {
+        loadDataTask = Task {
+            print("검색 단어: \(text)")
+        }
+    }
 }
 
 extension InfoSearchViewModel {

@@ -25,8 +25,6 @@ final class InfoSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        infoSearchView.scrollView.delegate = self
-        
         configure()
         setDataSource()
         setHeaderView()
@@ -45,6 +43,7 @@ final class InfoSearchViewController: UIViewController {
 private extension InfoSearchViewController {
     func configure() {
         view.backgroundColor = ThemeColor.systemBackground
+        infoSearchView.scrollView.delegate = self
         infoSearchView.collectionView.delegate = self
     }
     
@@ -54,7 +53,6 @@ private extension InfoSearchViewController {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.applyItems()
-                //                infoSearchView.remakeConstraints(cellCount: 5)
             }.store(in: &cancellable)
     }
     
@@ -163,13 +161,11 @@ private extension InfoSearchViewController {
 extension InfoSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        print("")
+        print("select")
     }
 }
 
 extension InfoSearchViewController: UIScrollViewDelegate {
-    
-    
 }
 
 // MARK: - Preview
