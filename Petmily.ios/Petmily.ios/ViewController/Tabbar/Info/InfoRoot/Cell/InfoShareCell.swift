@@ -26,7 +26,7 @@ final class InfoShareCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
         stack.spacing = Constants.Spacing.spacing8
         
         [titleLabel, contentLabel].forEach {
@@ -34,6 +34,8 @@ final class InfoShareCell: UICollectionViewCell {
         }
         return stack
     }()
+    
+    private let spacerView = UIView()
     
     private lazy var authorLabel: UILabel = {
         let font: UIFont = ThemeFont.r10
@@ -50,6 +52,12 @@ final class InfoShareCell: UICollectionViewCell {
         view.backgroundColor = ThemeColor.lightPink
         view.addSubview(hashtagLabel)
         view.layer.cornerRadius = Constants.Radius.radius6
+        
+        hashtagLabel.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size8)
+            $0.height.equalTo(Constants.Size.size22)
+        }
         return view
     }()
     
@@ -57,7 +65,7 @@ final class InfoShareCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
         stack.spacing = Constants.Spacing.spacing3
         
         [authorLabel, tagView].forEach {
@@ -70,10 +78,9 @@ final class InfoShareCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
-        stack.spacing = Constants.Spacing.spacing29
+        stack.distribution = .fill
         
-        [contentVStack, infoVStack].forEach {
+        [contentVStack, spacerView, infoVStack].forEach {
             stack.addArrangedSubview($0)
         }
         return stack
@@ -86,7 +93,7 @@ final class InfoShareCell: UICollectionViewCell {
         view.clipsToBounds = true
         
         view.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size114)
+            $0.width.equalTo(view.snp.height)
         }
         return view
     }()
@@ -95,8 +102,8 @@ final class InfoShareCell: UICollectionViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
-        stack.spacing = Constants.Spacing.spacing41
+        stack.distribution = .fill
+        stack.spacing = Constants.Spacing.spacing40
         
         [labelVStack, contentImageView].forEach {
             stack.addArrangedSubview($0)
@@ -163,42 +170,7 @@ private extension InfoShareCell {
         layer.borderColor = ThemeColor.lightGray.cgColor
         
         contentViewHStack.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(Constants.Size.size14)
-            $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(Constants.Size.size12)
-            $0.bottom.equalToSuperview().inset(Constants.Size.size13)
-        }
-        
-        contentVStack.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(infoVStack)
-        }
-        
-        infoVStack.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.width.equalTo(Constants.Size.size182)
-        }
-        
-        labelVStack.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(Constants.Size.size19)
-            $0.trailing.equalTo(contentImageView.snp.leading).offset(-Constants.Size.size41)
-        }
-        
-        contentImageView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(Constants.Size.size6)
-        }
-        
-        hashtagLabel.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size8)
-        }
-        
-        authorLabel.snp.makeConstraints {
-            $0.height.equalTo(Constants.Size.size20)
-        }
-        
-        tagView.snp.makeConstraints {
-            $0.height.equalTo(Constants.Size.size22)
+            $0.edges.equalToSuperview().inset(Constants.Size.size12)
         }
     }
 }
