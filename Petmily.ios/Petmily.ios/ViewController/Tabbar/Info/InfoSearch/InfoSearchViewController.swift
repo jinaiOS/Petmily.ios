@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SnapKit
 import SwiftUI
 import UIKit
 
@@ -43,7 +42,6 @@ final class InfoSearchViewController: UIViewController {
 private extension InfoSearchViewController {
     func configure() {
         view.backgroundColor = ThemeColor.systemBackground
-        infoSearchView.scrollView.delegate = self
         infoSearchView.collectionView.delegate = self
     }
     
@@ -53,6 +51,9 @@ private extension InfoSearchViewController {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.applyItems()
+                Task {
+                    await self.infoSearchView.remakeConstraints()
+                }
             }.store(in: &cancellable)
     }
     
@@ -161,11 +162,19 @@ private extension InfoSearchViewController {
 extension InfoSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        print("select")
+        switch InfoSearchSection(rawValue: indexPath.section) {
+        case .category:
+            guard let items = infoSearchViewModel.collectionViewModels.categoryItems else { return }
+            print("category: \(items[indexPath.item])")
+            
+        case .topic:
+            guard let items = infoSearchViewModel.collectionViewModels.topicItems else { return }
+            print("topic: \(items[indexPath.item])")
+            
+        case .none:
+            return
+        }
     }
-}
-
-extension InfoSearchViewController: UIScrollViewDelegate {
 }
 
 // MARK: - Preview

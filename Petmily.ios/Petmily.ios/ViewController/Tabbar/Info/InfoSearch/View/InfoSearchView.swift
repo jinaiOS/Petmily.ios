@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 final class InfoSearchView: UIView {
-    let scrollView = UIScrollView()
+    private let scrollView = UIScrollView()
     private let contentView = UIView()
     
     private let introLabel: UILabel = {
@@ -36,18 +36,14 @@ final class InfoSearchView: UIView {
 }
 
 extension InfoSearchView {
-    // TODO: - cell 크기 확정 후 수정하기
-//    func remakeConstraints(cellCount: Int) {
-//        collectionView.snp.remakeConstraints {
-//            let categorySize: CGFloat = 90
-//            let headerSize: CGFloat = 49
-//            let cellSize: CGFloat = 99
-//            let spacing: CGFloat = 14
-//            $0.top.equalTo(searchContentView.snp.bottom).offset(Constants.Size.size30)
-//            $0.leading.trailing.bottom.equalToSuperview()
-//            $0.height.equalTo(categorySize + headerSize + cellSize * CGFloat(cellCount) + spacing * CGFloat(cellCount - 1))
-//        }
-//    }
+    @MainActor
+    func remakeConstraints() async {
+        collectionView.snp.remakeConstraints {
+            $0.top.equalTo(searchContentView.snp.bottom).offset(Constants.Size.size30)
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(collectionView.contentSize.height)
+        }
+    }
 }
 
 private extension InfoSearchView {
@@ -82,8 +78,7 @@ private extension InfoSearchView {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(searchContentView.snp.bottom).offset(Constants.Size.size30)
             $0.leading.trailing.bottom.equalToSuperview()
-            let screenHeight = UIScreen.main.bounds.height
-            $0.height.equalTo(screenHeight)
+            $0.height.equalTo(UIScreen.main.bounds.height)
         }
     }
 }
