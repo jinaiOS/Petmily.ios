@@ -47,7 +47,6 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         
         view.snp.makeConstraints {
             $0.width.equalTo(Constants.Size.size1)
-            $0.height.equalTo(Constants.Size.size10)
         }
         return view
     }()

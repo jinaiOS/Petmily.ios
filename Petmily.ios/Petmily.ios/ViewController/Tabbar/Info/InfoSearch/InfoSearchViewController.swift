@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SnapKit
 import SwiftUI
 import UIKit
 
@@ -24,8 +23,6 @@ final class InfoSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        infoSearchView.scrollView.delegate = self
         
         configure()
         setDataSource()
@@ -54,7 +51,9 @@ private extension InfoSearchViewController {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.applyItems()
-                //                infoSearchView.remakeConstraints(cellCount: 5)
+                Task {
+                    await self.infoSearchView.remakeConstraints()
+                }
             }.store(in: &cancellable)
     }
     
@@ -163,13 +162,19 @@ private extension InfoSearchViewController {
 extension InfoSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        print("")
+        switch InfoSearchSection(rawValue: indexPath.section) {
+        case .category:
+            guard let items = infoSearchViewModel.collectionViewModels.categoryItems else { return }
+            print("category: \(items[indexPath.item])")
+            
+        case .topic:
+            guard let items = infoSearchViewModel.collectionViewModels.topicItems else { return }
+            print("topic: \(items[indexPath.item])")
+            
+        case .none:
+            return
+        }
     }
-}
-
-extension InfoSearchViewController: UIScrollViewDelegate {
-    
-    
 }
 
 // MARK: - Preview

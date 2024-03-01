@@ -71,9 +71,9 @@ private extension InfoDetailViewController {
             .sink { [weak self] type in
                 guard let self else { return }
                 print("Button Type: \(type)")
-            }
-            .store(in: &cancellables)
+            }.store(in: &cancellables)
         
+        // TODO: - 좋아요는 debounce, throttle 적용, 댓글은 즉시 이벤트 처리하기
         didTapSocialButton
             .receive(on: DispatchQueue.main)
             .sink { [weak self] type in
