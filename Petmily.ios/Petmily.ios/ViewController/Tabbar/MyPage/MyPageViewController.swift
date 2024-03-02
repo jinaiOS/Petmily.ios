@@ -7,6 +7,7 @@
 
 import UIKit
 
+import SideMenu
 import SnapKit
 
 struct TempDaily {
@@ -25,10 +26,18 @@ class MyPageViewController: BaseViewController {
     var infoData: [TempInfo]?
     var dailyThumbnail: UIImage?
     
-    let dailyDummy = [UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"),]
+    let dailyDummy = [UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1"), UIImage(named: "test1")]
                                                        
     let collectionViewHeight = ((UIScreen.main.bounds.size.width - 25) / 3)
     lazy var totalHeight = (self.collectionViewHeight + 2) * CGFloat(self.dailyDummy.count.calculateCount() / 3)
+    
+    private let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    
+    private var currentProfileIndex = 0 {
+        didSet {
+            setUpProfile()
+        }
+    }
     
     // MARK: Components
     lazy var myPageProfileView = MyPageProfileView()
@@ -45,21 +54,13 @@ class MyPageViewController: BaseViewController {
         return view
     }()
     
-    let contentView = UIView()
-    
-    let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    private let contentView = UIView()
     
     lazy var backgroundImageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "myPageBackground")
         return view
     }()
-    
-    private var currentProfileIndex = 0 {
-        didSet {
-            setUpProfile()
-        }
-    }
     
     // MARK: LifeCycle
     override func viewDidLoad() {
@@ -71,28 +72,6 @@ class MyPageViewController: BaseViewController {
         super.viewWillAppear(animated)
         setUpProfile()
     }
-    
-    @objc func tappedEditButton() {
-        let vc = MyPageSettingViewController()
-        navigationPushController(viewController: vc, animated: true)
-    }
-    
-    @objc private func didChangeValue(segment: UISegmentedControl) {
-        myPagePostView.shouldHideFirstView = segment.selectedSegmentIndex != 0
-        if segment.selectedSegmentIndex == 0 {
-            myPagePostView.dailyCollectionView.snp.remakeConstraints {
-                $0.height.equalTo(totalHeight)
-            }
-        } else {
-            myPagePostView.infoCollectionView.snp.remakeConstraints() {
-                let collectionViewHeight: CGFloat = 152
-                let totalHeight = (collectionViewHeight + 10) * CGFloat(10)
-                $0.height.equalTo(totalHeight)
-            }
-            myPagePostView.infoCollectionView.collectionViewLayout.invalidateLayout()
-            myPagePostView.infoCollectionView.layoutIfNeeded()
-        }
-     }
 }
 
 // MARK: Setup
@@ -107,7 +86,6 @@ private extension MyPageViewController {
         myPagePostView.infoCollectionView.dataSource = self
         
         setUpConstraints()
-        setUpSegmentedControl()
         setUpActions()
     }
     
@@ -120,7 +98,7 @@ private extension MyPageViewController {
         
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset((65 + 16))
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(65 + 16)
         }
         
         backgroundImageView.snp.makeConstraints {
@@ -130,7 +108,6 @@ private extension MyPageViewController {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            
         }
         
         myPageProfileView.snp.makeConstraints {
@@ -157,7 +134,22 @@ private extension MyPageViewController {
     }
     
     private func setUpActions() {
-        myPageProfileView.editProfileButton.addTarget(self, action: #selector(tappedEditButton), for: .touchUpInside)
+        myPagePostView.postSegmentControl.addAction(UIAction(handler: { [weak self] _ in
+            guard let segment = self?.myPagePostView.postSegmentControl else { return }
+            self?.didChangeValue(segment: segment)
+        }), for: .touchUpInside)
+        
+        myPageProfileView.editProfileButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.tappedEditButton()
+        }), for: .touchUpInside)
+        
+        myPageProfileView.settingButton.addAction(UIAction(handler: { [weak self] _ in
+            guard let self = self else { return }
+            let vc = SideMenuController()
+            let sideMenu = SideMenuNavigationController(rootViewController: vc)
+            self.setUpSideMenuNavigationVC(vc: self, menu: sideMenu)
+            self.present(sideMenu, animated: true)
+        }), for: .touchUpInside)
     }
     
     func setUpProfileImage() {
@@ -167,9 +159,41 @@ private extension MyPageViewController {
             }
         }
     }
+}
 
-    func setUpSegmentedControl() {
-        myPagePostView.postSegmentControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+// MARK: Methods
+private extension MyPageViewController {
+    func tappedEditButton() {
+        let vc = MyPageSettingViewController()
+        navigationPushController(viewController: vc, animated: true)
+    }
+    
+    func didChangeValue(segment: UISegmentedControl) {
+        myPagePostView.shouldHideFirstView = segment.selectedSegmentIndex != 0
+        if segment.selectedSegmentIndex == 0 {
+            myPagePostView.dailyCollectionView.snp.remakeConstraints {
+                $0.height.equalTo(totalHeight)
+            }
+        } else {
+            myPagePostView.infoCollectionView.snp.remakeConstraints {
+                let collectionViewHeight: CGFloat = 152
+                let totalHeight = (collectionViewHeight + 10) * CGFloat(10)
+                $0.height.equalTo(totalHeight)
+            }
+            myPagePostView.infoCollectionView.collectionViewLayout.invalidateLayout()
+            myPagePostView.infoCollectionView.layoutIfNeeded()
+        }
+    }
+    
+    func setUpSideMenuNavigationVC(vc: MyPageViewController, menu: SideMenuNavigationController) {
+        menu.dismissOnPresent = true
+        menu.dismissOnPush = true
+        menu.enableTapToDismissGesture = true
+        menu.enableSwipeToDismissGesture = true
+        menu.sideMenuDelegate = vc
+        menu.menuWidth = 240
+        menu.presentationStyle = .menuSlideIn
+        SideMenuManager.default.rightMenuNavigationController = menu
     }
 }
 
@@ -194,7 +218,7 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if myPagePostView.postSegmentControl.selectedSegmentIndex != 1  {
+        if myPagePostView.postSegmentControl.selectedSegmentIndex != 1 {
             let collectionViewWidth = collectionView.bounds.width
             let cellWidth = (collectionViewWidth - 5) / 3
             let cellHeight = cellWidth
@@ -209,28 +233,31 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension MyPageViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-        func numberOfComponents(in pickerView: UIPickerView) -> Int {
-            return 1
-        }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
 
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return profileData.pet?.count ?? 0
-        }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return profileData.pet?.count ?? 0
+    }
 
-        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return profileData.pet?[row].name
-        }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return profileData.pet?[row].name
+    }
 
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            self.currentProfileIndex = row
-            myPageProfileView.profileTextField.text = profileData.pet?[row].name
-        }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        currentProfileIndex = row
+        myPageProfileView.profileTextField.text = profileData.pet?[row].name
+    }
 }
 
 extension MyPageViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            return false
-        }
+        return false
+    }
+}
+
+extension MyPageViewController: SideMenuNavigationControllerDelegate {
 }
 
 extension Int {

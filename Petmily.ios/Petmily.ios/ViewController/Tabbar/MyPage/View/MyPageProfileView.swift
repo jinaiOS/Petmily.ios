@@ -33,7 +33,7 @@ class MyPageProfileView: UIView {
     
     var settingButton: UIButton = {
         var btn = UIButton()
-        let image = UIImage(systemName: "gearshape.fill")
+        let image = UIImage(systemName: "line.horizontal.3")
         let scaledImage = image?.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
         btn.setImage(scaledImage, for: .normal)
         btn.contentMode = .center

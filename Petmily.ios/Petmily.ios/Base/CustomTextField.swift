@@ -30,7 +30,7 @@ class CustomTextField: UIStackView {
     lazy var contentView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 12
+        view.layer.cornerRadius = 8
         return view
     }()
     
@@ -95,7 +95,7 @@ private extension CustomTextField {
         
         headerLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(22)
+            $0.height.equalTo(32)
         }
         
         contentView.snp.makeConstraints {

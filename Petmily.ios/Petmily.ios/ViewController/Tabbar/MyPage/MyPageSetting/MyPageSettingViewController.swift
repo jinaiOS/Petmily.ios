@@ -22,7 +22,7 @@ class MyPageSettingViewController: BaseHeaderViewController {
     }()
     
     lazy var profileStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [nameTextField, ageTextField, breedTextField, completeButton])
+        let view = UIStackView(arrangedSubviews: [nameTextField, ageTextField, genderSegmentControl, breedTextField, completeButton])
         view.axis = .vertical
         view.spacing = 20
         return view
@@ -30,26 +30,45 @@ class MyPageSettingViewController: BaseHeaderViewController {
     
     private let profileImageView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "photo")
+        view.image = UIImage(named: "pagination_second.png")
         return view
     }()
     
     private let profileNickName: UITextField = {
         let field = UITextField()
         field.placeholder = "닉네임을 입력해주세요."
+        let underLine = UIView()
+        field.addSubview(underLine)
+        underLine.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(1)
+            $0.height.equalTo(1)
+        }
+        underLine.backgroundColor = .black
         return field
     }()
     
     private let nameTextField = CustomTextField(type: .normal, header: "동물 이름", placeHolder: "이름")
+    
     private let ageTextField = CustomTextField(type: .normal, header: "동물 나이", placeHolder: "나이")
     
-    // 성별
+    var genderSegmentControl: UISegmentedControl = {
+        var control = UISegmentedControl(items: ["남", "녀"])
+        let font = UIFont.boldSystemFont(ofSize: 20)
+        control.setTitleTextAttributes([NSAttributedString.Key.font: font],for: .normal)
+        control.selectedSegmentTintColor = .gray
+        control.backgroundColor = .white
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     private let breedTextField = CustomTextField(type: .normal, header: "종", placeHolder: "종류")
     
     private let completeButton: UIButton = {
         let button = UIButton()
         button.setTitle("확인", for: .normal)
-        button.backgroundColor = .gray
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.3254902065, green: 0.3254902065, blue: 0.3254902065, alpha: 1)
         button.clipsToBounds = true
         button.cornerRadius = 10
         return button
@@ -98,6 +117,10 @@ class MyPageSettingViewController: BaseHeaderViewController {
         profileStackView.snp.makeConstraints {
             $0.top.equalTo(profileNickName.snp.bottom)
             $0.leading.trailing.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+        }
+        
+        genderSegmentControl.snp.makeConstraints {
+            $0.height.equalTo(44)
         }
         
         completeButton.snp.makeConstraints {
