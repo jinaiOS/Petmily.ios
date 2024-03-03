@@ -16,4 +16,6 @@ enum PetmilyImage {
     static var ellipsis = UIImage(systemName: "ellipsis")!
     static var trashFill = UIImage(systemName: "trash.fill")!
     static var lightBeacon = UIImage(systemName: "light.beacon.max.fill")!
+    static var back = UIImage(named: "btn_back")!
+    static var next = UIImage(named: "btn_next")!
 }
