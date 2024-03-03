@@ -46,13 +46,23 @@ class addpageViewController: UIViewController {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        
+
         let newColor = UIColor(hexString: "FD9B9B")
         button.backgroundColor = newColor
-        
+
         button.layer.cornerRadius = 10
+
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+
         return button
     }()
+    
+    let addImageButton: UIButton = {
+            let button = UIButton()
+            button.setImage(UIImage(systemName: "camera.fill"), for: .normal)
+            button.tintColor = .systemGray2
+            return button
+        }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,61 +75,69 @@ class addpageViewController: UIViewController {
         view.addSubview(titleTextField)
         view.addSubview(descriptionTextView)
         view.addSubview(completeButton)
+        view.addSubview(addImageButton)
 
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.centerX.equalToSuperview()
+
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(40)
+            $0.centerX.equalToSuperview()
         }
 
-        tagTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        tagTextField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
 
-        titleTextField.snp.makeConstraints { make in
-            make.top.equalTo(tagTextField.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        titleTextField.snp.makeConstraints {
+            $0.top.equalTo(tagTextField.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
 
-        descriptionTextView.snp.makeConstraints { make in
-            make.top.equalTo(titleTextField.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(200)
+        descriptionTextView.snp.makeConstraints {
+            $0.top.equalTo(titleTextField.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(200)
         }
 
-        completeButton.snp.makeConstraints { make in
-            make.top.equalTo(descriptionTextView.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
+        completeButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionTextView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+        }
+        
+        addImageButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.width.height.equalTo(60)
         }
 
+        
     }
 }
 
-//struct MyViewController_PreViews: PreviewProvider {
+//struct AddpageViewController_Previews: PreviewProvider {
 //    static var previews: some View {
-//        addpageViewController().toPreview()
+//        addpageViewController().toPreviewView()
 //    }
 //}
 //
-//
 //extension UIViewController {
 //    private struct Preview: UIViewControllerRepresentable {
-//            let viewController: UIViewController
+//        let viewController: UIViewController
 //
-//            func makeUIViewController(context: Context) -> UIViewController {
-//                return viewController
-//            }
-//
-//            func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//            }
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            return viewController
 //        }
 //
-//        func toPreview() -> some View {
-//            Preview(viewController: self)
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
 //        }
+//    }
+//
+//    func toPreviewView() -> some View {
+//        Preview(viewController: self)
+//    }
 //}

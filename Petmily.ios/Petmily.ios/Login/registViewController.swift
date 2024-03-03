@@ -65,8 +65,11 @@ class registViewController: UIViewController {
 
         let newColor = UIColor(hexString: "FD9B9B")
         button.backgroundColor = newColor
-        
+
         button.layer.cornerRadius = 10
+
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+
         return button
     }()
 
@@ -84,66 +87,61 @@ class registViewController: UIViewController {
         view.addSubview(confirmPasswordTextField)
         view.addSubview(signupButton)
 
-        roundButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(100)
-            make.width.height.equalTo(100)
+        roundButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(100)
+            $0.width.height.equalTo(100)
         }
 
-        usernameTextField.snp.makeConstraints { make in
-            make.top.equalTo(roundButton.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        usernameTextField.snp.makeConstraints {
+            $0.top.equalTo(roundButton.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
 
-        emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        emailTextField.snp.makeConstraints {
+            $0.top.equalTo(usernameTextField.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
 
-        passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        passwordTextField.snp.makeConstraints {
+            $0.top.equalTo(emailTextField.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
 
-        confirmPasswordTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        confirmPasswordTextField.snp.makeConstraints {
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
-        
-        signupButton.snp.makeConstraints { make in
-            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
+
+        signupButton.snp.makeConstraints {
+            $0.top.equalTo(confirmPasswordTextField.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(50)
         }
+
     }
 }
 
 
-struct MyViewController_PreViews: PreviewProvider {
-    static var previews: some View {
-        registViewController().toPreview()
-    }
-}
-
-
+//struct AddpageViewController_Previews: PreviewProvider {
+//    static var previews: some View {
+//        registViewController().toPreviewView()
+//    }
+//}
+//
 //extension UIViewController {
 //    private struct Preview: UIViewControllerRepresentable {
-//            let viewController: UIViewController
+//        let viewController: UIViewController
 //
-//            func makeUIViewController(context: Context) -> UIViewController {
-//                return viewController
-//            }
-//
-//            func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//            }
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            return viewController
 //        }
 //
-//        func toPreview() -> some View {
-//            Preview(viewController: self)
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
 //        }
+//    }
+//
+//    func toPreviewView() -> some View {
+//        Preview(viewController: self)
+//    }
 //}

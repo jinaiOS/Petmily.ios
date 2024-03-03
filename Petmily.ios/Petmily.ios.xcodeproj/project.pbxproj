@@ -86,6 +86,7 @@
 		CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */; };
 		CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */; };
 		CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */; };
+		CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B72B9404BD00FA1F8B /* InfoUseViewController.swift */; };
 		DB4E6A592B8A016B00624E8C /* KakaoMapsSDK_SPM in Frameworks */ = {isa = PBXBuildFile; productRef = DB4E6A582B8A016B00624E8C /* KakaoMapsSDK_SPM */; };
 		DB4E6A5B2B8A01BF00624E8C /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E6A5A2B8A01BF00624E8C /* KakaoMapViewController.swift */; };
 		DBA97AAC2B7E670600C4D6BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97AAB2B7E670600C4D6BB /* SnapKit */; };
@@ -196,6 +197,7 @@
 		CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addpageViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registViewController.swift; sourceTree = "<group>"; };
+		CC7AC6B72B9404BD00FA1F8B /* InfoUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUseViewController.swift; sourceTree = "<group>"; };
 		DB4E6A5A2B8A01BF00624E8C /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -463,10 +465,9 @@
 		560DFC022B7E5B6B00487736 /* Petmily.ios */ = {
 			isa = PBXGroup;
 			children = (
-				CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */,
-				CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */,
-				CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */,
 				560DFC032B7E5B6B00487736 /* AppDelegate.swift */,
+				CC7AC6B62B94047300FA1F8B /* Addpage */,
+				CC7AC6B52B94043500FA1F8B /* Login */,
 				DBDBA40F2B7F0220004C10C3 /* ViewController */,
 				DBDBA4122B7F02CD004C10C3 /* Base */,
 				DBDBA40E2B7F0219004C10C3 /* Util */,
@@ -532,6 +533,24 @@
 				77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */,
 			);
 			path = MyPageSetting;
+			sourceTree = "<group>";
+		};
+		CC7AC6B52B94043500FA1F8B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CC7AC6AF2B89A07100FA1F8B /* loginViewController.swift */,
+				CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */,
+				CC7AC6B72B9404BD00FA1F8B /* InfoUseViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CC7AC6B62B94047300FA1F8B /* Addpage */ = {
+			isa = PBXGroup;
+			children = (
+				CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */,
+			);
+			path = Addpage;
 			sourceTree = "<group>";
 		};
 		DBDBA40D2B7F020F004C10C3 /* Model */ = {
@@ -795,6 +814,7 @@
 				77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */,
 				33FE53272B89F49000BF1E98 /* InfoSearchTopicCell.swift in Sources */,
 				563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */,
+				CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */,
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
 				77DAE4F52B8A33D80020B4AA /* MyPagePostView.swift in Sources */,
