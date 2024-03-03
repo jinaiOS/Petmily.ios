@@ -46,7 +46,7 @@ class CommentView: UIView {
     /** @brief 댓글 달기 button */
     lazy var btnComment: UIButton = {
        let button = UIButton()
-        button.setImage(UIImage(named: "btn_comment"), for: .normal)
+        button.setImage(PetmilyImage.comment, for: .normal)
         return button
     }()
 
