@@ -30,8 +30,9 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bindViewModel()
+        
         Task {
-            await infoViewModel.setDummyData()
+            await infoViewModel.fetchShareInfoList()
         }
     }
 }
