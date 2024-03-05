@@ -10,7 +10,7 @@ import Foundation
 
 enum FireStoreError: Error {
     case decodeError
-    case errorString(description: Error)
+    case firestoreError(Error: Error) // Firestore 에러를 담기 위한 케이스
     case emptyData
     case unknownError
 }
@@ -18,30 +18,17 @@ enum FireStoreError: Error {
 final class ShareInfoManager {
     static let shared = ShareInfoManager()
     private let userDB = Firestore.firestore().collection("ShareInfos")
-    private let dateFormat = "yyyy-MM-dd"
-    private let createTime = "createTime"
-    private let limitCount = 2
+    private let orderbyCreateTime = "createTime"
     
     private init() { }
 }
 
 private extension ShareInfoManager {
     /// ShareInfo CRUD를 위한 경로를 만드는 메서드
-    /// - Parameters:
-    ///   - date: 접근하려는 날짜, **default value**: 오늘 날짜
-    ///   - breed: 동물 타입(종)
+    /// - Parameter breed: 동물 타입(종)
     /// - Returns: ShareInfo의 FireStore 경로
-    func makeCollectionReference(date: String? = nil, breed: Breed) -> CollectionReference {
-        let dateString: String
-        if let date = date {
-            dateString = date
-        } else {
-            dateString = Date.stringFromDate(date: Date(), format: dateFormat)
-        }
-        
-        let collectionReference = userDB.document(breed.name)
-            .collection(dateString)
-        return collectionReference
+    func makeCollectionReference(breed: Breed) -> CollectionReference {
+        return userDB.document("Breed").collection(breed.name)
     }
 }
 
@@ -58,20 +45,21 @@ extension ShareInfoManager {
             try docRef.setData(from: data, encoder: .init())
             return .success(true)
         } catch {
-            return .failure(.errorString(description: error))
+            return .failure(.firestoreError(Error: error))
         }
     }
     
-    /// Firestore에 ShareInfo list를 가져오기 위한 메서드
+    /// Firestore에서 ShareInfo 배열을 가져오기 위한 메서드
     /// - Parameters:
-    ///   - date: 가져올 날짜
     ///   - breed: 동물 타입(종)
+    ///   - createTime: 커서의 기준이 되는 시간
+    ///   - limitCount: 가져올 데이터 개수
     /// - Returns: **성공**: [ShareInfo], **실패**: error(String)
-    func getShreInfoQueryDocumentSnapshot(_ date: String, _ breed: Breed) async -> Result<[ShareInfo], FireStoreError> {
-        let collectionRef = makeCollectionReference(date: date, breed: breed)
+    func getShareInfoList(_ breed: Breed, _ createTime: Date, _ limitCount: Int) async -> Result<[ShareInfo], FireStoreError> {
+        let collectionRef = makeCollectionReference(breed: breed)
         let query = collectionRef
-            .order(by: createTime, descending: true)
-//            .order(by: "author", descending: true)
+            .order(by: orderbyCreateTime, descending: true)
+            .start(after: [createTime])
             .limit(to: limitCount)
         
         do {
@@ -80,73 +68,15 @@ extension ShareInfoManager {
             let shareInfoList = try decodeDocSnapshotToShareInfo(queryDocumentSnapshot)
             return .success(shareInfoList)
         } catch {
-            return .failure(.errorString(description: error))
+            return .failure(.firestoreError(Error: error))
         }
     }
-    
-//    func getShareInfoList(_ breed: Breed) async {
-//        let reference = userDB.document(breed.name).collection("2024-03-03")
-//        let query = reference
-//            .order(by: createTime, descending: true)
-//            .limit(to: limitCount)
-//        
-//        query.addSnapshotListener { [weak self] snapshot, error in
-//            guard let self else { return }
-//            guard let snapshot else {
-//                print("Error retreving cities: \(error.debugDescription)")
-//                return
-//            }
-//            
-//            guard let lastSnapshot = snapshot.documents.last else {
-//                return
-//            }
-//            
-//            let next = reference
-//                .order(by: createTime, descending: true)
-//                .start(afterDocument: lastSnapshot)
-//                .limit(to: limitCount)
-//            
-//            Task {
-//                let queryDocumentSnapshot = try await next.getDocuments().documents
-//                self.decodeDocSnapshotToShareInfo(queryDocumentSnapshot)
-//            }
-//        }
-//    }
-    
-//    func getTodoList(strDate: String) async -> [Todo]? {
-//        guard let uid = FirebaseManager.shared.getUID() else { return nil }
-//        
-//        do {
-//            let querySnapshot = try await userDB.document(uid).collection(strDate).getDocuments()
-//            let documentSnapshot = querySnapshot.documents
-//            
-//            let todoList = documentSnapshot.compactMap { document -> Todo? in
-//                guard
-//                    let id = document["id"] as? String,
-//                    let content = document["content"] as? String,
-//                    let date = document["date"] as? String,
-//                    let priority = (document["priority"] as? Timestamp)?.dateValue(),
-//                    let done = document["done"] as? Bool else { return nil }
-//                // 알람은 복귀 유저가 저장하지 않아도 되는 정보이므로 제외함
-//                
-//                let todo = Todo(
-//                    id: UUID(uuidString: id) ?? UUID(),
-//                    content: content,
-//                    date: date,
-//                    priority: priority,
-//                    done: done
-//                )
-//                return todo
-//            }
-//            return todoList
-//        } catch {
-//            print("error: \(error.localizedDescription)")
-//            return nil
-//        }
-//    }
 }
 
 private extension ShareInfoManager {
+    /// Firestore에서 받은 Snapshot을 ShareInfo로 디코딩 하는 메서드
+    /// - Parameter queryDocumentSnapshot: Documents의 queryDocumentSnapshot
+    /// - Returns: ShareInfo 배열을 반환
     func decodeDocSnapshotToShareInfo(_ queryDocumentSnapshot: [QueryDocumentSnapshot]) throws -> [ShareInfo] {
         var shareInfoList: [ShareInfo] = []
         

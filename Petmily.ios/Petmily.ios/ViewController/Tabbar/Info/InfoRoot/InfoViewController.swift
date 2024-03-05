@@ -30,9 +30,9 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bindViewModel()
-        
+                
         Task {
-            await infoViewModel.fetchShareInfoList()
+            await infoViewModel.fetchShareInfoList(breed: infoViewModel.currentBreed, lastData: nil)
         }
     }
 }
@@ -140,17 +140,17 @@ private extension InfoViewController {
      */
     func applyItems() {
         var snapShot = NSDiffableDataSourceSnapshot<InfoSection, InfoItem>()
+        let popularItems = infoViewModel.collectionViewModels.popularItems
+        let shareItems = infoViewModel.collectionViewModels.shareItems
+        
         InfoSection.allCases.forEach {
             snapShot.appendSections([$0])
         }
-        
-        snapShot.appendItems([InfoItem.spacer], toSection: .spacer)
-        
-        if let popularItems = infoViewModel.collectionViewModels.popularItems {
+        if popularItems.isEmpty != true {
+            snapShot.appendItems([InfoItem.spacer], toSection: .spacer)
             snapShot.appendItems(popularItems, toSection: .popular)
         }
-        
-        if let shareItems = infoViewModel.collectionViewModels.shareItems {
+        if shareItems.isEmpty != true {
             snapShot.appendItems(shareItems, toSection: .share)
         }
         dataSource?.apply(snapShot)
@@ -220,9 +220,40 @@ private extension InfoViewController {
 extension InfoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        let shareInfo = infoViewModel.makeShareInfo[indexPath.item]
+        var infoItems: [InfoItem]? = nil
+        
+        switch InfoSection(rawValue: indexPath.section) {
+        case .spacer, .none: return
+            
+        case .popular:
+            infoItems = infoViewModel.collectionViewModels.popularItems
+            
+        case .share:
+            infoItems = infoViewModel.collectionViewModels.shareItems
+        }
+        
+        guard let infoItem = infoItems?[indexPath.item],
+              let shareInfo = infoViewModel.infoItemToShareInfo(item: infoItem) else { return }
         let infoDetailVC = InfoDetailViewController(shareInfo)
         navigationPushController(viewController: infoDetailVC, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        let infoItems = infoViewModel.collectionViewModels.shareItems
+        guard let lastItem = infoItems.last else { return }
+        let shareInfo = infoViewModel.infoItemToShareInfo(item: lastItem)
+        let itemsCount = infoItems.count
+        let currentRow = indexPath.row
+        let remainCount = infoViewModel.remainCount
+        
+        if (itemsCount - currentRow) == remainCount &&
+            (itemsCount % currentRow) == remainCount {
+            Task {
+                await infoViewModel.fetchShareInfoList(breed: infoViewModel.currentBreed, lastData: shareInfo)
+            }
+        }
     }
 }
 
