@@ -148,7 +148,7 @@ extension InfoShareCell {
         titleLabel.text = info.title
         contentLabel.text = info.content
         authorLabel.text = info.author
-        hashtagLabel.text = info.hashtag
+        hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
         let url = URL(string: info.contentImageUrl)
         contentImageView.kf.setImage(with: url)
     }

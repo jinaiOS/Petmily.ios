@@ -78,7 +78,7 @@ extension InfoPopularCell {
         let profileUlr = URL(string: info.profileUrl)
         thumbnailImageView.kf.setImage(with: contentUrl)
         profileImageView.kf.setImage(with: profileUlr)
-        hashtagLabel.text = info.hashtag
+        hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
 }
 

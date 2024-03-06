@@ -23,7 +23,8 @@ final class InfoViewModel: ObservableObject {
     @Published private(set) var collectionViewModels = CollectionViewModels()
     private let shareInfoManager = ShareInfoManager.shared
     var currentBreed: Breed = .dog
-    private let display = 15
+    private let popularSectionDisplay = 9
+    private let shareSectionDisplay = 15
     let remainCount = 5
 }
 
@@ -48,24 +49,52 @@ extension InfoViewModel {
             print("Create ShareInfo: Success")
             
         case .failure(let error):
-            print("Failure Create ShareInfo: \(error)")
+            print("Failure create ShareInfo: \(error)")
         }
     }
     
-    func fetchShareInfoList(breed: Breed, lastData: ShareInfo?) async {
+    func fetchInfoSectionData(section: InfoSection, breed: Breed, lastData: ShareInfo?) async {
         let createTime = lastData?.createTime ?? Date()
-        let result = await shareInfoManager.getShareInfoList(breed, createTime, display)
         
+        switch section {
+        case .spacer: return
+            
+        case .popular:
+            let result = await shareInfoManager.getPopularSectionData(breed, createTime, popularSectionDisplay)
+            await resultProcess(section: .popular, result: result)
+            
+        case .share:
+            let result = await shareInfoManager.getShareSectionData(breed, createTime, shareSectionDisplay)
+            await resultProcess(section: .share, result: result)
+        }
+    }
+}
+
+private extension InfoViewModel {
+    @MainActor
+    func resultProcess(section: InfoSection, result: Result<[ShareInfo], FireStoreError>) async {
         switch result {
         case .success(let shareInfoList):
-            let newList = shareInfoList.map {
-                InfoItem.share($0)
+            switch section {
+            case .spacer: return
+                
+            case .popular:
+                let newList = shareInfoList.map {
+                    InfoItem.popular($0)
+                }
+                let uniqueItems = newList.filter { !collectionViewModels.popularItems.contains($0) }
+                collectionViewModels.popularItems += uniqueItems
+                
+            case .share:
+                let newList = shareInfoList.map {
+                    InfoItem.share($0)
+                }
+                let uniqueItems = newList.filter { !collectionViewModels.shareItems.contains($0) }
+                collectionViewModels.shareItems += uniqueItems
             }
-            let uniqueItems = newList.filter { !collectionViewModels.shareItems.contains($0) }
-            collectionViewModels.shareItems += uniqueItems
             
         case .failure(let error):
-            print("Failure fetch ShareInfoList: \(error)")
+            print("Failure fetch ShareInfo \(error)")
         }
     }
 }

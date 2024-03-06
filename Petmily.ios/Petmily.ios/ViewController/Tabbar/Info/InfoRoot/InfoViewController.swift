@@ -32,7 +32,13 @@ final class InfoViewController: BaseHeaderViewController {
         bindViewModel()
                 
         Task {
-            await infoViewModel.fetchShareInfoList(breed: infoViewModel.currentBreed, lastData: nil)
+            await infoViewModel.fetchInfoSectionData(section: .popular,
+                                                     breed: infoViewModel.currentBreed,
+                                                     lastData: nil)
+            
+            await infoViewModel.fetchInfoSectionData(section: .share,
+                                                     breed: infoViewModel.currentBreed,
+                                                     lastData: nil)
         }
     }
 }
@@ -120,17 +126,13 @@ private extension InfoViewController {
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let self else { return UICollectionReusableView() }
             switch InfoSection(rawValue: indexPath.section) {
-            case .spacer:
-                return nil
+            case .spacer, .none: return nil
                 
             case .popular:
                 return setPopularHeader(collectionView, indexPath)
                 
             case .share:
                 return setShareHeader(collectionView, indexPath)
-                
-            case .none:
-                return nil
             }
         }
     }
@@ -241,17 +243,24 @@ extension InfoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        let infoItems = infoViewModel.collectionViewModels.shareItems
-        guard let lastItem = infoItems.last else { return }
-        let shareInfo = infoViewModel.infoItemToShareInfo(item: lastItem)
-        let itemsCount = infoItems.count
-        let currentRow = indexPath.row
-        let remainCount = infoViewModel.remainCount
-        
-        if (itemsCount - currentRow) == remainCount &&
-            (itemsCount % currentRow) == remainCount {
-            Task {
-                await infoViewModel.fetchShareInfoList(breed: infoViewModel.currentBreed, lastData: shareInfo)
+        switch InfoSection(rawValue: indexPath.section) {
+        case .spacer, .popular, .none: return
+            
+        case .share:
+            let infoItems = infoViewModel.collectionViewModels.shareItems
+            guard let lastItem = infoItems.last else { return }
+            let shareInfo = infoViewModel.infoItemToShareInfo(item: lastItem)
+            let itemsCount = infoItems.count
+            let currentRow = indexPath.row
+            let remainCount = infoViewModel.remainCount
+            
+            if (itemsCount - currentRow) == remainCount &&
+                (itemsCount % currentRow) == remainCount {
+                Task {
+                    await infoViewModel.fetchInfoSectionData(section: .share,
+                                                             breed: infoViewModel.currentBreed,
+                                                             lastData: shareInfo)
+                }
             }
         }
     }

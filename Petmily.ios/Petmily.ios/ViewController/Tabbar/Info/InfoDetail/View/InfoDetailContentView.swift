@@ -267,7 +267,7 @@ private extension InfoDetailContentView {
         titleLabel.text = info.title
         authorLabel.text = info.author
         contentLabel.text = info.content
-        hashtagLabel.text = info.hashtag
+        hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
 }
 
