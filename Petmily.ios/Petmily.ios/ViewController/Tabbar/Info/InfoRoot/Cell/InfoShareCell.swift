@@ -103,7 +103,7 @@ final class InfoShareCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing40
+        stack.spacing = Constants.Spacing.spacing20
         
         [labelVStack, contentImageView].forEach {
             stack.addArrangedSubview($0)

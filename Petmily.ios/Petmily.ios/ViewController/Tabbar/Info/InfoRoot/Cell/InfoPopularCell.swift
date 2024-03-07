@@ -20,6 +20,14 @@ final class InfoPopularCell: UICollectionViewCell {
         return view
     }()
     
+    private let blurView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColor.black.withAlphaComponent(0.5)
+        view.layer.cornerRadius = Constants.Radius.radius9
+        view.clipsToBounds = true
+        return view
+    }()
+    
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
@@ -83,11 +91,15 @@ extension InfoPopularCell {
 
 private extension InfoPopularCell {
     func setLayout() {
-        [contentImageView, profileImageView, hashtagLabel].forEach {
+        [contentImageView, blurView, profileImageView, hashtagLabel].forEach {
             contentView.addSubview($0)
         }
         
         contentImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        blurView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
