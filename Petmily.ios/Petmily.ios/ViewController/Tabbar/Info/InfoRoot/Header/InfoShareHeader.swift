@@ -35,7 +35,7 @@ extension InfoShareHeader {
      */
     static func shareHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
-                                                heightDimension: .estimated(Constants.Size.size30))
+                                                heightDimension: .estimated(Constants.Size.size20))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,

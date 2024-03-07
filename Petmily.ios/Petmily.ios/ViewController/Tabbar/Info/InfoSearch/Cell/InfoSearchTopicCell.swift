@@ -65,7 +65,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing4
+        stack.spacing = Constants.Spacing.spacing5
         
         [profileImageView, authorLabel, separateView, dateLabel, UIView()].forEach {
             stack.addArrangedSubview($0)
@@ -78,7 +78,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing11
+        stack.spacing = Constants.Spacing.spacing10
         
         [titleLabel, labelHStack].forEach {
             stack.addArrangedSubview($0)
@@ -93,7 +93,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         view.cornerRadius = Constants.Radius.radius5
         
         view.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size75)
+            $0.width.equalTo(view.snp.height)
         }
         return view
     }()
@@ -129,11 +129,11 @@ extension InfoSearchTopicCell {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
-                                               heightDimension: .absolute(Constants.Size.size99))
+                                               heightDimension: .absolute(Constants.Size.size100))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0,
+        section.contentInsets = .init(top: Constants.Size.size8,
                                       leading: Constants.Size.size24,
                                       bottom: 0,
                                       trailing: Constants.Size.size24)
@@ -164,12 +164,7 @@ private extension InfoSearchTopicCell {
         contentView.addSubview(contentHStack)
         
         contentHStack.snp.makeConstraints {
-            $0.leading.top.bottom.equalToSuperview().inset(Constants.Size.size12)
-            $0.trailing.equalToSuperview().inset(Constants.Size.size14)
-        }
-        
-        labelHStack.snp.makeConstraints {
-            $0.height.equalTo(Constants.Size.size20)
+            $0.edges.equalToSuperview().inset(Constants.Size.size12)
         }
     }
 }

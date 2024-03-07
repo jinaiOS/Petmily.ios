@@ -36,7 +36,7 @@ extension InfoSearchCategoryHeader {
      */
     static func categoryHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
-                                                heightDimension: .absolute(Constants.Size.size36))
+                                                heightDimension: .absolute(Constants.Size.size20))
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,

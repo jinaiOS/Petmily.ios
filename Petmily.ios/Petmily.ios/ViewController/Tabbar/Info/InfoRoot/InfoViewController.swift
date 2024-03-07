@@ -59,7 +59,7 @@ private extension InfoViewController {
     
     func setBaseHeaderView() {
         let title = NSMutableAttributedString(
-            string: "반려in",
+            string: infoViewModel.baseHeaderTitle,
             attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
         

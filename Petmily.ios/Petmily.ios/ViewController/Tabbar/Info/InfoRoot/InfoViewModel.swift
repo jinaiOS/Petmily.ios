@@ -22,7 +22,8 @@ final class InfoViewModel: ObservableObject {
     
     @Published private(set) var collectionViewModels = CollectionViewModels()
     private let shareInfoManager = ShareInfoManager.shared
-    var currentBreed: Breed = .dog
+    let baseHeaderTitle = "반려in"
+    private(set) var currentBreed: Breed = .dog
     private let popularSectionDisplay = 9
     private let shareSectionDisplay = 15
     let remainCount = 5

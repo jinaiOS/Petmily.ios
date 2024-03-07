@@ -51,7 +51,7 @@ final class InfoShareCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = ThemeColor.lightPink
         view.addSubview(hashtagLabel)
-        view.layer.cornerRadius = Constants.Radius.radius6
+        view.layer.cornerRadius = Constants.Radius.radius7
         
         hashtagLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
@@ -66,7 +66,7 @@ final class InfoShareCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing3
+        stack.spacing = Constants.Spacing.spacing2
         
         [authorLabel, tagView].forEach {
             stack.addArrangedSubview($0)
@@ -135,7 +135,7 @@ extension InfoShareCell {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: Constants.Size.size16,
                                       leading: Constants.Size.size16,
-                                      bottom: Constants.Size.size10,
+                                      bottom: Constants.Size.size16 + Constants.HeaderView.height,
                                       trailing: Constants.Size.size16)
         section.interGroupSpacing = Constants.Spacing.spacing16
         

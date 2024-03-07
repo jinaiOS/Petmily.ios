@@ -12,10 +12,10 @@ import UIKit
 final class InfoPopularCell: UICollectionViewCell {
     static let identifier = "InfoPopularCell"
     
-    private lazy var thumbnailImageView: UIImageView = {
+    private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = Constants.Radius.radius7
+        view.layer.cornerRadius = Constants.Radius.radius9
         view.clipsToBounds = true
         return view
     }()
@@ -24,9 +24,9 @@ final class InfoPopularCell: UICollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.cornerRadius = Constants.Size.size24 / 2
+        view.cornerRadius = Constants.Size.size30 / 2
         view.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size24)
+            $0.width.height.equalTo(Constants.Size.size30)
         }
         return view
     }()
@@ -76,7 +76,7 @@ extension InfoPopularCell {
     func setViewModel(info: ShareInfo) {
         let contentUrl = URL(string: info.contentImageUrl)
         let profileUlr = URL(string: info.profileUrl)
-        thumbnailImageView.kf.setImage(with: contentUrl)
+        contentImageView.kf.setImage(with: contentUrl)
         profileImageView.kf.setImage(with: profileUlr)
         hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
@@ -84,11 +84,11 @@ extension InfoPopularCell {
 
 private extension InfoPopularCell {
     func setLayout() {
-        [thumbnailImageView, profileImageView, hashtagLabel].forEach {
+        [contentImageView, profileImageView, hashtagLabel].forEach {
             contentView.addSubview($0)
         }
         
-        thumbnailImageView.snp.makeConstraints {
+        contentImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         

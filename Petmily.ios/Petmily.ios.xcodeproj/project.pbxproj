@@ -61,10 +61,7 @@
 		33FE53342B89F49000BF1E98 /* InfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE53152B89F49000BF1E98 /* InfoDetailView.swift */; };
 		33FE53352B89F49000BF1E98 /* InfoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE53162B89F49000BF1E98 /* InfoDetailViewModel.swift */; };
 		33FE53362B89F49000BF1E98 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE53172B89F49000BF1E98 /* InfoDetailViewController.swift */; };
-		33FE53372B89F49000BF1E98 /* InfoDetailCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE53192B89F49000BF1E98 /* InfoDetailCommentCell.swift */; };
-		33FE53382B89F49000BF1E98 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE531B2B89F49000BF1E98 /* Comment.swift */; };
 		33FE53392B89F49000BF1E98 /* InfoDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE531C2B89F49000BF1E98 /* InfoDetailContentView.swift */; };
-		33FE533A2B89F49000BF1E98 /* InfoDetailCommentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE531E2B89F49000BF1E98 /* InfoDetailCommentHeader.swift */; };
 		33FE533B2B89F49000BF1E98 /* InfoShareHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE53202B89F49000BF1E98 /* InfoShareHeader.swift */; };
 		33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE53212B89F49000BF1E98 /* InfoPopularHeader.swift */; };
 		33FE533E2B89F4B400BF1E98 /* ThemeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE533D2B89F4B400BF1E98 /* ThemeFont.swift */; };
@@ -172,10 +169,7 @@
 		33FE53152B89F49000BF1E98 /* InfoDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDetailView.swift; sourceTree = "<group>"; };
 		33FE53162B89F49000BF1E98 /* InfoDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDetailViewModel.swift; sourceTree = "<group>"; };
 		33FE53172B89F49000BF1E98 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
-		33FE53192B89F49000BF1E98 /* InfoDetailCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDetailCommentCell.swift; sourceTree = "<group>"; };
-		33FE531B2B89F49000BF1E98 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		33FE531C2B89F49000BF1E98 /* InfoDetailContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDetailContentView.swift; sourceTree = "<group>"; };
-		33FE531E2B89F49000BF1E98 /* InfoDetailCommentHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDetailCommentHeader.swift; sourceTree = "<group>"; };
 		33FE53202B89F49000BF1E98 /* InfoShareHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoShareHeader.swift; sourceTree = "<group>"; };
 		33FE53212B89F49000BF1E98 /* InfoPopularHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPopularHeader.swift; sourceTree = "<group>"; };
 		33FE533D2B89F4B400BF1E98 /* ThemeFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeFont.swift; sourceTree = "<group>"; };
@@ -387,8 +381,8 @@
 		33FE530C2B89F49000BF1E98 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				33FE530D2B89F49000BF1E98 /* InfoSearchTopicHeader.swift */,
 				33FE530E2B89F49000BF1E98 /* InfoSearchCategoryHeader.swift */,
+				33FE530D2B89F49000BF1E98 /* InfoSearchTopicHeader.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -405,8 +399,6 @@
 		33FE53142B89F49000BF1E98 /* InfoDetail */ = {
 			isa = PBXGroup;
 			children = (
-				33FE53182B89F49000BF1E98 /* Cell */,
-				33FE531D2B89F49000BF1E98 /* Header */,
 				33FE531A2B89F49000BF1E98 /* Model */,
 				3326075E2B8A44C800A66DC5 /* View */,
 				33FE53162B89F49000BF1E98 /* InfoDetailViewModel.swift */,
@@ -415,30 +407,13 @@
 			path = InfoDetail;
 			sourceTree = "<group>";
 		};
-		33FE53182B89F49000BF1E98 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				33FE53192B89F49000BF1E98 /* InfoDetailCommentCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		33FE531A2B89F49000BF1E98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				33FE531B2B89F49000BF1E98 /* Comment.swift */,
 				3349CAB82B8DBD7900C48362 /* MenuButtonType.swift */,
 				3349CABA2B8DD6A800C48362 /* SocialButtonType.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		33FE531D2B89F49000BF1E98 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				33FE531E2B89F49000BF1E98 /* InfoDetailCommentHeader.swift */,
-			);
-			path = Header;
 			sourceTree = "<group>";
 		};
 		33FE531F2B89F49000BF1E98 /* Header */ = {
@@ -774,14 +749,11 @@
 				3349CABB2B8DD6A800C48362 /* SocialButtonType.swift in Sources */,
 				CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */,
 				33FE53342B89F49000BF1E98 /* InfoDetailView.swift in Sources */,
-				33FE533A2B89F49000BF1E98 /* InfoDetailCommentHeader.swift in Sources */,
 				33FE53302B89F49000BF1E98 /* InfoViewModel.swift in Sources */,
 				33FE53362B89F49000BF1E98 /* InfoDetailViewController.swift in Sources */,
 				33FE53312B89F49000BF1E98 /* ShareInfo.swift in Sources */,
 				DBA97AFA2B7EF25F00C4D6BB /* Pet.swift in Sources */,
 				33FE53242B89F49000BF1E98 /* InfoShareCell.swift in Sources */,
-				33FE53382B89F49000BF1E98 /* Comment.swift in Sources */,
-				33FE53372B89F49000BF1E98 /* InfoDetailCommentCell.swift in Sources */,
 				563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */,
 				DB4E6A5B2B8A01BF00624E8C /* KakaoMapViewController.swift in Sources */,
 				33FE53262B89F49000BF1E98 /* InfoSearchCategoryCell.swift in Sources */,
