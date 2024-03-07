@@ -260,10 +260,8 @@ private extension InfoDetailContentView {
 private extension InfoDetailContentView {
     func setViewModel(info: ShareInfo) {
         let profileUrl = URL(string: info.profileUrl)
-        let contentImageUrl = URL(string: info.contentImageUrl)
-        
         profileImageView.kf.setImage(with: profileUrl)
-        contentImageView.kf.setImage(with: contentImageUrl)
+        contentImageView.kf.setImage(with: info.contentImageUrl)
         titleLabel.text = info.title
         authorLabel.text = info.author
         contentLabel.text = info.content

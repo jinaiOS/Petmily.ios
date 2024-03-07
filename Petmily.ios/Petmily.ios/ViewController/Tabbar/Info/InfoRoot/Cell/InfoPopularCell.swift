@@ -74,9 +74,8 @@ extension InfoPopularCell {
     }
     
     func setViewModel(info: ShareInfo) {
-        let contentUrl = URL(string: info.contentImageUrl)
         let profileUlr = URL(string: info.profileUrl)
-        contentImageView.kf.setImage(with: contentUrl)
+        contentImageView.kf.setImage(with: info.contentImageUrl)
         profileImageView.kf.setImage(with: profileUlr)
         hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
