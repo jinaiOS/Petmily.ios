@@ -30,7 +30,7 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bindViewModel()
-                
+        
         Task {
             await infoViewModel.fetchInfoSectionData(section: .popular,
                                                      breed: infoViewModel.currentBreed,

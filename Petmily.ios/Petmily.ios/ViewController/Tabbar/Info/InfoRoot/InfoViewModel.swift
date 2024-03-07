@@ -5,7 +5,7 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
-import Foundation
+import UIKit
 
 final class InfoViewModel: ObservableObject {
     struct CollectionViewModels {
@@ -22,8 +22,11 @@ final class InfoViewModel: ObservableObject {
     
     @Published private(set) var collectionViewModels = CollectionViewModels()
     private let shareInfoManager = ShareInfoManager.shared
+    private let storageManager = StorageManager.shared
+    
     let baseHeaderTitle = "반려in"
     private(set) var currentBreed: Breed = .dog
+    
     private let popularSectionDisplay = 9
     private let shareSectionDisplay = 15
     let remainCount = 5
@@ -42,15 +45,25 @@ extension InfoViewModel {
 }
 
 extension InfoViewModel {
-    func createShareInfo(breed: Breed, shareInfo: ShareInfo) async {
-        let result = await shareInfoManager.createShareInfo(breed, shareInfo)
+    func createShareInfo(contentImage: UIImage, breed: Breed, shareInfo: ShareInfo) async {
+        var data = shareInfo
         
-        switch result {
-        case .success(_):
-            print("Create ShareInfo: Success")
-            
-        case .failure(let error):
-            print("Failure create ShareInfo: \(error)")
+        do {
+            let imageResult = try await storageManager
+                .createContentImage(storageRefName: storageManager.shareInfoPath,
+                                    spaceRefName: data.shareID.uuidString,
+                                    contentImage: contentImage)
+            data.contentImageUrl = imageResult
+            let result = await shareInfoManager.createShareInfo(breed: breed, data: data)
+            switch result {
+            case .success(_):
+                print("Create ShareInfo: Success")
+                
+            case .failure(let error):
+                print("Failure create ShareInfo: \(error)")
+            }
+        } catch {
+            print("Failure create contentImage: \(error)")
         }
     }
     
@@ -61,11 +74,15 @@ extension InfoViewModel {
         case .spacer: return
             
         case .popular:
-            let result = await shareInfoManager.getPopularSectionData(breed, createTime, popularSectionDisplay)
+            let result = await shareInfoManager.getPopularSectionData(breed: breed,
+                                                                      createTime: createTime,
+                                                                      limitCount: popularSectionDisplay)
             await resultProcess(section: .popular, result: result)
             
         case .share:
-            let result = await shareInfoManager.getShareSectionData(breed, createTime, shareSectionDisplay)
+            let result = await shareInfoManager.getShareSectionData(breed: breed,
+                                                                    createTime: createTime,
+                                                                    limitCount: shareSectionDisplay)
             await resultProcess(section: .share, result: result)
         }
     }

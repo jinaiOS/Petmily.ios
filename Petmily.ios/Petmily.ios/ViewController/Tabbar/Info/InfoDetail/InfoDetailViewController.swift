@@ -94,7 +94,8 @@ private extension InfoDetailViewController {
 // MARK: - Preview
 struct InfoDetailVC_PreView: PreviewProvider {
     static var previews: some View {
-        let dummyInfo = ShareInfo(
+        let contentUrl: URL? = URL(string: "https://flexible.img.hani.co.kr/flexible/normal/850/567/imgdb/original/2023/0111/20230111503366.jpg")
+        var dummyInfo = ShareInfo(
             title: "우리집 강쥐 자랑",
             content: """
                 강아지 자랑 내용 첨부1
@@ -110,8 +111,7 @@ struct InfoDetailVC_PreView: PreviewProvider {
                 """,
             author: "아이언맨",
             hashtag: ["강아지", "힐링", "귀여운", "자랑"],
-            profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-            contentImageUrl: "https://flexible.img.hani.co.kr/flexible/normal/850/567/imgdb/original/2023/0111/20230111503366.jpg")
+            profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg")
         InfoDetailViewController(dummyInfo).toPreview()
     }
 }

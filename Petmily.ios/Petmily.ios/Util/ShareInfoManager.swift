@@ -29,10 +29,10 @@ extension ShareInfoManager {
     /// - Parameters:
     ///   - breed: 동물 타입(종)
     ///   - data: 생성하려는 ShareInfo 데이터
-    /// - Returns: **성공**: success, **실패**: error(String)
-    func createShareInfo(_ breed: Breed, _ data: ShareInfo) async -> Result<Bool, FireStoreError> {
+    /// - Returns: **성공**: success(true), **실패**: failure(FireStoreError)
+    func createShareInfo(breed: Breed, data: ShareInfo) async -> Result<Bool, FireStoreError> {
         do {
-            let collectionRef = makeCollectionReference(breed: breed)
+            let collectionRef = makeCollectionReference(breed)
             let docRef = collectionRef.document(data.shareID.uuidString)
             try docRef.setData(from: data, encoder: .init())
             return .success(true)
@@ -46,9 +46,9 @@ extension ShareInfoManager {
     ///   - breed: 동물 타입(종)
     ///   - createTime: 커서의 기준이 되는 시간
     ///   - limitCount: 가져올 데이터 개수
-    /// - Returns: **성공**: [ShareInfo], **실패**: error(String)
-    func getPopularSectionData(_ breed: Breed, _ createTime: Date, _ limitCount: Int) async -> Result<[ShareInfo], FireStoreError> {
-        let collectionRef = makeCollectionReference(breed: breed)
+    /// - Returns: **성공**: success([ShareInfo]), **실패**: failure(FireStoreError)
+    func getPopularSectionData(breed: Breed, createTime: Date, limitCount: Int) async -> Result<[ShareInfo], FireStoreError> {
+        let collectionRef = makeCollectionReference(breed)
         let query = makePopularShareInfoQuery(collectionRef, createTime, limitCount)
         
         do {
@@ -66,10 +66,10 @@ extension ShareInfoManager {
     ///   - breed: 동물 타입(종)
     ///   - createTime: 커서의 기준이 되는 시간
     ///   - limitCount: 가져올 데이터 개수
-    /// - Returns: **성공**: [ShareInfo], **실패**: error(String)
-    func getShareSectionData(_ breed: Breed, _ createTime: Date, _ limitCount: Int) async -> Result<[ShareInfo], FireStoreError> {
+    /// - Returns: **성공**: success([ShareInfo]), **실패**: failure(FireStoreError)
+    func getShareSectionData(breed: Breed, createTime: Date, limitCount: Int) async -> Result<[ShareInfo], FireStoreError> {
         do {
-            let collectionRef = makeCollectionReference(breed: breed)
+            let collectionRef = makeCollectionReference(breed)
             let query = makeShareInfoQuery(collectionRef, createTime, limitCount)
             
             let shareInfoList = try await getShareInfo(query)
@@ -84,7 +84,7 @@ private extension ShareInfoManager {
     /// ShareInfo CRUD를 위한 경로를 만드는 메서드
     /// - Parameter breed: 동물 타입(종)
     /// - Returns: ShareInfo의 FireStore 경로
-    func makeCollectionReference(breed: Breed) -> CollectionReference {
+    func makeCollectionReference(_ breed: Breed) -> CollectionReference {
         return userDB.document("Breed").collection(breed.name)
     }
     
