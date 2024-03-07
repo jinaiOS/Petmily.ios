@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Kingfisher
 import SnapKit
 import SwiftUI
 import UIKit
@@ -30,23 +31,16 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bindViewModel()
-        
-        Task {
-            await infoViewModel.fetchInfoSectionData(section: .popular,
-                                                     breed: infoViewModel.currentBreed,
-                                                     lastData: nil)
-            
-            await infoViewModel.fetchInfoSectionData(section: .share,
-                                                     breed: infoViewModel.currentBreed,
-                                                     lastData: nil)
-        }
+        getData()
     }
 }
 
 private extension InfoViewController {
     func configure() {
         infoView.collectionView.delegate = self
-        infoView.collectionView.prefetchDataSource = self
+        infoView.collectionView.refreshControl?.addTarget(self,
+                                                          action: #selector(refreshCollectionView),
+                                                          for: .valueChanged)
     }
     
     func setLayout() {
@@ -86,8 +80,29 @@ private extension InfoViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
+                infoView.collectionView.refreshControl?.endRefreshing()
                 applyItems()
             }.store(in: &cancellables)
+    }
+    
+    func getData() {
+        Task {
+            await infoViewModel.fetchInfoSectionData(section: .popular,
+                                                     breed: infoViewModel.currentBreed,
+                                                     lastData: nil)
+            
+            await infoViewModel.fetchInfoSectionData(section: .share,
+                                                     breed: infoViewModel.currentBreed,
+                                                     lastData: nil)
+        }
+    }
+    
+    @objc func refreshCollectionView() {
+        infoView.collectionView.refreshControl?.beginRefreshing()
+        ImageCache.default.clearMemoryCache()
+        ImageCache.default.clearDiskCache()
+        infoViewModel.resetAllData()
+        getData()
     }
 }
 
@@ -263,17 +278,6 @@ extension InfoViewController: UICollectionViewDelegate {
                                                              lastData: shareInfo)
                 }
             }
-        }
-    }
-}
-
-extension InfoViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView,
-                        prefetchItemsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            print("index: \(indexPath)")
-//            let imageName = imageBaseName + "\(indexPath.item)"
-//            ImageCacheManager.shared.prefetchImage(imgName: imageName)
         }
     }
 }

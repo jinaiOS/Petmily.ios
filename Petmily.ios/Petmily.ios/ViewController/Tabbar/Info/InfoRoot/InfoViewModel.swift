@@ -42,6 +42,11 @@ extension InfoViewModel {
             return shareInfo
         }
     }
+    
+    func resetAllData() {
+        collectionViewModels.popularItems.removeAll()
+        collectionViewModels.shareItems.removeAll()
+    }
 }
 
 extension InfoViewModel {
