@@ -46,6 +46,7 @@ final class InfoViewController: BaseHeaderViewController {
 private extension InfoViewController {
     func configure() {
         infoView.collectionView.delegate = self
+        infoView.collectionView.prefetchDataSource = self
     }
     
     func setLayout() {
@@ -262,6 +263,17 @@ extension InfoViewController: UICollectionViewDelegate {
                                                              lastData: shareInfo)
                 }
             }
+        }
+    }
+}
+
+extension InfoViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView,
+                        prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            print("index: \(indexPath)")
+//            let imageName = imageBaseName + "\(indexPath.item)"
+//            ImageCacheManager.shared.prefetchImage(imgName: imageName)
         }
     }
 }

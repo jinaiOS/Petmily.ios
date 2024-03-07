@@ -24,6 +24,7 @@ final class InfoDetailContentView: UIView {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.cornerRadius = Constants.Size.size50 / 2
+        view.kf.indicatorType = .activity
         view.clipsToBounds = true
         
         view.snp.makeConstraints {
@@ -126,8 +127,9 @@ final class InfoDetailContentView: UIView {
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         view.cornerRadius = Constants.Radius.radius13
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
         return view
     }()
     
@@ -260,8 +262,10 @@ private extension InfoDetailContentView {
 private extension InfoDetailContentView {
     func setViewModel(info: ShareInfo) {
         let profileUrl = URL(string: info.profileUrl)
-        profileImageView.kf.setImage(with: profileUrl)
-        contentImageView.kf.setImage(with: info.contentImageUrl)
+        profileImageView.kf.setImage(with: profileUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        contentImageView.kf.setImage(with: info.contentImageUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
         titleLabel.text = info.title
         authorLabel.text = info.author
         contentLabel.text = info.content

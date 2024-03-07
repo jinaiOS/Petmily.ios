@@ -16,6 +16,7 @@ final class InfoPopularCell: UICollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = Constants.Radius.radius9
+        view.kf.indicatorType = .activity
         view.clipsToBounds = true
         return view
     }()
@@ -33,6 +34,8 @@ final class InfoPopularCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.cornerRadius = Constants.Size.size30 / 2
+        view.kf.indicatorType = .activity
+        
         view.snp.makeConstraints {
             $0.width.height.equalTo(Constants.Size.size30)
         }
@@ -83,8 +86,10 @@ extension InfoPopularCell {
     
     func setViewModel(info: ShareInfo) {
         let profileUlr = URL(string: info.profileUrl)
-        contentImageView.kf.setImage(with: info.contentImageUrl)
-        profileImageView.kf.setImage(with: profileUlr)
+        contentImageView.kf.setImage(with: info.contentImageUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        profileImageView.kf.setImage(with: profileUlr,
+                                     options: [.transition(.fade(Timer.transitionTime))])
         hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
 }

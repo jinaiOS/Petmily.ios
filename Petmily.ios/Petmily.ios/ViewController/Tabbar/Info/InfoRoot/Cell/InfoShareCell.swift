@@ -90,6 +90,7 @@ final class InfoShareCell: UICollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = Constants.Radius.radius13
+        view.kf.indicatorType = .activity
         view.clipsToBounds = true
         
         view.snp.makeConstraints {
@@ -149,7 +150,8 @@ extension InfoShareCell {
         contentLabel.text = info.content
         authorLabel.text = info.author
         hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
-        contentImageView.kf.setImage(with: info.contentImageUrl)
+        contentImageView.kf.setImage(with: info.contentImageUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
     }
 }
 

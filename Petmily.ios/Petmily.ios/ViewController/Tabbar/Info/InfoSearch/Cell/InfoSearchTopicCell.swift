@@ -23,8 +23,9 @@ final class InfoSearchTopicCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         view.cornerRadius = Constants.Size.size20 / 2
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
         
         view.snp.makeConstraints {
             $0.width.height.equalTo(Constants.Size.size20)
@@ -89,8 +90,9 @@ final class InfoSearchTopicCell: UICollectionViewCell {
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         view.cornerRadius = Constants.Radius.radius5
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
         
         view.snp.makeConstraints {
             $0.width.equalTo(view.snp.height)
@@ -147,8 +149,10 @@ extension InfoSearchTopicCell {
     func setViewModel(info: TopicInfo) {
         let profileUrl = URL(string: info.profileUrl)
         let contentUrl = URL(string: info.contentUrl)
-        profileImageView.kf.setImage(with: profileUrl)
-        contentImageView.kf.setImage(with: contentUrl)
+        profileImageView.kf.setImage(with: profileUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        contentImageView.kf.setImage(with: contentUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
         titleLabel.text = info.title
         authorLabel.text = info.author
         dateLabel.text = "\(info.date)"
