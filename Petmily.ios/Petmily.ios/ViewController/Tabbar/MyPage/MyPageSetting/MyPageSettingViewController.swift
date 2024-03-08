@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class MyPageSettingViewController: UIViewController {
+class MyPageSettingViewController: BaseHeaderViewController {
     //MARK: Properties
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -22,7 +22,7 @@ class MyPageSettingViewController: UIViewController {
     }()
     
     lazy var profileStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [nameStackView, ageStackView, breedStackView, completeButton])
+        let view = UIStackView(arrangedSubviews: [nameTextField, ageTextField, genderSegmentControl, breedTextField, completeButton])
         view.axis = .vertical
         view.spacing = 20
         return view
@@ -30,27 +30,45 @@ class MyPageSettingViewController: UIViewController {
     
     private let profileImageView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "photo")
+        view.image = UIImage(named: "pagination_second.png")
         return view
     }()
     
     private let profileNickName: UITextField = {
         let field = UITextField()
         field.placeholder = "닉네임을 입력해주세요."
+        let underLine = UIView()
+        field.addSubview(underLine)
+        underLine.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(1)
+            $0.height.equalTo(1)
+        }
+        underLine.backgroundColor = .black
         return field
     }()
     
-    private let nameStackView = CustomStackView(text: "동물 이름", placeholder: "이름")
-    private let ageStackView = CustomStackView(text: "동물 나이", placeholder: "나이")
+    private let nameTextField = CustomTextField(type: .normal, header: "동물 이름", placeHolder: "이름")
     
-    // 성별
+    private let ageTextField = CustomTextField(type: .normal, header: "동물 나이", placeHolder: "나이")
     
-    private let breedStackView = CustomStackView(text: "종", placeholder: "종류")
+    var genderSegmentControl: UISegmentedControl = {
+        var control = UISegmentedControl(items: ["남", "녀"])
+        let font = UIFont.boldSystemFont(ofSize: 20)
+        control.setTitleTextAttributes([NSAttributedString.Key.font: font],for: .normal)
+        control.selectedSegmentTintColor = .gray
+        control.backgroundColor = .white
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
+    private let breedTextField = CustomTextField(type: .normal, header: "종", placeHolder: "종류")
     
     private let completeButton: UIButton = {
         let button = UIButton()
         button.setTitle("확인", for: .normal)
-        button.backgroundColor = .gray
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.3254902065, green: 0.3254902065, blue: 0.3254902065, alpha: 1)
         button.clipsToBounds = true
         button.cornerRadius = 10
         return button
@@ -59,11 +77,11 @@ class MyPageSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
-        // 백버튼
     }
     
     private func setupUI() {
+        setHeaderHidden(isHidden: false)
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(profileTitle)
@@ -72,7 +90,8 @@ class MyPageSettingViewController: UIViewController {
         contentView.addSubview(profileStackView)
         
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(headerView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         contentView.snp.makeConstraints {
@@ -99,56 +118,13 @@ class MyPageSettingViewController: UIViewController {
             $0.top.equalTo(profileNickName.snp.bottom)
             $0.leading.trailing.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(10)
         }
-    }
-}
-
-class CustomStackView: UIStackView {
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .left
-        return label
-    }()
-    
-    lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.textColor = .black
-        textField.backgroundColor = .white
-        textField.textAlignment = .left
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: textField.frame.size.height))
-        textField.leftViewMode = .always
-        textField.borderStyle = .line
-        textField.layer.cornerRadius = 5
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.clipsToBounds = true
-        return textField
-    }()
-    
-    private func setupUI() {
         
-        addSubview(label)
-        addSubview(textField)
-        
-        label.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+        genderSegmentControl.snp.makeConstraints {
+            $0.height.equalTo(44)
         }
         
-        textField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+        completeButton.snp.makeConstraints {
+            $0.height.equalTo(50)
         }
-    }
-    
-    init(text: String, placeholder: String) {
-        super.init(frame: .zero)
-        label.text = text
-        textField.placeholder = placeholder
-        setupUI()
-    }
-
-    @available(*, unavailable)
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
