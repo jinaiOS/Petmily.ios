@@ -80,6 +80,9 @@
 		563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61872B89A0A8006FC307 /* CommentViewController.swift */; };
 		563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
+		7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7719DD492B936CB5003797F4 /* SideMenu */; };
+		7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719DD4B2B936EC3003797F4 /* SideMenuController.swift */; };
+		77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */; };
 		77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */; };
 		77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */; };
 		77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EE2B8A33D10020B4AA /* MyPageCollectionViewCell.swift */; };
@@ -193,6 +196,8 @@
 		563E61872B89A0A8006FC307 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		7719DD4B2B936EC3003797F4 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingViewController.swift; sourceTree = "<group>"; };
 		77DAE4EE2B8A33D10020B4AA /* MyPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -252,6 +257,7 @@
 				33F774812B8059D60044DF28 /* FirebaseDynamicLinks in Frameworks */,
 				DBA97AC52B7EEF5300C4D6BB /* FirebaseAppCheck in Frameworks */,
 				DBA97AE92B7EEF5300C4D6BB /* FirebasePerformance in Frameworks */,
+				7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */,
 				33F774792B8059D60044DF28 /* FirebaseAuthCombine-Community in Frameworks */,
 				DBA97ADF2B7EEF5300C4D6BB /* FirebaseInAppMessaging-Beta in Frameworks */,
 				DBA97ADD2B7EEF5300C4D6BB /* FirebaseFunctionsCombine-Community in Frameworks */,
@@ -487,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */,
+				7719DD4B2B936EC3003797F4 /* SideMenuController.swift */,
 				77DAE4FA2B8A34310020B4AA /* MyPageSetting */,
 				77DAE4F82B8A34240020B4AA /* Cell */,
 				77DAE4F72B8A34170020B4AA /* View */,
@@ -497,8 +504,8 @@
 		77DAE4F72B8A34170020B4AA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				77DAE4F32B8A33D80020B4AA /* MyPagePostView.swift */,
 				77DAE4F22B8A33D80020B4AA /* MyPageProfileView.swift */,
+				77DAE4F32B8A33D80020B4AA /* MyPagePostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -600,6 +607,7 @@
 				DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */,
 				DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */,
 				DBDBA4112B7F0295004C10C3 /* CommonHeaderView */,
+				77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -685,6 +693,7 @@
 				3302417F2B805A070045F56E /* SnapKit */,
 				33946F892B89F56E00C0EDF3 /* Kingfisher */,
 				DB4E6A582B8A016B00624E8C /* KakaoMapsSDK_SPM */,
+				7719DD492B936CB5003797F4 /* SideMenu */,
 			);
 			productName = Petmily.ios;
 			productReference = 560DFC002B7E5B6B00487736 /* Petmily.ios.app */;
@@ -720,6 +729,7 @@
 				3302417E2B805A070045F56E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				33946F882B89F56E00C0EDF3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				DB4E6A572B8A016B00624E8C /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
+				7719DD482B936CB5003797F4 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 560DFC012B7E5B6B00487736 /* Products */;
 			projectDirPath = "";
@@ -751,6 +761,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33FE532D2B89F49000BF1E98 /* InfoSearchViewController.swift in Sources */,
+				7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */,
 				33FE53332B89F49000BF1E98 /* InfoSection.swift in Sources */,
 				562380952B936027006F194E /* AddDailyViewController.swift in Sources */,
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
@@ -794,6 +805,7 @@
 				33FE53392B89F49000BF1E98 /* InfoDetailContentView.swift in Sources */,
 				339937F72B8E4A8100E9CCA2 /* TopicInfo.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
+				77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */,
 				33FE532C2B89F49000BF1E98 /* InfoSearchCollectionView.swift in Sources */,
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,
@@ -1056,6 +1068,14 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		7719DD482B936CB5003797F4 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		DB4E6A572B8A016B00624E8C /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM";
@@ -1164,6 +1184,11 @@
 		33F7748E2B8059D60044DF28 /* FirebaseInAppMessagingSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "FirebaseInAppMessagingSwift-Beta";
+		};
+		7719DD492B936CB5003797F4 /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7719DD482B936CB5003797F4 /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
 		};
 		DB4E6A582B8A016B00624E8C /* KakaoMapsSDK_SPM */ = {
 			isa = XCSwiftPackageProductDependency;

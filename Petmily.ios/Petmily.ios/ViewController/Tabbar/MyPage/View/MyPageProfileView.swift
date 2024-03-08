@@ -13,6 +13,7 @@ class MyPageProfileView: UIView {
     lazy var profileTextField: UITextField = {
         let textField = UITextField()
         textField.text = "프로필 변경"
+        textField.font = UIFont.boldSystemFont(ofSize: 24)
         textField.tintColor = .clear
         textField.inputView = pickerView
         return textField
@@ -32,7 +33,7 @@ class MyPageProfileView: UIView {
     
     var settingButton: UIButton = {
         var btn = UIButton()
-        let image = UIImage(systemName: "gearshape.fill")
+        let image = UIImage(systemName: "line.horizontal.3")
         let scaledImage = image?.scalePreservingAspectRatio(targetSize: CGSize(width: 30, height: 30))
         btn.setImage(scaledImage, for: .normal)
         btn.contentMode = .center
@@ -43,6 +44,7 @@ class MyPageProfileView: UIView {
     var userNameLabel: UILabel = {
         var label = UILabel()
         label.text = "단지"
+        label.font = UIFont.boldSystemFont(ofSize: 28)
         label.textColor = .white
         return label
     }()
@@ -51,8 +53,8 @@ class MyPageProfileView: UIView {
         var btn = UIButton()
         btn.setTitle("기본 정보 수정하기", for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-        btn.setTitleColor(.darkGray, for: .normal)
-        btn.backgroundColor = .systemGray5
+        btn.setTitleColor(UIColor(red: 109/255, green: 109/255, blue: 109/255, alpha: 0.5), for: .normal)
+        btn.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
         btn.cornerRadius = 10
         return btn
     }()
@@ -83,6 +85,7 @@ class MyPageProfileView: UIView {
     var petAgeLabel: UILabel = {
         var view = UILabel()
         view.text = "나이"
+        view.font = UIFont.systemFont(ofSize: 16)
         view.textColor = .white
         return view
     }()
@@ -90,6 +93,7 @@ class MyPageProfileView: UIView {
     var petAgeText: UILabel = {
         var view = UILabel()
         view.text = "7살"
+        view.font = UIFont.boldSystemFont(ofSize: 20)
         view.textColor = .white
         return view
     }()
@@ -109,6 +113,7 @@ class MyPageProfileView: UIView {
     var petGenderLabel: UILabel = {
         var view = UILabel()
         view.text = "성별"
+        view.font = UIFont.systemFont(ofSize: 16)
         view.textColor = .white
         return view
     }()
@@ -116,6 +121,7 @@ class MyPageProfileView: UIView {
     var petGenderText: UILabel = {
         var view = UILabel()
         view.text = "몰라"
+        view.font = UIFont.boldSystemFont(ofSize: 20)
         view.textColor = .white
         return view
     }()
@@ -135,6 +141,7 @@ class MyPageProfileView: UIView {
     var petBreedLabel: UILabel = {
         var view = UILabel()
         view.text = "종"
+        view.font = UIFont.systemFont(ofSize: 16)
         view.textColor = .white
         return view
     }()
@@ -142,6 +149,7 @@ class MyPageProfileView: UIView {
     var petBreedText: UILabel = {
         var view = UILabel()
         view.text = "강아지"
+        view.font = UIFont.boldSystemFont(ofSize: 20)
         view.textColor = .white
         return view
     }()
