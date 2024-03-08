@@ -12,10 +12,19 @@ import UIKit
 final class InfoPopularCell: UICollectionViewCell {
     static let identifier = "InfoPopularCell"
     
-    private lazy var thumbnailImageView: UIImageView = {
+    private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = Constants.Radius.radius7
+        view.layer.cornerRadius = Constants.Radius.radius9
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private let blurView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ThemeColor.black.withAlphaComponent(0.5)
+        view.layer.cornerRadius = Constants.Radius.radius9
         view.clipsToBounds = true
         return view
     }()
@@ -24,9 +33,11 @@ final class InfoPopularCell: UICollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.cornerRadius = Constants.Size.size24 / 2
+        view.cornerRadius = Constants.Size.size30 / 2
+        view.kf.indicatorType = .activity
+        
         view.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size24)
+            $0.width.height.equalTo(Constants.Size.size30)
         }
         return view
     }()
@@ -74,21 +85,26 @@ extension InfoPopularCell {
     }
     
     func setViewModel(info: ShareInfo) {
-        let contentUrl = URL(string: info.contentImageUrl)
         let profileUlr = URL(string: info.profileUrl)
-        thumbnailImageView.kf.setImage(with: contentUrl)
-        profileImageView.kf.setImage(with: profileUlr)
-        hashtagLabel.text = info.hashtag
+        contentImageView.kf.setImage(with: info.contentImageUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        profileImageView.kf.setImage(with: profileUlr,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
 }
 
 private extension InfoPopularCell {
     func setLayout() {
-        [thumbnailImageView, profileImageView, hashtagLabel].forEach {
+        [contentImageView, blurView, profileImageView, hashtagLabel].forEach {
             contentView.addSubview($0)
         }
         
-        thumbnailImageView.snp.makeConstraints {
+        contentImageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        blurView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         

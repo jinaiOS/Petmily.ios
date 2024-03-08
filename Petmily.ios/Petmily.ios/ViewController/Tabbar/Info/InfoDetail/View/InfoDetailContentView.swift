@@ -24,6 +24,7 @@ final class InfoDetailContentView: UIView {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.cornerRadius = Constants.Size.size50 / 2
+        view.kf.indicatorType = .activity
         view.clipsToBounds = true
         
         view.snp.makeConstraints {
@@ -53,7 +54,7 @@ final class InfoDetailContentView: UIView {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing4
+        stack.spacing = Constants.Spacing.spacing5
         
         [titleLabel, authorLabel].forEach {
             stack.addArrangedSubview($0)
@@ -126,8 +127,9 @@ final class InfoDetailContentView: UIView {
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         view.cornerRadius = Constants.Radius.radius13
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
         return view
     }()
     
@@ -177,7 +179,7 @@ final class InfoDetailContentView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing11
+        stack.spacing = Constants.Spacing.spacing12
         
         [likeButton, showCommentButton, spacerView5].forEach {
             stack.addArrangedSubview($0)
@@ -224,7 +226,7 @@ private extension InfoDetailContentView {
         }
         
         spacerView1.snp.makeConstraints {
-            $0.height.equalTo(Constants.Size.size8)
+            $0.height.equalTo(Constants.Size.size16)
         }
         
         spacerView2.snp.makeConstraints {
@@ -260,14 +262,14 @@ private extension InfoDetailContentView {
 private extension InfoDetailContentView {
     func setViewModel(info: ShareInfo) {
         let profileUrl = URL(string: info.profileUrl)
-        let contentImageUrl = URL(string: info.contentImageUrl)
-        
-        profileImageView.kf.setImage(with: profileUrl)
-        contentImageView.kf.setImage(with: contentImageUrl)
+        profileImageView.kf.setImage(with: profileUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        contentImageView.kf.setImage(with: info.contentImageUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
         titleLabel.text = info.title
         authorLabel.text = info.author
         contentLabel.text = info.content
-        hashtagLabel.text = info.hashtag
+        hashtagLabel.text = "#" + info.hashtag.joined(separator: " #")
     }
 }
 

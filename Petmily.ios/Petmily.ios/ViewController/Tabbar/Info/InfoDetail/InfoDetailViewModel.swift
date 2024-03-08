@@ -11,10 +11,10 @@ final class InfoDetailViewModel: ObservableObject {
     private(set) var shareInfo: ShareInfo
     
     struct CommentViewModel {
-        var commentList: [Comment] = []
     }
     
     @Published private(set) var commentViewModel = CommentViewModel()
+    let baseHeaderTitle = "반려in"
     
     init(shareInfo: ShareInfo) {
         self.shareInfo = shareInfo
@@ -24,33 +24,5 @@ final class InfoDetailViewModel: ObservableObject {
 extension InfoDetailViewModel {
     @MainActor
     func setDummyData() async {
-        commentViewModel.commentList = [
-            Comment(
-                state: "BEST1",
-                author: "김아무개",
-                comment: "사랑스러운 강아지 보고 힘이나요."),
-            Comment(
-                state: "BEST2",
-                author: "홍길동",
-                comment: """
-                사랑스러운 강아지 보고 힘이나요.
-                사랑스러운 강아지 보고 힘이나요.
-                사랑스러운 강아지 보고 힘이나요.
-                사랑스러운 강아지 보고 힘이나요.
-                사랑스러운 강아지 보고 힘이나요.
-                """),
-            Comment(
-                state: "BEST3",
-                author: "익명",
-                comment: "사랑스러운 강아지 보고 힘이나요."),
-            Comment(
-                state: "BEST4",
-                author: "스티브잡스",
-                comment: "사랑스러운 강아지 보고 힘이나요."),
-            Comment(
-                state: "BEST5",
-                author: "팀쿡",
-                comment: "사랑스러운 강아지 보고 힘이나요.")
-        ]
     }
 }

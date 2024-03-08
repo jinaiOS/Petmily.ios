@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Kingfisher
 import SnapKit
 import SwiftUI
 import UIKit
@@ -30,15 +31,16 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bindViewModel()
-        Task {
-            await infoViewModel.setDummyData()
-        }
+        getData()
     }
 }
 
 private extension InfoViewController {
     func configure() {
         infoView.collectionView.delegate = self
+        infoView.collectionView.refreshControl?.addTarget(self,
+                                                          action: #selector(refreshCollectionView),
+                                                          for: .valueChanged)
     }
     
     func setLayout() {
@@ -52,7 +54,7 @@ private extension InfoViewController {
     
     func setBaseHeaderView() {
         let title = NSMutableAttributedString(
-            string: "반려in",
+            string: infoViewModel.baseHeaderTitle,
             attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
         
@@ -78,8 +80,29 @@ private extension InfoViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
+                infoView.collectionView.refreshControl?.endRefreshing()
                 applyItems()
             }.store(in: &cancellables)
+    }
+    
+    func getData() {
+        Task {
+            await infoViewModel.fetchInfoSectionData(section: .popular,
+                                                     breed: infoViewModel.currentBreed,
+                                                     lastData: nil)
+            
+            await infoViewModel.fetchInfoSectionData(section: .share,
+                                                     breed: infoViewModel.currentBreed,
+                                                     lastData: nil)
+        }
+    }
+    
+    @objc func refreshCollectionView() {
+        infoView.collectionView.refreshControl?.beginRefreshing()
+        ImageCache.default.clearMemoryCache()
+        ImageCache.default.clearDiskCache()
+        infoViewModel.resetAllData()
+        getData()
     }
 }
 
@@ -119,17 +142,13 @@ private extension InfoViewController {
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let self else { return UICollectionReusableView() }
             switch InfoSection(rawValue: indexPath.section) {
-            case .spacer:
-                return nil
+            case .spacer, .none: return nil
                 
             case .popular:
                 return setPopularHeader(collectionView, indexPath)
                 
             case .share:
                 return setShareHeader(collectionView, indexPath)
-                
-            case .none:
-                return nil
             }
         }
     }
@@ -139,17 +158,17 @@ private extension InfoViewController {
      */
     func applyItems() {
         var snapShot = NSDiffableDataSourceSnapshot<InfoSection, InfoItem>()
+        let popularItems = infoViewModel.collectionViewModels.popularItems
+        let shareItems = infoViewModel.collectionViewModels.shareItems
+        
         InfoSection.allCases.forEach {
             snapShot.appendSections([$0])
         }
-        
-        snapShot.appendItems([InfoItem.spacer], toSection: .spacer)
-        
-        if let popularItems = infoViewModel.collectionViewModels.popularItems {
+        if popularItems.isEmpty != true {
+            snapShot.appendItems([InfoItem.spacer], toSection: .spacer)
             snapShot.appendItems(popularItems, toSection: .popular)
         }
-        
-        if let shareItems = infoViewModel.collectionViewModels.shareItems {
+        if shareItems.isEmpty != true {
             snapShot.appendItems(shareItems, toSection: .share)
         }
         dataSource?.apply(snapShot)
@@ -219,9 +238,47 @@ private extension InfoViewController {
 extension InfoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        let shareInfo = infoViewModel.makeShareInfo[indexPath.item]
+        var infoItems: [InfoItem]? = nil
+        
+        switch InfoSection(rawValue: indexPath.section) {
+        case .spacer, .none: return
+            
+        case .popular:
+            infoItems = infoViewModel.collectionViewModels.popularItems
+            
+        case .share:
+            infoItems = infoViewModel.collectionViewModels.shareItems
+        }
+        
+        guard let infoItem = infoItems?[indexPath.item],
+              let shareInfo = infoViewModel.infoItemToShareInfo(item: infoItem) else { return }
         let infoDetailVC = InfoDetailViewController(shareInfo)
         navigationPushController(viewController: infoDetailVC, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        switch InfoSection(rawValue: indexPath.section) {
+        case .spacer, .popular, .none: return
+            
+        case .share:
+            let infoItems = infoViewModel.collectionViewModels.shareItems
+            guard let lastItem = infoItems.last else { return }
+            let shareInfo = infoViewModel.infoItemToShareInfo(item: lastItem)
+            let itemsCount = infoItems.count
+            let currentRow = indexPath.row
+            let remainCount = infoViewModel.remainCount
+            
+            if (itemsCount - currentRow) == remainCount &&
+                (itemsCount % currentRow) == remainCount {
+                Task {
+                    await infoViewModel.fetchInfoSectionData(section: .share,
+                                                             breed: infoViewModel.currentBreed,
+                                                             lastData: shareInfo)
+                }
+            }
+        }
     }
 }
 

@@ -40,10 +40,10 @@ extension InfoSearchCategoryCell {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
                                                heightDimension: .estimated(Constants.Size.size30))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .flexible(Constants.Size.size2)
+        group.interItemSpacing = .flexible(Constants.Spacing.spacing2)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0,
+        section.contentInsets = .init(top: Constants.Size.size16,
                                       leading: Constants.Size.size24,
                                       bottom: Constants.Size.size24,
                                       trailing: Constants.Size.size24)

@@ -5,10 +5,16 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
+import Combine
 import SnapKit
 import UIKit
 
 final class InfoView: UIView {
+    private let attributes: [NSAttributedString.Key: Any] = [
+        .font: ThemeFont.r14,
+        .foregroundColor: ThemeColor.systemGray
+    ]
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(SpacerCell.self,
@@ -24,6 +30,12 @@ final class InfoView: UIView {
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: InfoShareHeader.identifier)
         collectionView.setCollectionViewLayout(collectionViewLayout(), animated: true)
+        
+        let refresh = UIRefreshControl()
+        let attributedTitle = NSAttributedString(string: "당겨서 새로고침", attributes: attributes)
+        refresh.attributedTitle = attributedTitle
+        collectionView.refreshControl = refresh
+        
         return collectionView
     }()
     

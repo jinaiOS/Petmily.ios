@@ -13,7 +13,7 @@ final class InfoSearchViewController: UIViewController {
     private let infoSearchView = InfoSearchView()
     private let infoSearchViewModel = InfoSearchViewModel()
     private var dataSource: UICollectionViewDiffableDataSource<InfoSearchSection, infoSearchItem>?
-    private var cancellable = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     
     override func loadView() {
         super.loadView()
@@ -54,7 +54,7 @@ private extension InfoSearchViewController {
                 Task {
                     await self.infoSearchView.remakeConstraints()
                 }
-            }.store(in: &cancellable)
+            }.store(in: &cancellables)
     }
     
     func bindTextField() {
@@ -62,7 +62,7 @@ private extension InfoSearchViewController {
             .myDebounceTextFieldPublisher
             .receive(on: DispatchQueue.main)
             .assign(to: \.searchInput, on: infoSearchViewModel)
-            .store(in: &cancellable)
+            .store(in: &cancellables)
     }
 }
 

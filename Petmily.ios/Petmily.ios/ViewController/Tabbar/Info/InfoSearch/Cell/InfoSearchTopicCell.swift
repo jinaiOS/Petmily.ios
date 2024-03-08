@@ -23,8 +23,9 @@ final class InfoSearchTopicCell: UICollectionViewCell {
     private lazy var profileImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         view.cornerRadius = Constants.Size.size20 / 2
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
         
         view.snp.makeConstraints {
             $0.width.height.equalTo(Constants.Size.size20)
@@ -65,7 +66,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing4
+        stack.spacing = Constants.Spacing.spacing5
         
         [profileImageView, authorLabel, separateView, dateLabel, UIView()].forEach {
             stack.addArrangedSubview($0)
@@ -78,7 +79,7 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing11
+        stack.spacing = Constants.Spacing.spacing10
         
         [titleLabel, labelHStack].forEach {
             stack.addArrangedSubview($0)
@@ -89,11 +90,12 @@ final class InfoSearchTopicCell: UICollectionViewCell {
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         view.cornerRadius = Constants.Radius.radius5
+        view.kf.indicatorType = .activity
+        view.clipsToBounds = true
         
         view.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size75)
+            $0.width.equalTo(view.snp.height)
         }
         return view
     }()
@@ -129,11 +131,11 @@ extension InfoSearchTopicCell {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(Constants.Size.size1),
-                                               heightDimension: .absolute(Constants.Size.size99))
+                                               heightDimension: .absolute(Constants.Size.size100))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0,
+        section.contentInsets = .init(top: Constants.Size.size8,
                                       leading: Constants.Size.size24,
                                       bottom: 0,
                                       trailing: Constants.Size.size24)
@@ -147,8 +149,10 @@ extension InfoSearchTopicCell {
     func setViewModel(info: TopicInfo) {
         let profileUrl = URL(string: info.profileUrl)
         let contentUrl = URL(string: info.contentUrl)
-        profileImageView.kf.setImage(with: profileUrl)
-        contentImageView.kf.setImage(with: contentUrl)
+        profileImageView.kf.setImage(with: profileUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
+        contentImageView.kf.setImage(with: contentUrl,
+                                     options: [.transition(.fade(Timer.transitionTime))])
         titleLabel.text = info.title
         authorLabel.text = info.author
         dateLabel.text = "\(info.date)"
@@ -164,12 +168,7 @@ private extension InfoSearchTopicCell {
         contentView.addSubview(contentHStack)
         
         contentHStack.snp.makeConstraints {
-            $0.leading.top.bottom.equalToSuperview().inset(Constants.Size.size12)
-            $0.trailing.equalToSuperview().inset(Constants.Size.size14)
-        }
-        
-        labelHStack.snp.makeConstraints {
-            $0.height.equalTo(Constants.Size.size20)
+            $0.edges.equalToSuperview().inset(Constants.Size.size12)
         }
     }
 }

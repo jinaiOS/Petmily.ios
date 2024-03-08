@@ -5,12 +5,12 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
-import Foundation
+import UIKit
 
 final class InfoViewModel: ObservableObject {
     struct CollectionViewModels {
-        var popularItems: [InfoItem]?
-        var shareItems: [InfoItem]?
+        var popularItems: [InfoItem] = []
+        var shareItems: [InfoItem] = []
     }
     
     enum HeaderTitle: String {
@@ -21,135 +21,103 @@ final class InfoViewModel: ObservableObject {
     }
     
     @Published private(set) var collectionViewModels = CollectionViewModels()
+    private let shareInfoManager = ShareInfoManager.shared
+    private let storageManager = StorageManager.shared
+    
+    let baseHeaderTitle = "반려in"
+    private(set) var currentBreed: Breed = .dog
+    
+    private let popularSectionDisplay = 9
+    private let shareSectionDisplay = 15
+    let remainCount = 5
 }
 
 extension InfoViewModel {
-    var makeShareInfo: [ShareInfo] {
-        if let items = collectionViewModels.shareItems {
-            return items.compactMap { infoItem -> ShareInfo? in
-                switch infoItem {
-                case .spacer:
-                    return nil
-                    
-                case .popular(_):
-                    return nil
-                    
-                case .share(let shareInfo):
-                    return shareInfo
-                }
-            }
+    func infoItemToShareInfo(item: InfoItem) -> ShareInfo? {
+        switch item {
+        case .spacer:
+            return nil
+            
+        case .popular(let shareInfo), .share(let shareInfo):
+            return shareInfo
         }
-        return []
+    }
+    
+    func resetAllData() {
+        collectionViewModels.popularItems.removeAll()
+        collectionViewModels.shareItems.removeAll()
     }
 }
 
 extension InfoViewModel {
-    @MainActor
-    func setDummyData() async {
-        collectionViewModels.popularItems = [
-            InfoItem.popular(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "우리집 강아지를 자랑합니다.",
-                    content: "귀여운 강아지 봐주세요~",
-                    author: "작성자: 홍길동",
-                    hashtag: "#강아지 #애견샵",
-                    profileUrl: "https://thumb.mt.co.kr/06/2021/07/2021070813140171986_3.jpg/dims/optimize/",
-                    contentImageUrl: "https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMzQg/MDAxNDkxMTg4NzEyMDYz.8F6HI-zibQXRsxR_Sy0nQFRRBY1h4XkhUFFmUUkD7Bkg.B5xEZHBHwyBdtynCQUHND8C5CPH3cHhM093JEkROJpsg.JPEG.truthy2000/10.jpg?type=w800")
-            ),
-            InfoItem.popular(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "강아지 자랑!!!",
-                    content: "우리집 강아지 봐주세요~",
-                    author: "작성자: 김개똥",
-                    hashtag: "#강아지 #자유로운 #사랑스러운",
-                    profileUrl: "https://thumb.mt.co.kr/06/2021/07/2021070813140171986_3.jpg/dims/optimize/",
-                    contentImageUrl: "https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMzQg/MDAxNDkxMTg4NzEyMDYz.8F6HI-zibQXRsxR_Sy0nQFRRBY1h4XkhUFFmUUkD7Bkg.B5xEZHBHwyBdtynCQUHND8C5CPH3cHhM093JEkROJpsg.JPEG.truthy2000/10.jpg?type=w800")
-            ),
-            InfoItem.popular(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "강아지를 자랑",
-                    content: "강아지보고 힐링하고 가세요~",
-                    author: "작성자: 익명",
-                    hashtag: "#강아지 #힐링 #귀여운 #자랑",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://d1bg8rd1h4dvdb.cloudfront.net/upload/imgServer/storypick/editor/2019052111361692611.jpg")
-            ),
-            InfoItem.popular(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "우리집 고양이 자랑",
-                    content: "사랑스러운 고양이 봐주세요~",
-                    author: "작성자: 이루리",
-                    hashtag: "#고양이 #사랑스러운 #귀여운",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://cat-lab.co.kr/data/editor/2203/4fea39b9ee8ab23e62522153035041fc_1646215721_8448.jpg")
-            ),
-            InfoItem.popular(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "우리집 고양이를 자랑합니다.",
-                    content: "귀여운 고양이 봐주세요~",
-                    author: "작성자: 아무나",
-                    hashtag: "#고양이 #자랑",
-                    profileUrl: "https://thumb.mt.co.kr/06/2021/07/2021070813140171986_3.jpg/dims/optimize/",
-                    contentImageUrl: "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202306/25/488f9638-800c-4bac-ad65-82877fbff79b.jpg")
-            )
-        ]
+    func createShareInfo(contentImage: UIImage, breed: Breed, shareInfo: ShareInfo) async {
+        var data = shareInfo
         
-        collectionViewModels.shareItems = [
-            InfoItem.share(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "우리집 강아지를 자랑합니다.",
-                    content: "귀여운 강아지 봐주세요~",
-                    author: "작성자: 홍길동",
-                    hashtag: "#강아지 #자유로운 #귀여운",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://d1bg8rd1h4dvdb.cloudfront.net/upload/imgServer/storypick/editor/2019052111361692611.jpg")
-            ),
-            InfoItem.share(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "강아지 자랑!!!",
-                    content: "우리집 강아지 봐주세요~",
-                    author: "작성자: 김개똥",
-                    hashtag: "#강아지 #자유로운 #사랑스러운",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://d1bg8rd1h4dvdb.cloudfront.net/upload/imgServer/storypick/editor/2019052111361692611.jpg")
-            ),
-            InfoItem.share(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "강아지를 자랑",
-                    content: "강아지보고 힐링하고 가세요~",
-                    author: "작성자: 익명",
-                    hashtag: "#강아지 #힐링 #귀여운 #자랑",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://d1bg8rd1h4dvdb.cloudfront.net/upload/imgServer/storypick/editor/2019052111361692611.jpg")
-            ),
-            InfoItem.share(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "우리집 고양이 자랑",
-                    content: "사랑스러운 고양이 봐주세요~",
-                    author: "작성자: 이루리",
-                    hashtag: "#고양이 #사랑스러운 #귀여운",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://cat-lab.co.kr/data/editor/2203/4fea39b9ee8ab23e62522153035041fc_1646215721_8448.jpg")
-            ),
-            InfoItem.share(
-                ShareInfo(
-                    shareID: UUID(),
-                    title: "우리집 고양이를 자랑합니다.",
-                    content: "귀여운 고양이 봐주세요~",
-                    author: "작성자: 아무나",
-                    hashtag: "#고양이 #자유로운 #귀여운",
-                    profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg",
-                    contentImageUrl: "https://cat-lab.co.kr/data/editor/2203/4fea39b9ee8ab23e62522153035041fc_1646215721_8448.jpg")
-            )
-        ]
+        do {
+            let imageResult = try await storageManager
+                .createContentImage(storageRefName: storageManager.shareInfoPath,
+                                    spaceRefName: data.shareID.uuidString,
+                                    contentImage: contentImage)
+            data.contentImageUrl = imageResult
+            let result = await shareInfoManager.createShareInfo(breed: breed, data: data)
+            switch result {
+            case .success(_):
+                print("Create ShareInfo: Success")
+                
+            case .failure(let error):
+                print("Failure create ShareInfo: \(error)")
+            }
+        } catch {
+            print("Failure create contentImage: \(error)")
+        }
+    }
+    
+    func fetchInfoSectionData(section: InfoSection, breed: Breed, lastData: ShareInfo?) async {
+        let createTime = lastData?.createTime ?? Date()
+        
+        switch section {
+        case .spacer: return
+            
+        case .popular:
+            let result = await shareInfoManager.getPopularSectionData(breed: breed,
+                                                                      createTime: createTime,
+                                                                      limitCount: popularSectionDisplay)
+            await resultProcess(section: .popular, result: result)
+            
+        case .share:
+            let result = await shareInfoManager.getShareSectionData(breed: breed,
+                                                                    createTime: createTime,
+                                                                    limitCount: shareSectionDisplay)
+            await resultProcess(section: .share, result: result)
+        }
+    }
+}
+
+private extension InfoViewModel {
+    @MainActor
+    func resultProcess(section: InfoSection, result: Result<[ShareInfo], FireStoreError>) async {
+        switch result {
+        case .success(let shareInfoList):
+            switch section {
+            case .spacer: return
+                
+            case .popular:
+                let newList = shareInfoList.map {
+                    InfoItem.popular($0)
+                }
+                let uniqueItems = newList.filter { !collectionViewModels.popularItems.contains($0) }
+                collectionViewModels.popularItems += uniqueItems
+                
+            case .share:
+                let newList = shareInfoList.map {
+                    InfoItem.share($0)
+                }
+                let uniqueItems = newList.filter { !collectionViewModels.shareItems.contains($0) }
+                collectionViewModels.shareItems += uniqueItems
+            }
+            
+        case .failure(let error):
+            print("Failure fetch ShareInfo \(error)")
+        }
     }
 }
