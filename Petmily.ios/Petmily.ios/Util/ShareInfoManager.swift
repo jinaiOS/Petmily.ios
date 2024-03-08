@@ -40,7 +40,9 @@ extension ShareInfoManager {
             return .failure(.firestoreError(Error: error))
         }
     }
-    
+}
+
+extension ShareInfoManager {
     /// Firestore에서 PopularSection 데이터를 가져오기 위한 메서드
     /// - Parameters:
     ///   - breed: 동물 타입(종)
@@ -74,6 +76,18 @@ extension ShareInfoManager {
             
             let shareInfoList = try await getShareInfo(query)
             return .success(shareInfoList)
+        } catch {
+            return .failure(.firestoreError(Error: error))
+        }
+    }
+}
+
+extension ShareInfoManager {
+    func removeShareInfo(breed: Breed, id: UUID) async -> Result<Bool, FireStoreError> {
+        let collectionDocRef = makeCollectionReference(breed).document(id.uuidString)
+        do {
+            try await collectionDocRef.delete()
+            return .success(true)
         } catch {
             return .failure(.firestoreError(Error: error))
         }

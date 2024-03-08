@@ -23,6 +23,7 @@ final class InfoSearchViewModel: ObservableObject {
     
     deinit {
         loadDataTask?.cancel()
+        print("deinit - InfoSearchVM")
     }
 }
 

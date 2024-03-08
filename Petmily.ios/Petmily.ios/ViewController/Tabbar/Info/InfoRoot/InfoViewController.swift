@@ -91,9 +91,9 @@ private extension InfoViewController {
                                                      breed: infoViewModel.currentBreed,
                                                      lastData: nil)
             
-            await infoViewModel.fetchInfoSectionData(section: .share,
-                                                     breed: infoViewModel.currentBreed,
-                                                     lastData: nil)
+//            await infoViewModel.fetchInfoSectionData(section: .share,
+//                                                     breed: infoViewModel.currentBreed,
+//                                                     lastData: nil)
         }
     }
     
@@ -252,7 +252,7 @@ extension InfoViewController: UICollectionViewDelegate {
         
         guard let infoItem = infoItems?[indexPath.item],
               let shareInfo = infoViewModel.infoItemToShareInfo(item: infoItem) else { return }
-        let infoDetailVC = InfoDetailViewController(shareInfo)
+        let infoDetailVC = InfoDetailViewController(shareInfo, infoViewModel.currentBreed)
         navigationPushController(viewController: infoDetailVC, animated: true)
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		330241802B805A070045F56E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3302417F2B805A070045F56E /* SnapKit */; };
+		331C6E6E2B9B51C5007D8EFE /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C6E6D2B9B51C5007D8EFE /* AlertFactory.swift */; };
 		332607602B8A46BE00A66DC5 /* PetmilyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */; };
 		332607622B8A4FDB00A66DC5 /* SpacerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332607612B8A4FDB00A66DC5 /* SpacerCell.swift */; };
 		3336ED872B930A2900658729 /* ShareInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336ED862B930A2900658729 /* ShareInfoManager.swift */; };
@@ -138,6 +139,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331C6E6D2B9B51C5007D8EFE /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		3326075F2B8A46BE00A66DC5 /* PetmilyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetmilyImage.swift; sourceTree = "<group>"; };
 		332607612B8A4FDB00A66DC5 /* SpacerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCell.swift; sourceTree = "<group>"; };
 		3336ED862B930A2900658729 /* ShareInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareInfoManager.swift; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 		DBDBA40E2B7F0219004C10C3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				331C6E6D2B9B51C5007D8EFE /* AlertFactory.swift */,
 				33946F8B2B89F59B00C0EDF3 /* Constants.swift */,
 				DBA97B012B7EF47600C4D6BB /* Common.swift */,
 				DBA97B052B7EF86600C4D6BB /* CommonUtil.swift */,
@@ -800,6 +803,7 @@
 				DBA97B062B7EF86600C4D6BB /* CommonUtil.swift in Sources */,
 				77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */,
 				56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */,
+				331C6E6E2B9B51C5007D8EFE /* AlertFactory.swift in Sources */,
 				33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */,
 				339937F52B8DE57A00E9CCA2 /* UITextField+.swift in Sources */,
 				DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */,

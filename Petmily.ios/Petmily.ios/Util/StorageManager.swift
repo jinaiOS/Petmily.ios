@@ -46,6 +46,18 @@ extension StorageManager {
     }
 }
 
+extension StorageManager {
+    func deleteContentImage(storageRefName: String, spaceRefName: String) async throws -> Bool {
+        let storageRef = makeStorageRef(storageRefName, spaceRefName)
+        do {
+            try await storageRef.delete()
+            return true
+        } catch {
+            throw error
+        }
+    }
+}
+
 private extension StorageManager {
     func makeStorageRef(_ storageRefName: String, _ spaceRefName: String) -> StorageReference {
         let storageRef = storage.reference()
