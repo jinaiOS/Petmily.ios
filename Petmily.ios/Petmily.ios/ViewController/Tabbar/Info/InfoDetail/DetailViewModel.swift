@@ -5,23 +5,25 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
+import Combine
 import Foundation
 
 final class InfoDetailViewModel: ObservableObject {
-    private(set) var shareInfo: ShareInfo
     private let shareInfoManager = ShareInfoManager.shared
     private let storageManager = StorageManager.shared
-    private let breed: Breed
     
-    struct CommentViewModel {
+    struct DetailViewModel {
+        var shareInfo: ShareInfo
+        var breed: Breed
     }
     
-    @Published private(set) var commentViewModel = CommentViewModel()
+    @Published private(set) var detailViewModel: DetailViewModel
+    private let updateSubject: PassthroughSubject<ShareInfo?, Never>
     let baseHeaderTitle = "반려in"
     
-    init(shareInfo: ShareInfo, breed: Breed) {
-        self.shareInfo = shareInfo
-        self.breed = breed
+    init(shareInfo: ShareInfo, breed: Breed, updateSubject: PassthroughSubject<ShareInfo?, Never>) {
+        detailViewModel = DetailViewModel(shareInfo: shareInfo, breed: breed)
+        self.updateSubject = updateSubject
     }
     
     deinit {
@@ -51,6 +53,7 @@ extension InfoDetailViewModel {
         switch button {
         case .like:
             return
+            
         case .comment:
             return
         }
@@ -62,11 +65,12 @@ private extension InfoDetailViewModel {
         Task {
             do {
                 let _ = try await storageManager.deleteContentImage(storageRefName: storageManager.shareInfoPath,
-                                                                    spaceRefName: shareInfo.shareID.uuidString)
-                let result = await shareInfoManager.removeShareInfo(breed: breed, id: shareInfo.shareID)
+                                                                    spaceRefName: detailViewModel.shareInfo.shareID.uuidString)
+                let result = await shareInfoManager.removeShareInfo(breed: detailViewModel.breed,
+                                                                    id: detailViewModel.shareInfo.shareID)
                 switch result {
                 case .success(_):
-                    print("Remove ShareInfo: Success")
+                    updateSubject.send(nil)
                     
                 case .failure(let error):
                     print("Failure remove ShareInfo: \(error)")
@@ -75,11 +79,5 @@ private extension InfoDetailViewModel {
                 print("Failure remove ShareInfo: \(error)")
             }
         }
-    }
-}
-
-extension InfoDetailViewModel {
-    @MainActor
-    func setDummyData() async {
     }
 }

@@ -26,6 +26,7 @@ final class InfoViewModel: ObservableObject {
     
     let baseHeaderTitle = "반려in"
     private(set) var currentBreed: Breed = .dog
+    var tapIndex = IndexPath()
     
     private let popularSectionDisplay = 9
     private let shareSectionDisplay = 15
@@ -46,6 +47,30 @@ extension InfoViewModel {
     func resetAllData() {
         collectionViewModels.popularItems.removeAll()
         collectionViewModels.shareItems.removeAll()
+    }
+    
+    func updateData(info: ShareInfo?) {
+        switch InfoSection(rawValue: tapIndex.section) {
+        case .spacer, .none: return
+            
+        case .popular:
+            let oldInfo = collectionViewModels.popularItems[tapIndex.item]
+            if info == nil {
+                collectionViewModels.popularItems.remove(at: tapIndex.item)
+                return
+            }
+            // 삭제 아닌 수정한 경우
+            return
+            
+        case .share:
+            let oldInfo = collectionViewModels.shareItems[tapIndex.item]
+            if info == nil {
+                collectionViewModels.shareItems.remove(at: tapIndex.item)
+                return
+            }
+            // 삭제 아닌 수정한 경우
+            return
+        }
     }
 }
 

@@ -16,9 +16,9 @@ final class InfoDetailViewController: BaseHeaderViewController {
     private let didTapSocialButton = PassthroughSubject<SocialButtonType, Never>()
     private var cancellables = Set<AnyCancellable>()
     
-    init(_ shareInfo: ShareInfo, _ breed: Breed) {
-        infoDetailViewModel = InfoDetailViewModel(shareInfo: shareInfo, breed: breed)
-        infoDetailView = InfoDetailView(infoDetailViewModel.shareInfo,
+    init(_ shareInfo: ShareInfo, _ breed: Breed, updateSubject: PassthroughSubject<ShareInfo?, Never>) {
+        infoDetailViewModel = InfoDetailViewModel(shareInfo: shareInfo, breed: breed, updateSubject: updateSubject)
+        infoDetailView = InfoDetailView(infoDetailViewModel.detailViewModel.shareInfo,
                                         didTapMoreButton,
                                         didTapSocialButton)
         super.init(nibName: nil, bundle: nil)
@@ -41,8 +41,6 @@ final class InfoDetailViewController: BaseHeaderViewController {
         setBaseHeaderView()
         bindButton()
         bindViewModel()
-        
-        print("\(infoDetailViewModel.shareInfo)")
     }
     
     deinit {
@@ -87,7 +85,7 @@ private extension InfoDetailViewController {
     }
     
     func bindViewModel() {
-        infoDetailViewModel.$commentViewModel
+        infoDetailViewModel.$detailViewModel
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
@@ -127,6 +125,6 @@ struct InfoDetailVC_PreView: PreviewProvider {
             author: "아이언맨",
             hashtag: ["강아지", "힐링", "귀여운", "자랑"],
             profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg")
-        InfoDetailViewController(dummyInfo, .dog).toPreview()
+        InfoDetailViewController(dummyInfo, .dog, updateSubject: PassthroughSubject()).toPreview()
     }
 }
