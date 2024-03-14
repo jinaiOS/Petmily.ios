@@ -83,6 +83,21 @@ extension ShareInfoManager {
 }
 
 extension ShareInfoManager {
+    func updateShareInfo(breed: Breed, data: ShareInfo) async -> Result<Bool, FireStoreError> {
+        let collectionRef = makeCollectionReference(breed)
+        let docRef = collectionRef.document(data.shareID.uuidString)
+        let newData = makeUpdateData(data)
+        
+        do {
+            try await docRef.updateData(newData)
+            return .success(true)
+        } catch {
+            return .failure(.firestoreError(Error: error))
+        }
+    }
+}
+
+extension ShareInfoManager {
     func removeShareInfo(breed: Breed, id: UUID) async -> Result<Bool, FireStoreError> {
         let collectionDocRef = makeCollectionReference(breed).document(id.uuidString)
         do {
@@ -126,6 +141,15 @@ private extension ShareInfoManager {
         let queryDocumentSnapshot = querySnapshot.documents
         let shareInfoList = try decodeDocSnapshotToShareInfo(queryDocumentSnapshot)
         return shareInfoList
+    }
+    
+    func makeUpdateData(_ data: ShareInfo) -> [String : Any] {
+        let updateData: [String : Any] = [
+            "title": data.title,
+            "content": data.content,
+            "hashtag": data.hashtag
+        ]
+        return updateData
     }
     
     /// Firestore에서 받은 Snapshot을 ShareInfo로 디코딩 하는 메서드
