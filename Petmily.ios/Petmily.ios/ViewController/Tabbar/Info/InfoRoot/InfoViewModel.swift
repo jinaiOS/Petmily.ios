@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class InfoViewModel: ObservableObject {
     struct CollectionViewModels {
@@ -54,22 +55,20 @@ extension InfoViewModel {
         case .spacer, .none: return
             
         case .popular:
-            let oldInfo = collectionViewModels.popularItems[tapIndex.item]
-            if info == nil {
+            guard let info else {
                 collectionViewModels.popularItems.remove(at: tapIndex.item)
                 return
             }
-            // 삭제 아닌 수정한 경우
-            return
+            // TODO: - 사진 업데이트라면 캐시 메모리에서 사진 초기화 시키기
+            collectionViewModels.popularItems[tapIndex.item] = InfoItem.popular(info)
             
         case .share:
-            let oldInfo = collectionViewModels.shareItems[tapIndex.item]
-            if info == nil {
+            guard let info else {
                 collectionViewModels.shareItems.remove(at: tapIndex.item)
                 return
             }
-            // 삭제 아닌 수정한 경우
-            return
+            // TODO: - 사진 업데이트라면 캐시 메모리에서 사진 초기화 시키기
+            collectionViewModels.shareItems[tapIndex.item] = InfoItem.share(info)
         }
     }
 }
@@ -80,7 +79,7 @@ extension InfoViewModel {
         
         do {
             let imageResult = try await storageManager
-                .createContentImage(storageRefName: storageManager.shareInfoPath,
+                .createContentImage(storageRefName: StorageManager.ImagePath.shareInfoPath,
                                     spaceRefName: data.shareID.uuidString,
                                     contentImage: contentImage)
             data.contentImageUrl = imageResult

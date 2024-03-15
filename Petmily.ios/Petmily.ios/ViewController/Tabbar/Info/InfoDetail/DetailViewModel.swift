@@ -64,7 +64,7 @@ private extension InfoDetailViewModel {
     func removeInfo() {
         Task {
             do {
-                let _ = try await storageManager.deleteContentImage(storageRefName: storageManager.shareInfoPath,
+                let _ = try await storageManager.deleteContentImage(storageRefName: StorageManager.ImagePath.shareInfoPath,
                                                                     spaceRefName: detailViewModel.shareInfo.shareID.uuidString)
                 let result = await shareInfoManager.removeShareInfo(breed: detailViewModel.breed,
                                                                     id: detailViewModel.shareInfo.shareID)
