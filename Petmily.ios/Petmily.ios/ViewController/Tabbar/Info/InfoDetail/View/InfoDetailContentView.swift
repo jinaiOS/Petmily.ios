@@ -207,8 +207,8 @@ final class InfoDetailContentView: UIView {
         didTapSocialButton = socialBtnSubject
         super.init(frame: .zero)
         
-        setLayout()
         setViewModel(info: info)
+        setLayout()
     }
     
     required init?(coder: NSCoder) {

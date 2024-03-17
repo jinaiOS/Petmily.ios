@@ -10,6 +10,7 @@ import UIKit
 
 final class InfoSearchCategoryCell: UICollectionViewCell {
     static let identifier = "InfoSearchCategoryCell"
+    private(set) var select = false
     
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()
@@ -18,6 +19,17 @@ final class InfoSearchCategoryCell: UICollectionViewCell {
         label.textAlignment = .center
         return label
     }()
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                select.toggle()
+            } else {
+                select = false
+            }
+            setupCategory()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,6 +84,18 @@ private extension InfoSearchCategoryCell {
         categoryLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(Constants.Size.size20)
+        }
+    }
+    
+    func setupCategory() {
+        if select {
+            contentView.backgroundColor = ThemeColor.lightPink
+            contentView.layer.borderColor = ThemeColor.white.cgColor
+            categoryLabel.textColor = ThemeColor.white
+        } else {
+            contentView.backgroundColor = ThemeColor.white
+            contentView.layer.borderColor = ThemeColor.lightPink.cgColor
+            categoryLabel.textColor = ThemeColor.lightPink
         }
     }
 }

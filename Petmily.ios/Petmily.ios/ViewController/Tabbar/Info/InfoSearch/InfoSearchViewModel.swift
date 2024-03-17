@@ -5,12 +5,38 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
+import Combine
 import Foundation
 
 final class InfoSearchViewModel: ObservableObject {
     struct CollectionViewModels {
         var categoryItems: [infoSearchItem]?
         var topicItems: [infoSearchItem]?
+    }
+    
+    enum HeaderTitle {
+        case category
+        case topic(Topic)
+        
+        enum Topic {
+            case main
+            case sub
+        }
+        
+        var title: String {
+            switch self {
+            case .category:
+                return "추천 검색어"
+                
+            case .topic(let topic):
+                switch topic {
+                case .main:
+                    return "반려인은 전부 봤다"
+                case .sub:
+                    return "운영자 작성 글"
+                }
+            }
+        }
     }
     
     private var loadDataTask: Task<Void, Never>?
@@ -20,9 +46,11 @@ final class InfoSearchViewModel: ObservableObject {
             searchData(text: searchInput)
         }
     }
+    @Published var categoryValue: String = ""
     
     deinit {
         loadDataTask?.cancel()
+        print("deinit - InfoSearchVM")
     }
 }
 

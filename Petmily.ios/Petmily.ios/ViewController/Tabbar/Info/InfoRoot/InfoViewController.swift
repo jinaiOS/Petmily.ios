@@ -14,6 +14,7 @@ import UIKit
 final class InfoViewController: BaseHeaderViewController {
     private let infoView = InfoView()
     private let infoViewModel = InfoViewModel()
+    private let updateShareInfo = PassthroughSubject<ShareInfo?, Never>()
     private var dataSource: UICollectionViewDiffableDataSource<InfoSection, InfoItem>?
     private var cancellables = Set<AnyCancellable>()
     
@@ -30,7 +31,7 @@ final class InfoViewController: BaseHeaderViewController {
         configure()
         setDataSource()
         setHeaderView()
-        bindViewModel()
+        bind()
         getData()
     }
 }
@@ -72,16 +73,20 @@ private extension InfoViewController {
         }
     }
     
-    /**
-     @brief ViewModel 연결
-     */
-    func bindViewModel() {
+    func bind() {
         infoViewModel.$collectionViewModels
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 infoView.collectionView.refreshControl?.endRefreshing()
                 applyItems()
+            }.store(in: &cancellables)
+        
+        updateShareInfo
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self else { return }
+                infoViewModel.updateData(info: $0)
             }.store(in: &cancellables)
     }
     
@@ -239,6 +244,7 @@ extension InfoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         var infoItems: [InfoItem]? = nil
+        infoViewModel.tapIndex = indexPath
         
         switch InfoSection(rawValue: indexPath.section) {
         case .spacer, .none: return
@@ -252,7 +258,9 @@ extension InfoViewController: UICollectionViewDelegate {
         
         guard let infoItem = infoItems?[indexPath.item],
               let shareInfo = infoViewModel.infoItemToShareInfo(item: infoItem) else { return }
-        let infoDetailVC = InfoDetailViewController(shareInfo)
+        let infoDetailVC = InfoDetailViewController(shareInfo,
+                                                    infoViewModel.currentBreed,
+                                                    updateSubject: updateShareInfo)
         navigationPushController(viewController: infoDetailVC, animated: true)
     }
     

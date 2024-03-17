@@ -40,7 +40,9 @@ extension ShareInfoManager {
             return .failure(.firestoreError(Error: error))
         }
     }
-    
+}
+
+extension ShareInfoManager {
     /// Firestore에서 PopularSection 데이터를 가져오기 위한 메서드
     /// - Parameters:
     ///   - breed: 동물 타입(종)
@@ -80,6 +82,33 @@ extension ShareInfoManager {
     }
 }
 
+extension ShareInfoManager {
+    func updateShareInfo(breed: Breed, data: ShareInfo) async -> Result<Bool, FireStoreError> {
+        let collectionRef = makeCollectionReference(breed)
+        let docRef = collectionRef.document(data.shareID.uuidString)
+        let newData = makeUpdateData(data)
+        
+        do {
+            try await docRef.updateData(newData)
+            return .success(true)
+        } catch {
+            return .failure(.firestoreError(Error: error))
+        }
+    }
+}
+
+extension ShareInfoManager {
+    func removeShareInfo(breed: Breed, id: UUID) async -> Result<Bool, FireStoreError> {
+        let collectionDocRef = makeCollectionReference(breed).document(id.uuidString)
+        do {
+            try await collectionDocRef.delete()
+            return .success(true)
+        } catch {
+            return .failure(.firestoreError(Error: error))
+        }
+    }
+}
+
 private extension ShareInfoManager {
     /// ShareInfo CRUD를 위한 경로를 만드는 메서드
     /// - Parameter breed: 동물 타입(종)
@@ -112,6 +141,15 @@ private extension ShareInfoManager {
         let queryDocumentSnapshot = querySnapshot.documents
         let shareInfoList = try decodeDocSnapshotToShareInfo(queryDocumentSnapshot)
         return shareInfoList
+    }
+    
+    func makeUpdateData(_ data: ShareInfo) -> [String : Any] {
+        let updateData: [String : Any] = [
+            "title": data.title,
+            "content": data.content,
+            "hashtag": data.hashtag
+        ]
+        return updateData
     }
     
     /// Firestore에서 받은 Snapshot을 ShareInfo로 디코딩 하는 메서드

@@ -16,9 +16,9 @@ final class InfoDetailViewController: BaseHeaderViewController {
     private let didTapSocialButton = PassthroughSubject<SocialButtonType, Never>()
     private var cancellables = Set<AnyCancellable>()
     
-    init(_ shareInfo: ShareInfo) {
-        infoDetailViewModel = InfoDetailViewModel(shareInfo: shareInfo)
-        infoDetailView = InfoDetailView(infoDetailViewModel.shareInfo,
+    init(_ shareInfo: ShareInfo, _ breed: Breed, updateSubject: PassthroughSubject<ShareInfo?, Never>) {
+        infoDetailViewModel = InfoDetailViewModel(shareInfo: shareInfo, breed: breed, updateSubject: updateSubject)
+        infoDetailView = InfoDetailView(infoDetailViewModel.detailViewModel.shareInfo,
                                         didTapMoreButton,
                                         didTapSocialButton)
         super.init(nibName: nil, bundle: nil)
@@ -41,9 +41,6 @@ final class InfoDetailViewController: BaseHeaderViewController {
         setBaseHeaderView()
         bindButton()
         bindViewModel()
-        Task {
-            await infoDetailViewModel.setDummyData()
-        }
     }
     
     deinit {
@@ -70,7 +67,12 @@ private extension InfoDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] type in
                 guard let self else { return }
-                print("Button Type: \(type)")
+                if type == .delete {
+                    showAlert()
+                    return
+                }
+                infoDetailViewModel.menuButtonAction(type)
+                
             }.store(in: &cancellables)
         
         // TODO: - 좋아요는 debounce, throttle 적용, 댓글은 즉시 이벤트 처리하기
@@ -78,12 +80,12 @@ private extension InfoDetailViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] type in
                 guard let self else { return }
-                print("Button Type: \(type)")
+                infoDetailViewModel.socialButtonAction(type)
             }.store(in: &cancellables)
     }
     
     func bindViewModel() {
-        infoDetailViewModel.$commentViewModel
+        infoDetailViewModel.$detailViewModel
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
@@ -91,11 +93,27 @@ private extension InfoDetailViewController {
     }
 }
 
+private extension InfoDetailViewController {
+    func showAlert() {
+        let alert = AlertFactory.makeAlert(
+            title: "삭제하시겠습니까?",
+            message: "삭제하면 복구할 수 없습니다.",
+            style: .alert,
+            action1Title: "취소",
+            action1Style: .cancel,
+            action2Title: "삭제",
+            action2Style: .destructive) {
+                self.infoDetailViewModel.menuButtonAction(.delete)
+                self.navigationPopViewController(animated: true, completion: nil)
+            }
+        present(alert, animated: true)
+    }
+}
+
 // MARK: - Preview
 struct InfoDetailVC_PreView: PreviewProvider {
     static var previews: some View {
-        let contentUrl: URL? = URL(string: "https://flexible.img.hani.co.kr/flexible/normal/850/567/imgdb/original/2023/0111/20230111503366.jpg")
-        var dummyInfo = ShareInfo(
+        let dummyInfo = ShareInfo(
             title: "우리집 강쥐 자랑",
             content: """
                 강아지 자랑 내용 첨부1
@@ -103,15 +121,10 @@ struct InfoDetailVC_PreView: PreviewProvider {
                 강아지 자랑 내용 첨부3
                 강아지 자랑 내용 첨부4
                 강아지 자랑 내용 첨부5
-                강아지 자랑 내용 첨부6
-                강아지 자랑 내용 첨부7
-                강아지 자랑 내용 첨부8
-                강아지 자랑 내용 첨부9
-                강아지 자랑 내용 첨부10
                 """,
             author: "아이언맨",
             hashtag: ["강아지", "힐링", "귀여운", "자랑"],
             profileUrl: "https://www.handmk.com/news/photo/202306/16714_40371_5250.jpg")
-        InfoDetailViewController(dummyInfo).toPreview()
+        InfoDetailViewController(dummyInfo, .dog, updateSubject: PassthroughSubject()).toPreview()
     }
 }
