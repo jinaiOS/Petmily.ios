@@ -74,11 +74,14 @@
 		562380952B936027006F194E /* AddDailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562380942B936027006F194E /* AddDailyViewController.swift */; };
 		562380972B93603B006F194E /* AddDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562380962B93603B006F194E /* AddDailyView.swift */; };
 		5623809B2B9423F5006F194E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5623809A2B9423F5006F194E /* GoogleService-Info.plist */; };
+		562380A62B959802006F194E /* ShareDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562380A52B959802006F194E /* ShareDaily.swift */; };
 		563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617D2B896850006FC307 /* UIImage+Extension.swift */; };
 		563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617F2B896B88006FC307 /* UIColor+Extension.swift */; };
 		563E61862B89A0A0006FC307 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61852B89A09F006FC307 /* CommentView.swift */; };
 		563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61872B89A0A8006FC307 /* CommentViewController.swift */; };
 		563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */; };
+		56790F182B9D1B72003B4079 /* ShareDailyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56790F172B9D1B72003B4079 /* ShareDailyManager.swift */; };
+		56790F1A2B9D1CB0003B4079 /* AddDailyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
 		7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7719DD492B936CB5003797F4 /* SideMenu */; };
 		7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719DD4B2B936EC3003797F4 /* SideMenuController.swift */; };
@@ -190,11 +193,14 @@
 		562380942B936027006F194E /* AddDailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyViewController.swift; sourceTree = "<group>"; };
 		562380962B93603B006F194E /* AddDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyView.swift; sourceTree = "<group>"; };
 		5623809A2B9423F5006F194E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		562380A52B959802006F194E /* ShareDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDaily.swift; sourceTree = "<group>"; };
 		563E617D2B896850006FC307 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		563E617F2B896B88006FC307 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		563E61852B89A09F006FC307 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		563E61872B89A0A8006FC307 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		56790F172B9D1B72003B4079 /* ShareDailyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDailyManager.swift; sourceTree = "<group>"; };
+		56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyViewModel.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		7719DD4B2B936EC3003797F4 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -485,6 +491,7 @@
 				563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */,
 				562380942B936027006F194E /* AddDailyViewController.swift */,
 				562380962B93603B006F194E /* AddDailyView.swift */,
+				56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */,
 			);
 			name = Daily;
 			sourceTree = "<group>";
@@ -551,6 +558,7 @@
 				3336ED882B930C1300658729 /* Breed.swift */,
 				DBA97AF92B7EF25F00C4D6BB /* Pet.swift */,
 				DBA97AF72B7EF23400C4D6BB /* UserModel.swift */,
+				562380A52B959802006F194E /* ShareDaily.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -564,6 +572,7 @@
 				DBA97AF52B7EF20F00C4D6BB /* DataManager.swift */,
 				3336ED862B930A2900658729 /* ShareInfoManager.swift */,
 				335F5BA72B997AD7002D7F75 /* StorageManager.swift */,
+				56790F172B9D1B72003B4079 /* ShareDailyManager.swift */,
 				335F5BA92B9A0F2C002D7F75 /* Timer.swift */,
 				DBDBA4102B7F0244004C10C3 /* Extension */,
 			);
@@ -762,6 +771,7 @@
 			files = (
 				33FE532D2B89F49000BF1E98 /* InfoSearchViewController.swift in Sources */,
 				7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */,
+				562380A62B959802006F194E /* ShareDaily.swift in Sources */,
 				33FE53332B89F49000BF1E98 /* InfoSection.swift in Sources */,
 				562380952B936027006F194E /* AddDailyViewController.swift in Sources */,
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
@@ -810,12 +820,14 @@
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,
 				77DAE4F42B8A33D80020B4AA /* MyPageProfileView.swift in Sources */,
+				56790F1A2B9D1CB0003B4079 /* AddDailyViewModel.swift in Sources */,
 				33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */,
 				33FE53292B89F49000BF1E98 /* InfoSearchSection.swift in Sources */,
 				DBA97B042B7EF82C00C4D6BB /* UIView+Extension.swift in Sources */,
 				77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */,
 				33FE53272B89F49000BF1E98 /* InfoSearchTopicCell.swift in Sources */,
 				563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */,
+				56790F182B9D1B72003B4079 /* ShareDailyManager.swift in Sources */,
 				CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */,
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
