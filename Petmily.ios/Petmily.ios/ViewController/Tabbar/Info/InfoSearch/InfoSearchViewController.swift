@@ -55,11 +55,18 @@ private extension InfoSearchViewController {
                     await self.infoSearchView.remakeConstraints()
                 }
             }.store(in: &cancellables)
+        
+        infoSearchViewModel.$categoryValue
+            .removeDuplicates()
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                print("Category value changed, \(newValue)")
+            }.store(in: &cancellables)
     }
     
     func bindTextField() {
         infoSearchView.searchContentView.searchTextField
-            .myDebounceTextFieldPublisher
+            .debounceTextFieldPublisher
             .receive(on: DispatchQueue.main)
             .assign(to: \.searchInput, on: infoSearchViewModel)
             .store(in: &cancellables)
@@ -144,7 +151,7 @@ private extension InfoSearchViewController {
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: InfoSearchCategoryHeader.identifier,
             for: indexPath) as? InfoSearchCategoryHeader else { return UICollectionReusableView() }
-        header.setViewModel(title: "추천 검색어")
+        header.setViewModel(title: InfoSearchViewModel.HeaderTitle.category.title)
         return header
     }
     
@@ -154,7 +161,8 @@ private extension InfoSearchViewController {
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: InfoSearchTopicHeader.identifier,
             for: indexPath) as? InfoSearchTopicHeader else { return UICollectionReusableView() }
-        header.setViewModel(mainTitle: "반려인은 전부 봤다", subTitle: "운영자 작성 글")
+        header.setViewModel(mainTitle: InfoSearchViewModel.HeaderTitle.topic(.main).title,
+                            subTitle: InfoSearchViewModel.HeaderTitle.topic(.sub).title)
         return header
     }
 }
@@ -165,7 +173,8 @@ extension InfoSearchViewController: UICollectionViewDelegate {
         switch InfoSearchSection(rawValue: indexPath.section) {
         case .category:
             guard let items = infoSearchViewModel.collectionViewModels.categoryItems else { return }
-            print("category: \(items[indexPath.item])")
+//            print("category: \(items[indexPath.item])")
+            infoSearchViewModel.categoryValue = "\(items[indexPath.item])"
             
         case .topic:
             guard let items = infoSearchViewModel.collectionViewModels.topicItems else { return }

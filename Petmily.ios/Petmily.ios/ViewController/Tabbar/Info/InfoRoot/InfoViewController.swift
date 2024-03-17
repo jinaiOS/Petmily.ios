@@ -32,7 +32,7 @@ final class InfoViewController: BaseHeaderViewController {
         setDataSource()
         setHeaderView()
         bind()
-//        getData()
+        getData()
     }
 }
 
