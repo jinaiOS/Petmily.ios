@@ -29,7 +29,7 @@ final class TabBarController: UIViewController {
 
 private extension TabBarController {
     func configure() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ThemeColor.systemBackground
         view.addSubview(dailyVC.view)
         changeTintColor(buttonType: tabBarView.dailyBtn)
     }

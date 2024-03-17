@@ -136,10 +136,10 @@ extension InfoSearchTopicCell {
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: Constants.Size.size8,
-                                      leading: Constants.Size.size24,
+                                      leading: Constants.Size.size16,
                                       bottom: 0,
-                                      trailing: Constants.Size.size24)
-        section.interGroupSpacing = Constants.Spacing.spacing14
+                                      trailing: Constants.Size.size16)
+        section.interGroupSpacing = Constants.Spacing.spacing16
         
         let sectionHeader = InfoSearchTopicHeader.topicHeader()
         section.boundarySupplementaryItems = [sectionHeader]

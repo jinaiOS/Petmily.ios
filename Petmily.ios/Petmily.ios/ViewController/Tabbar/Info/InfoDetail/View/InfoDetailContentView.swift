@@ -179,7 +179,7 @@ final class InfoDetailContentView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing12
+        stack.spacing = Constants.Spacing.spacing16
         
         [likeButton, showCommentButton, spacerView5].forEach {
             stack.addArrangedSubview($0)
@@ -222,7 +222,7 @@ private extension InfoDetailContentView {
         
         vStack.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing24)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
         }
         
         spacerView1.snp.makeConstraints {

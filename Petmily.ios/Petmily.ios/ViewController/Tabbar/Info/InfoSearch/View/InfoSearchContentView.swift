@@ -41,7 +41,7 @@ final class InfoSearchContentView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillProportionally
-        stack.spacing = Constants.Spacing.spacing5
+        stack.spacing = Constants.Spacing.spacing8
         
         [searchTextField, searchButton].forEach {
             stack.addArrangedSubview($0)
@@ -54,7 +54,7 @@ final class InfoSearchContentView: UIView {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing6
+        stack.spacing = Constants.Spacing.spacing8
         
         [hStack, underLine].forEach {
             stack.addArrangedSubview($0)
