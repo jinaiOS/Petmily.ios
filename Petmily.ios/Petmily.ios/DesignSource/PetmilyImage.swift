@@ -12,6 +12,7 @@ enum PetmilyImage {
     static var pencil = UIImage(named: "pencil")!
     static var search = UIImage(named: "search")!
     static var like = UIImage(named: "btn_like")!
+    static var unlike = UIImage(named: "btn_unlike")!
     static var union = UIImage(named: "Union")!
     static var ellipsis = UIImage(systemName: "ellipsis")!
     static var trashFill = UIImage(systemName: "trash.fill")!

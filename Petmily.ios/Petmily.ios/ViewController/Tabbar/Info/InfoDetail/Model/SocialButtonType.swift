@@ -8,6 +8,11 @@
 import Foundation
 
 enum SocialButtonType {
-    case like
+    case like(LikeBtnState)
     case comment
+    
+    enum LikeBtnState {
+        case unlike
+        case like
+    }
 }

@@ -150,13 +150,15 @@ final class InfoDetailContentView: UIView {
         return label
     }()
     
+    // TODO: - // touch, nomal 구분하기
     private lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(PetmilyImage.like, for: .normal)
+        button.setImage(PetmilyImage.unlike, for: .normal)
         button.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
             Task {
-                await self.socialBtnAction(buttonType: .like)
+                let requestState = button.currentImage == PetmilyImage.unlike ? SocialButtonType.like(.like) : SocialButtonType.like(.unlike)
+                await self.socialBtnAction(buttonType: requestState)
             }
         }), for: .touchUpInside)
         return button
@@ -299,7 +301,10 @@ private extension InfoDetailContentView {
     func socialBtnAction(buttonType: SocialButtonType) async {
         switch buttonType {
         case .like:
-            didTapSocialButton.send(.like)
+            let btnImage = likeButton.currentImage == PetmilyImage.unlike ? PetmilyImage.like : PetmilyImage.unlike
+            let requestState: SocialButtonType = btnImage == PetmilyImage.unlike ? .like(.unlike) : .like(.like)
+            likeButton.setImage(btnImage, for: .normal)
+            didTapSocialButton.send(requestState)
             
         case .comment:
             didTapSocialButton.send(.comment)

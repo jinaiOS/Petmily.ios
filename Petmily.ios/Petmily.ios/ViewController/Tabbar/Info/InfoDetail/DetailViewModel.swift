@@ -51,10 +51,18 @@ extension InfoDetailViewModel {
     
     func socialButtonAction(_ button: SocialButtonType) {
         switch button {
-        case .like:
+        case .like(let state):
+            switch state {
+            case .like:
+                print("like")
+                
+            case .unlike:
+                print("unlike")
+            }
             return
             
         case .comment:
+            print("comment")
             return
         }
     }
