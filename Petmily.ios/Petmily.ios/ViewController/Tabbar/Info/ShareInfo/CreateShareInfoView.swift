@@ -84,14 +84,7 @@ final class CreateShareInfoView: UIView {
                                                               spacing: Constants.Spacing.spacing8,
                                                               subViews: [photoButton, photoLabel, UIView()])
     
-    private let spacerView: UIView = {
-        let view = UIView()
-        
-        view.snp.makeConstraints {
-            $0.height.equalTo(Constants.Size.size16)
-        }
-        return view
-    }()
+    private let spacerView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,10 +99,12 @@ final class CreateShareInfoView: UIView {
 
 extension CreateShareInfoView {
     func remakeConstraints(keyboardHight: CGFloat = 0) {
+        let spacerHeight = keyboardHight == 0 ? Constants.Size.size50 : Constants.Size.size16
+        
         spacerView.snp.remakeConstraints {
             $0.top.equalTo(scrollView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(keyboardHight + Constants.Size.size16)
+            $0.height.equalTo(keyboardHight + spacerHeight)
         }
     }
 }
@@ -153,6 +148,7 @@ private extension CreateShareInfoView {
         spacerView.snp.makeConstraints {
             $0.top.equalTo(scrollView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(Constants.Size.size50)
         }
     }
 }
