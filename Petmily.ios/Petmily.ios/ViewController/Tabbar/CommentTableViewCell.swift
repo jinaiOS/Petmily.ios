@@ -8,7 +8,6 @@
 import UIKit
 
 final class CommentTableViewCell: UITableViewCell {
-    static let identifier = "CommentTableViewCell"
     
     /** @brief 사용자 명, 베스트 stackview */
     lazy var stvProfile: UIStackView = {

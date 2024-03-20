@@ -83,6 +83,8 @@
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
 		7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7719DD492B936CB5003797F4 /* SideMenu */; };
 		7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719DD4B2B936EC3003797F4 /* SideMenuController.swift */; };
+		77CC08092BAB1C5B00A5C966 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */; };
+		77CC080B2BAB1EBF00A5C966 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC080A2BAB1EBF00A5C966 /* UITableViewCell+.swift */; };
 		77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */; };
 		77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */; };
 		77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */; };
@@ -199,6 +201,8 @@
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		7719DD4B2B936EC3003797F4 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		77CC080A2BAB1EBF00A5C966 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		77DAE4EB2B8A33CD0020B4AA /* MyPageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingViewController.swift; sourceTree = "<group>"; };
@@ -327,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				33BA6C502B7E631B004AA232 /* UIColor+.swift */,
+				77CC080A2BAB1EBF00A5C966 /* UITableViewCell+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -499,6 +504,7 @@
 				77DAE4FA2B8A34310020B4AA /* MyPageSetting */,
 				77DAE4F82B8A34240020B4AA /* Cell */,
 				77DAE4F72B8A34170020B4AA /* View */,
+				77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -802,6 +808,7 @@
 				335F5BAA2B9A0F2C002D7F75 /* Timer.swift in Sources */,
 				CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */,
 				33FE532E2B89F49000BF1E98 /* InfoSearchTopicHeader.swift in Sources */,
+				77CC080B2BAB1EBF00A5C966 /* UITableViewCell+.swift in Sources */,
 				33FE53282B89F49000BF1E98 /* InfoSearchViewModel.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				335F5BA82B997AD7002D7F75 /* StorageManager.swift in Sources */,
@@ -826,6 +833,7 @@
 				77DAE4F52B8A33D80020B4AA /* MyPagePostView.swift in Sources */,
 				CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */,
 				DBA97AF42B7EF1BA00C4D6BB /* IntroViewController.swift in Sources */,
+				77CC08092BAB1C5B00A5C966 /* SideMenuTableViewCell.swift in Sources */,
 				33FE533B2B89F49000BF1E98 /* InfoShareHeader.swift in Sources */,
 				563E61862B89A0A0006FC307 /* CommentView.swift in Sources */,
 				DBA97AFE2B7EF3BB00C4D6BB /* CommonHeaderView.swift in Sources */,

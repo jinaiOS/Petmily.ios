@@ -12,12 +12,13 @@ import SnapKit
 
 class SideMenuController: BaseViewController {
     // MARK: Properties
-    private let sideMenus = [SideMenu(name: "저장된 글", icon: "rightArrow"), SideMenu(name: "계정", icon: "rightArrow"), SideMenu(name: "설정", icon: "rightArrow")]
+    private let sideMenus = [SideMenu.savePosts, SideMenu.account, SideMenu.settings]
     
     // MARK: Components
     private let menuTableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .none
+        view.register(SideMenuTableViewCell.self, forCellReuseIdentifier: SideMenuTableViewCell.identifier)
         return view
     }()
     
@@ -58,23 +59,17 @@ extension SideMenuController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = sideMenus[indexPath.row]
-        let cell = UITableViewCell()
-        var content = cell.defaultContentConfiguration()
-        content.image = UIImage(named: item.icon)
-        content.text = item.name
-        content.imageProperties.tintColor = .black
-        content.imageProperties.maximumSize = CGSize(width: 20, height: 20)
-        content.textProperties.font = UIFont.boldSystemFont(ofSize: 24)
-        cell.contentConfiguration = content
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SideMenuTableViewCell.identifier) as? SideMenuTableViewCell else { return UITableViewCell() }
+        cell.bind(title: sideMenus[indexPath.row].rawValue)
         return cell
     }
 }
 
 // MARK: Struct
 extension SideMenuController {
-    struct SideMenu {
-        var name: String
-        var icon: String
+    enum SideMenu: String {
+        case savePosts = "저장된 글"
+        case account = "계정"
+        case settings = "설정"
     }
 }
