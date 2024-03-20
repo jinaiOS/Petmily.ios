@@ -220,12 +220,12 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if myPagePostView.postSegmentControl.selectedSegmentIndex != 1 {
             let collectionViewWidth = collectionView.bounds.width
-            let cellWidth = (collectionViewWidth - 5) / 3
+            let cellWidth = (collectionViewWidth - Constants.Spacing.spacing16 / 2) / 3
             let cellHeight = cellWidth
             return CGSize(width: cellWidth, height: cellHeight)
         } else {
             let collectionViewWidth = collectionView.bounds.width
-            let cellWidth = collectionViewWidth - 10
+            let cellWidth = collectionViewWidth - Constants.Spacing.spacing16
             let cellHeight: CGFloat = 152
             return CGSize(width: cellWidth, height: cellHeight)
         }
