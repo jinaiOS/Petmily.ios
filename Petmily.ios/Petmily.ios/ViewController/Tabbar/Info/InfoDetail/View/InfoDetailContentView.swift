@@ -49,18 +49,8 @@ final class InfoDetailContentView: UIView {
         return label
     }()
     
-    private lazy var labelVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing5
-        
-        [titleLabel, authorLabel].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var labelVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing5,
+                                                              subViews: [titleLabel, authorLabel])
     
     private lazy var editAction = UIAction(title: "수정",
                                            image: PetmilyImage.pencil) { [weak self] _ in
@@ -108,21 +98,9 @@ final class InfoDetailContentView: UIView {
         return button
     }()
     
-    private lazy var hStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .equalSpacing
-        
-        [profileImageView, labelVStack, moreButon].forEach {
-            stack.addArrangedSubview($0)
-        }
-        labelVStack.snp.makeConstraints {
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(Constants.Size.size10)
-            $0.trailing.equalTo(moreButon.snp.leading).offset(-Constants.Size.size10)
-        }
-        return stack
-    }()
+    private lazy var hStack = StackFactory.makeStackView(axis: .horizontal,
+                                                         distribution: .equalSpacing,
+                                                         subViews: [profileImageView, labelVStack, moreButon])
     
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
@@ -175,31 +153,14 @@ final class InfoDetailContentView: UIView {
         return button
     }()
     
-    private lazy var buttonHStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing16
-        
-        [likeButton, showCommentButton, spacerView5].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var buttonHStack = StackFactory.makeStackView(axis: .horizontal,
+                                                               spacing: Constants.Spacing.spacing16,
+                                                               subViews: [likeButton, showCommentButton, spacerView5])
     
-    private lazy var vStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        
-        [hStack, spacerView1, contentImageView, spacerView2, contentLabel,
-         spacerView3, hashtagLabel, spacerView4, buttonHStack].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var vStack = StackFactory.makeStackView(subViews: [
+        hStack, spacerView1, contentImageView, spacerView2, contentLabel,
+        spacerView3, hashtagLabel, spacerView4, buttonHStack]
+    )
     
     init(_ info: ShareInfo,
          _ menuBtnSubject: PassthroughSubject<MenuButtonType, Never>,
@@ -220,6 +181,11 @@ final class InfoDetailContentView: UIView {
 private extension InfoDetailContentView {
     func setLayout() {
         addSubview(vStack)
+        
+        labelVStack.snp.makeConstraints {
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(Constants.Size.size10)
+            $0.trailing.equalTo(moreButon.snp.leading).offset(-Constants.Size.size10)
+        }
         
         vStack.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()

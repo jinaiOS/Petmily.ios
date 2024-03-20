@@ -61,31 +61,12 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var labelHStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing5
-        
-        [profileImageView, authorLabel, separateView, dateLabel, UIView()].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var labelHStack = StackFactory.makeStackView(axis: .horizontal,
+                                                              spacing: Constants.Spacing.spacing5,
+                                                              subViews: [profileImageView, authorLabel, separateView, dateLabel, UIView()])
     
-    private lazy var labelVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing10
-        
-        [titleLabel, labelHStack].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var labelVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing10,
+                                                              subViews: [titleLabel, labelHStack])
     
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
@@ -100,18 +81,9 @@ final class InfoSearchTopicCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var contentHStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing6
-        
-        [labelVStack, contentImageView].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var contentHStack = StackFactory.makeStackView(axis: .horizontal,
+                                                                spacing: Constants.Spacing.spacing6,
+                                                                subViews: [labelVStack, contentImageView])
     
     override init(frame: CGRect) {
         super.init(frame: frame)

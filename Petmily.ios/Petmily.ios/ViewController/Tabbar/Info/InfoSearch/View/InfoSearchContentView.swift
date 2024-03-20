@@ -49,18 +49,8 @@ final class InfoSearchContentView: UIView {
         return stack
     }()
     
-    private lazy var vStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing8
-        
-        [hStack, underLine].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var vStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing8,
+                                                         subViews: [hStack, underLine])
     
     override init(frame: CGRect) {
         super.init(frame: frame)
