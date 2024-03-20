@@ -19,10 +19,6 @@ final class InfoSearchContentView: UIView {
     private let searchButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.search, for: .normal)
-        
-        button.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size33)
-        }
         return button
     }()
     

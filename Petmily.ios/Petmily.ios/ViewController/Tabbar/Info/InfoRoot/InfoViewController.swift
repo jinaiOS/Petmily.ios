@@ -112,8 +112,11 @@ private extension InfoViewController {
 
 private extension InfoViewController {
     @objc func didTapSearchButton() {
-        let searchVC = InfoSearchViewController()
-        present(searchVC, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let searchVC = InfoSearchViewController()
+            present(searchVC, animated: true)
+        }
     }
 }
 
