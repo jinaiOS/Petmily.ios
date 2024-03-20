@@ -69,7 +69,6 @@ private extension InfoViewController {
         infoView.searchButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(Constants.Size.size16)
-            $0.width.height.equalTo(Constants.Size.size30)
         }
     }
     

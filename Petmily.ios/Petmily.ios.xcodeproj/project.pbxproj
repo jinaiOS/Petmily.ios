@@ -18,6 +18,10 @@
 		3349CABB2B8DD6A800C48362 /* SocialButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3349CABA2B8DD6A800C48362 /* SocialButtonType.swift */; };
 		335F5BA82B997AD7002D7F75 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F5BA72B997AD7002D7F75 /* StorageManager.swift */; };
 		335F5BAA2B9A0F2C002D7F75 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F5BA92B9A0F2C002D7F75 /* Timer.swift */; };
+		337D3BB72BA6F1FD00431449 /* CreateShareInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */; };
+		337D3BB92BA6F23600431449 /* CreateShareInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */; };
+		337D3BBB2BA80EE900431449 /* StackFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BBA2BA80EE900431449 /* StackFactory.swift */; };
+		337D3BBD2BA819A700431449 /* CreateShareInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */; };
 		33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33946F892B89F56E00C0EDF3 /* Kingfisher */; };
 		33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* Constants.swift */; };
 		33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */; };
@@ -153,6 +157,10 @@
 		3349CABA2B8DD6A800C48362 /* SocialButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButtonType.swift; sourceTree = "<group>"; };
 		335F5BA72B997AD7002D7F75 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		335F5BA92B9A0F2C002D7F75 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoViewController.swift; sourceTree = "<group>"; };
+		337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoView.swift; sourceTree = "<group>"; };
+		337D3BBA2BA80EE900431449 /* StackFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackFactory.swift; sourceTree = "<group>"; };
+		337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoViewModel.swift; sourceTree = "<group>"; };
 		33946F8B2B89F59B00C0EDF3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		339937F42B8DE57A00E9CCA2 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -313,6 +321,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		337D3BB52BA6F01C00431449 /* ShareInfo */ = {
+			isa = PBXGroup;
+			children = (
+				337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */,
+				337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */,
+				337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */,
+			);
+			path = ShareInfo;
+			sourceTree = "<group>";
+		};
 		33BA6C4F2B7E6309004AA232 /* DesignSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +352,7 @@
 		33FE52FA2B89F49000BF1E98 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				337D3BB52BA6F01C00431449 /* ShareInfo */,
 				33FE53142B89F49000BF1E98 /* InfoDetail */,
 				3326075D2B8A43AF00A66DC5 /* InfoRoot */,
 				33FE53002B89F49000BF1E98 /* InfoSearch */,
@@ -565,6 +584,7 @@
 				DBA97B012B7EF47600C4D6BB /* Common.swift */,
 				DBA97B052B7EF86600C4D6BB /* CommonUtil.swift */,
 				DBA97AF52B7EF20F00C4D6BB /* DataManager.swift */,
+				337D3BBA2BA80EE900431449 /* StackFactory.swift */,
 				3336ED862B930A2900658729 /* ShareInfoManager.swift */,
 				335F5BA72B997AD7002D7F75 /* StorageManager.swift */,
 				335F5BA92B9A0F2C002D7F75 /* Timer.swift */,
@@ -765,6 +785,7 @@
 			files = (
 				33FE532D2B89F49000BF1E98 /* InfoSearchViewController.swift in Sources */,
 				7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */,
+				337D3BB92BA6F23600431449 /* CreateShareInfoView.swift in Sources */,
 				33FE53332B89F49000BF1E98 /* InfoSection.swift in Sources */,
 				562380952B936027006F194E /* AddDailyViewController.swift in Sources */,
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
@@ -793,6 +814,7 @@
 				33FE53312B89F49000BF1E98 /* ShareInfo.swift in Sources */,
 				DBA97AFA2B7EF25F00C4D6BB /* Pet.swift in Sources */,
 				33FE53242B89F49000BF1E98 /* InfoShareCell.swift in Sources */,
+				337D3BBD2BA819A700431449 /* CreateShareInfoViewModel.swift in Sources */,
 				563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */,
 				DB4E6A5B2B8A01BF00624E8C /* KakaoMapViewController.swift in Sources */,
 				33FE53262B89F49000BF1E98 /* InfoSearchCategoryCell.swift in Sources */,
@@ -805,6 +827,7 @@
 				33FE53282B89F49000BF1E98 /* InfoSearchViewModel.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				335F5BA82B997AD7002D7F75 /* StorageManager.swift in Sources */,
+				337D3BBB2BA80EE900431449 /* StackFactory.swift in Sources */,
 				33FE53392B89F49000BF1E98 /* InfoDetailContentView.swift in Sources */,
 				339937F72B8E4A8100E9CCA2 /* TopicInfo.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
@@ -836,6 +859,7 @@
 				77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */,
 				56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */,
 				331C6E6E2B9B51C5007D8EFE /* AlertFactory.swift in Sources */,
+				337D3BB72BA6F1FD00431449 /* CreateShareInfoViewController.swift in Sources */,
 				33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */,
 				339937F52B8DE57A00E9CCA2 /* UITextField+.swift in Sources */,
 				DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */,

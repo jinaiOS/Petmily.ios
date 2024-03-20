@@ -150,7 +150,6 @@ final class InfoDetailContentView: UIView {
         return label
     }()
     
-    // TODO: - // touch, nomal 구분하기
     private lazy var likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.unlike, for: .normal)
