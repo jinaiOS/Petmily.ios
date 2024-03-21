@@ -191,41 +191,41 @@ class MyPageProfileView: UIView {
         }
         
         settingButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
+            $0.top.trailing.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing8)
             $0.width.height.equalTo(30)
         }
         
         userNameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileTextField.snp.bottom).inset(-Constants.Spacing.spacing16)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
+            $0.top.equalTo(profileTextField.snp.bottom).inset(-Constants.Spacing.spacing8)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing8)
         }
         
         editProfileButton.snp.makeConstraints {
-            $0.top.equalTo(userNameLabel.snp.bottom).inset(-Constants.Spacing.spacing16)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
+            $0.top.equalTo(userNameLabel.snp.bottom).inset(-Constants.Spacing.spacing8)
+            $0.leading.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing8)
             $0.width.equalTo(120)
             $0.height.equalTo(30)
         }
         
         profileImage.snp.makeConstraints {
-            $0.top.equalTo(settingButton.snp.bottom).inset(-Constants.Spacing.spacing16)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
+            $0.top.equalTo(settingButton.snp.bottom).inset(-Constants.Spacing.spacing8)
+            $0.trailing.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing8)
             $0.bottom.equalTo(editProfileButton)
             $0.width.height.equalTo(60)
         }
         
         petInfoStackView.snp.makeConstraints {
-            $0.top.equalTo(editProfileButton.snp.bottom).inset(-Constants.Spacing.spacing16)
-            $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
+            $0.top.equalTo(editProfileButton.snp.bottom).inset(-Constants.Spacing.spacing8)
+            $0.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide).inset(Constants.Spacing.spacing8)
             $0.height.equalTo(150)
         }
         
         petAgeLabel.snp.makeConstraints {
-            $0.top.leading.bottom.equalTo(petAgeView).inset(Constants.Spacing.spacing16)
+            $0.top.leading.bottom.equalTo(petAgeView).inset(Constants.Spacing.spacing8)
         }
         
         petAgeText.snp.makeConstraints {
-            $0.top.trailing.bottom.equalTo(petAgeView).inset(Constants.Spacing.spacing16)
+            $0.top.trailing.bottom.equalTo(petAgeView).inset(Constants.Spacing.spacing8)
         }
         
         firstDivider.snp.makeConstraints {
@@ -234,11 +234,11 @@ class MyPageProfileView: UIView {
         }
         
         petGenderLabel.snp.makeConstraints {
-            $0.top.leading.bottom.equalTo(petGenderView).inset(Constants.Spacing.spacing16)
+            $0.top.leading.bottom.equalTo(petGenderView).inset(Constants.Spacing.spacing8)
         }
         
         petGenderText.snp.makeConstraints {
-            $0.top.trailing.bottom.equalTo(petGenderView).inset(Constants.Spacing.spacing16)
+            $0.top.trailing.bottom.equalTo(petGenderView).inset(Constants.Spacing.spacing8)
         }
         
         secondDivider.snp.makeConstraints {
@@ -247,11 +247,11 @@ class MyPageProfileView: UIView {
         }
         
         petBreedLabel.snp.makeConstraints {
-            $0.top.leading.bottom.equalTo(petBreedView).inset(Constants.Spacing.spacing16)
+            $0.top.leading.bottom.equalTo(petBreedView).inset(Constants.Spacing.spacing8)
         }
         
         petBreedText.snp.makeConstraints {
-            $0.top.trailing.bottom.equalTo(petBreedView).inset(Constants.Spacing.spacing16)
+            $0.top.trailing.bottom.equalTo(petBreedView).inset(Constants.Spacing.spacing8)
         }
     }
 }
