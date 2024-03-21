@@ -50,7 +50,7 @@ private extension InfoSearchViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.applyItems()
+                applyItems()
                 Task {
                     await self.infoSearchView.remakeConstraints()
                 }

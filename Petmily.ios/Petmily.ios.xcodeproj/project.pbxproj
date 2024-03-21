@@ -22,6 +22,9 @@
 		337D3BB92BA6F23600431449 /* CreateShareInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */; };
 		337D3BBB2BA80EE900431449 /* StackFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BBA2BA80EE900431449 /* StackFactory.swift */; };
 		337D3BBD2BA819A700431449 /* CreateShareInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */; };
+		337D3BC12BAC062E00431449 /* HashTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BC02BAC062E00431449 /* HashTagCollectionView.swift */; };
+		337D3BC32BAC07AB00431449 /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BC22BAC07AB00431449 /* HashTagCell.swift */; };
+		337D3BC72BAC21DA00431449 /* CreateShareInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BC62BAC21DA00431449 /* CreateShareInfoSection.swift */; };
 		33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33946F892B89F56E00C0EDF3 /* Kingfisher */; };
 		33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* Constants.swift */; };
 		33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */; };
@@ -161,6 +164,9 @@
 		337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoView.swift; sourceTree = "<group>"; };
 		337D3BBA2BA80EE900431449 /* StackFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackFactory.swift; sourceTree = "<group>"; };
 		337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoViewModel.swift; sourceTree = "<group>"; };
+		337D3BC02BAC062E00431449 /* HashTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagCollectionView.swift; sourceTree = "<group>"; };
+		337D3BC22BAC07AB00431449 /* HashTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
+		337D3BC62BAC21DA00431449 /* CreateShareInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoSection.swift; sourceTree = "<group>"; };
 		33946F8B2B89F59B00C0EDF3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		339937F42B8DE57A00E9CCA2 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -324,11 +330,30 @@
 		337D3BB52BA6F01C00431449 /* ShareInfo */ = {
 			isa = PBXGroup;
 			children = (
-				337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */,
+				337D3BC62BAC21DA00431449 /* CreateShareInfoSection.swift */,
+				337D3BC52BAC0D6200431449 /* Cell */,
+				337D3BC42BAC0C7100431449 /* View */,
 				337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */,
 				337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */,
 			);
 			path = ShareInfo;
+			sourceTree = "<group>";
+		};
+		337D3BC42BAC0C7100431449 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */,
+				337D3BC02BAC062E00431449 /* HashTagCollectionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		337D3BC52BAC0D6200431449 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				337D3BC22BAC07AB00431449 /* HashTagCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		33BA6C4F2B7E6309004AA232 /* DesignSource */ = {
@@ -806,6 +831,7 @@
 				33FE53222B89F49000BF1E98 /* InfoView.swift in Sources */,
 				33FE532A2B89F49000BF1E98 /* InfoSearchView.swift in Sources */,
 				DBA97AF82B7EF23400C4D6BB /* UserModel.swift in Sources */,
+				337D3BC72BAC21DA00431449 /* CreateShareInfoSection.swift in Sources */,
 				3349CABB2B8DD6A800C48362 /* SocialButtonType.swift in Sources */,
 				CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */,
 				33FE53342B89F49000BF1E98 /* InfoDetailView.swift in Sources */,
@@ -832,6 +858,7 @@
 				339937F72B8E4A8100E9CCA2 /* TopicInfo.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
 				77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */,
+				337D3BC32BAC07AB00431449 /* HashTagCell.swift in Sources */,
 				33FE532C2B89F49000BF1E98 /* InfoSearchCollectionView.swift in Sources */,
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,
@@ -862,6 +889,7 @@
 				337D3BB72BA6F1FD00431449 /* CreateShareInfoViewController.swift in Sources */,
 				33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */,
 				339937F52B8DE57A00E9CCA2 /* UITextField+.swift in Sources */,
+				337D3BC12BAC062E00431449 /* HashTagCollectionView.swift in Sources */,
 				DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */,
 				33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */,
 			);

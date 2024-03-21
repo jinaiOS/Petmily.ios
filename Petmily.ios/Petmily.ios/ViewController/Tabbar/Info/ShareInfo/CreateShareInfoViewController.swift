@@ -5,6 +5,7 @@
 //  Copyright (c) 2024 z-wook. All right reserved.
 //
 
+import Combine
 import SnapKit
 import SwiftUI
 import UIKit
@@ -12,6 +13,12 @@ import UIKit
 final class CreateShareInfoViewController: BaseHeaderViewController {
     private let createShareInfoView = CreateShareInfoView()
     private let createShareInfoViewModel = CreateShareInfoViewModel()
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+    
+    typealias Section = CreateShareInfoSection
+    typealias Item = CreateShareInfoItem
+    
+    private var cancellables = Set<AnyCancellable>()
     
     override func loadView() {
         super.loadView()
@@ -25,6 +32,8 @@ final class CreateShareInfoViewController: BaseHeaderViewController {
         configure()
         setBaseHeaderView()
         setKeyboardObserver()
+        setDataSource()
+        bindViewModel()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -38,16 +47,36 @@ final class CreateShareInfoViewController: BaseHeaderViewController {
     }
 }
 
-extension CreateShareInfoViewController {
-    override func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
-            createShareInfoView.remakeConstraints(keyboardHight: keyboardHeight)
-        }
-    }
-    
-    override func keyboardWillHide(notification: NSNotification) {
-        createShareInfoView.remakeConstraints()
+private extension CreateShareInfoViewController {
+    func bindViewModel() {
+        createShareInfoViewModel.$collectionViewModels
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] items in
+                guard let self else { return }
+                applyItems()
+                if items.hashtagItems.isEmpty != true {
+                    Task {
+                        await self.createShareInfoView.remakeHashTagConstraints(collectionHeight: Constants.Size.size30)
+                    }
+                    return
+                }
+                Task {
+                    await self.createShareInfoView.remakeHashTagConstraints()
+                }
+            }.store(in: &cancellables)
+        
+        // TODO: - 수정해야 함
+        createShareInfoViewModel.textFieldOutput
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                guard let self else { return }
+                if state == true {
+                    createShareInfoView.doneButton.isEnabled = true
+                    return
+                }
+                createShareInfoView.doneButton.isEnabled = false
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -64,6 +93,7 @@ private extension CreateShareInfoViewController {
     func configure() {
         view.backgroundColor = ThemeColor.systemBackground
         
+        createShareInfoView.collectionView.delegate = self
         createShareInfoView.hashtagTextField.delegate = self
         createShareInfoView.titleTextField.delegate = self
         createShareInfoView.contentTextView.delegate = self
@@ -95,7 +125,89 @@ private extension CreateShareInfoViewController {
     }
 }
 
+private extension CreateShareInfoViewController {
+    func setDataSource() {
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: createShareInfoView.collectionView,
+            cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
+                guard let self else { return UICollectionViewCell() }
+                switch itemIdentifier {
+                case .hashtag(let item):
+                    return setHashTagCell(collectionView, indexPath, item)
+                }
+            })
+    }
+    
+    func applyItems() {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Item>()
+        let hashtagItems = createShareInfoViewModel.collectionViewModels.hashtagItems
+        
+        Section.allCases.forEach {
+            snapShot.appendSections([$0])
+        }
+        
+        if hashtagItems.isEmpty != true {
+            snapShot.appendItems(hashtagItems, toSection: .hashtag)
+        }
+        dataSource?.apply(snapShot)
+    }
+}
+
+private extension CreateShareInfoViewController {
+    func setHashTagCell(_ collectionView: UICollectionView,
+                        _ indexPath: IndexPath,
+                        _ item: String) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: HashTagCell.identifier,
+            for: indexPath) as? HashTagCell else { return UICollectionViewCell() }
+        cell.setViewModel(hashtagStr: item)
+        return cell
+    }
+}
+
+extension CreateShareInfoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        switch CreateShareInfoSection(rawValue: indexPath.section) {
+        case .hashtag:
+            createShareInfoViewModel.removeHashTag(index: indexPath.item)
+            
+        case .none:
+            return
+        }
+    }
+}
+
 extension CreateShareInfoViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        guard let hashTag = textField.text else { return true }
+        if string == " " {
+            createShareInfoViewModel.inputHashTag(hashtagStr: hashTag)
+            textField.text?.removeAll()
+        }
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == createShareInfoView.hashtagTextField {
+            createShareInfoViewModel.hashtagStr = textField.text ?? ""
+        }
+        
+        if textField == createShareInfoView.titleTextField {
+            createShareInfoViewModel.titleStr = textField.text ?? ""
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let str = textField.text,
+           str.isEmpty != true {
+            createShareInfoViewModel.inputHashTag(hashtagStr: str)
+        }
+        textField.text?.removeAll()
+        return true
+    }
 }
 
 extension CreateShareInfoViewController: UITextViewDelegate {
@@ -105,10 +217,10 @@ extension CreateShareInfoViewController: UITextViewDelegate {
             textView.textColor = ThemeColor.lightGray
         } else {
             textView.textColor = ThemeColor.label
+            createShareInfoViewModel.contentStr = textView.text
         }
     }
     
-    // 텍스트뷰가 터치될 때 호출되는 메서드
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == createShareInfoViewModel.textViewPlaceholder {
             textView.text = ""
@@ -116,11 +228,27 @@ extension CreateShareInfoViewController: UITextViewDelegate {
         }
     }
     
-    // 텍스트뷰에서 포커스가 벗어날 때 호출되는 메서드
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = createShareInfoViewModel.textViewPlaceholder
             textView.textColor = ThemeColor.lightGray
+        }
+    }
+}
+
+extension CreateShareInfoViewController {
+    override func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            Task {
+                await createShareInfoView.remakeKeyboardConstraints(keyboardHight: keyboardHeight)
+            }
+        }
+    }
+    
+    override func keyboardWillHide(notification: NSNotification) {
+        Task {
+            await createShareInfoView.remakeKeyboardConstraints()
         }
     }
 }

@@ -14,6 +14,7 @@ final class CreateShareInfoView: UIView {
         button.tintColor = ThemeColor.black
         button.titleLabel?.font = ThemeFont.b20
         button.setTitle("완료", for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -23,7 +24,7 @@ final class CreateShareInfoView: UIView {
     let hashtagTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
-        textField.keyboardType = .twitter
+        textField.keyboardType = .default
         textField.font = ThemeFont.r16
         textField.textColor = ThemeColor.label
         textField.placeholder = "해시 태그를 입력해 주세요."
@@ -40,6 +41,8 @@ final class CreateShareInfoView: UIView {
         return view
     }()
     
+    let collectionView = HashTagCollectionView(frame: .zero, collectionViewLayout: .init())
+    
     let titleTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
@@ -50,9 +53,8 @@ final class CreateShareInfoView: UIView {
         return textField
     }()
     
-    private lazy var textFieldVStack = StackFactory.makeStackView(distribution: .fillProportionally,
-                                                                spacing: Constants.Spacing.spacing16,
-                                                                subViews: [hashtagTextField, underLine, titleTextField])
+    private lazy var textFieldVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing16,
+                                                                  subViews: [hashtagTextField, underLine, collectionView, titleTextField])
     
     let contentTextView: UITextView = {
         let view = UITextView()
@@ -98,7 +100,20 @@ final class CreateShareInfoView: UIView {
 }
 
 extension CreateShareInfoView {
-    func remakeConstraints(keyboardHight: CGFloat = 0) {
+    @MainActor
+    func remakeHashTagConstraints(collectionHeight: CGFloat = 0) async {
+        collectionView.snp.remakeConstraints {
+            $0.height.equalTo(collectionHeight)
+        }
+        
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            guard let self else { return }
+            layoutIfNeeded()
+        }
+    }
+    
+    @MainActor
+    func remakeKeyboardConstraints(keyboardHight: CGFloat = 0) async {
         let spacerHeight = keyboardHight == 0 ? Constants.Size.size50 : Constants.Size.size16
         
         spacerView.snp.remakeConstraints {
