@@ -179,20 +179,13 @@ extension CreateShareInfoViewController: UICollectionViewDelegate {
 }
 
 extension CreateShareInfoViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        guard let hashTag = textField.text else { return true }
-        if string == " " {
-            createShareInfoViewModel.inputHashTag(hashtagStr: hashTag)
-            textField.text?.removeAll()
-        }
-        return true
-    }
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField == createShareInfoView.hashtagTextField {
-            createShareInfoViewModel.hashtagStr = textField.text ?? ""
+            guard let hashText = textField.text else { return }
+            if hashText.last == " " {
+                createShareInfoViewModel.inputHashTag(hashtagStr: hashText)
+                textField.text?.removeAll()
+            }
         }
         
         if textField == createShareInfoView.titleTextField {
@@ -212,13 +205,8 @@ extension CreateShareInfoViewController: UITextFieldDelegate {
 
 extension CreateShareInfoViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = createShareInfoViewModel.textViewPlaceholder
-            textView.textColor = ThemeColor.lightGray
-        } else {
-            textView.textColor = ThemeColor.label
-            createShareInfoViewModel.contentStr = textView.text
-        }
+        textView.textColor = ThemeColor.label
+        createShareInfoViewModel.contentStr = textView.text
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
