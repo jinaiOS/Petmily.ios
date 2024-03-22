@@ -41,10 +41,6 @@ final class HashTagCell: UICollectionViewCell {
 }
 
 extension HashTagCell {
-    func setViewModel(hashtagStr: String) {
-        hashtagLabel.text = "#" + hashtagStr
-    }
-    
     static func hashTagSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(Constants.Size.size100),
                                               heightDimension: .fractionalHeight(Constants.Size.size1))
@@ -58,6 +54,10 @@ extension HashTagCell {
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = Constants.Spacing.spacing8
         return section
+    }
+    
+    func setViewModel(hashtagStr: String) {
+        hashtagLabel.text = "#" + hashtagStr
     }
 }
 

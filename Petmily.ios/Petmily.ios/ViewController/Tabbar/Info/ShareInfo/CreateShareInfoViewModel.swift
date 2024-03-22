@@ -13,17 +13,16 @@ final class CreateShareInfoViewModel: ObservableObject {
         var hashtagItems: [CreateShareInfoItem] = []
     }
     
-    @Published var hashtagStr = ""
+    @Published private(set) var collectionViewModels = CollectionViewModels()
     @Published var titleStr = ""
     @Published var contentStr = ""
-    @Published private(set) var collectionViewModels = CollectionViewModels()
     
     let baseHeaderTitle = "정보 공유 글쓰기"
     let textViewPlaceholder = "반려동물에 관련된 질문이나 이야기를 해보세요."
     
-    private(set) lazy var textFieldOutput: AnyPublisher<Bool, Never> = Publishers.CombineLatest3($hashtagStr, $titleStr, $contentStr)
-        .map { hashtag, title, content in
-            if hashtag == "" || title == "" || content == "" {
+    private(set) lazy var textFieldOutput: AnyPublisher<Bool, Never> = Publishers.CombineLatest3($collectionViewModels, $titleStr, $contentStr)
+        .map { collectionVM, title, content in
+            if collectionVM.hashtagItems.isEmpty || title == "" || content == "" {
                 return false
             }
             return true
@@ -36,9 +35,9 @@ final class CreateShareInfoViewModel: ObservableObject {
 
 extension CreateShareInfoViewModel {
     func inputHashTag(hashtagStr: String) {
-        let newStr = replacingString(str: hashtagStr)
-        let isDuplicate = checkDuplication(checkStr: newStr)
-        let isEmpty = checkEmpty(str: newStr)
+        let newStr = replacingString(hashtagStr)
+        let isDuplicate = checkDuplication(newStr)
+        let isEmpty = checkEmpty(newStr)
         
         if isDuplicate == false && isEmpty == false {
             Task {
@@ -53,21 +52,22 @@ extension CreateShareInfoViewModel {
 }
 
 private extension CreateShareInfoViewModel {
-    func replacingString(str: String) -> String {
+    func replacingString(_ str: String) -> String {
         let newStr = str.replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: ".", with: "")
             .replacingOccurrences(of: "#", with: "")
             .lowercased()
         return newStr
     }
     
-    func checkEmpty(str: String) -> Bool {
+    func checkEmpty(_ str: String) -> Bool {
         if str == "" {
             return true
         }
         return false
     }
     
-    func checkDuplication(checkStr: String) -> Bool {
+    func checkDuplication(_ checkStr: String) -> Bool {
         return collectionViewModels.hashtagItems.contains { item in
             switch item {
             case .hashtag(let string):
