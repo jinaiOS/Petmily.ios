@@ -11,7 +11,7 @@ class AddDailyView: UIView {
     /** @brief video imageview */
     lazy var imgVideo: UIImageView = {
        let imageview = UIImageView()
-        imageview.cornerRadius = 8
+        imageview.cornerRadius = Constants.Radius.radius7
         imageview.clipsToBounds = true
         return imageview
     }()
@@ -26,7 +26,7 @@ class AddDailyView: UIView {
        let button = UIButton()
         button.backgroundColor = ThemeColor.appPink
         button.titleLabel?.font = ThemeFont.b24
-        button.titleLabel?.textColor = .white
+        button.titleLabel?.textColor = ThemeColor.white
         button.cornerRadius = 30
         button.setTitle("설명 작성", for: .normal)
         return button
@@ -54,26 +54,26 @@ class AddDailyView: UIView {
         
         imgVideo.snp.makeConstraints {
             $0.top.equalToSuperview().inset(13)
-            $0.leading.trailing.equalToSuperview().inset(23)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
         }
         
         btnBack.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(23)
+            $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
             $0.width.equalTo(30)
             $0.height.equalTo(56)
         }
         
         btnExplain.snp.makeConstraints {
             $0.top.equalTo(imgVideo.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().inset(23)
+            $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
             $0.bottom.equalToSuperview().inset(44)
             $0.height.equalTo(60)
         }
         
         btnNext.snp.makeConstraints {
             $0.top.equalTo(imgVideo.snp.bottom).offset(16)
-            $0.trailing.equalToSuperview().inset(23)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
             $0.leading.equalTo(btnExplain.snp.trailing).offset(9)
             $0.width.height.equalTo(60)
         }
