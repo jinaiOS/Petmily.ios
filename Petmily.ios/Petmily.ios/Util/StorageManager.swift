@@ -69,7 +69,7 @@ extension StorageManager {
     ///   - contentVideo: 저장할 비디오
     /// - Tip: 사진 저장 경로: storageRefName/spaceRefName
     /// - Returns: **성공**: 비디오 URL, **실패**: Error
-    func createContentVideo(storageRefName: String, spaceRefName: String, contentVideo: URL) async throws -> URL {
+    func createContentVideo(storageRefName: ImagePath, spaceRefName: String, contentVideo: URL) async throws -> URL {
         let storageRef = makeStorageRef(storageRefName, spaceRefName)
         do {
             let videoUrl = try await putFileData(storageRef, contentVideo)

@@ -92,6 +92,7 @@
 		563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */; };
 		56790F182B9D1B72003B4079 /* ShareDailyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56790F172B9D1B72003B4079 /* ShareDailyManager.swift */; };
 		56790F1A2B9D1CB0003B4079 /* AddDailyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */; };
+		56A267032BA67D8500A1A412 /* DailyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A267022BA67D8500A1A412 /* DailyViewModel.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
 		7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7719DD492B936CB5003797F4 /* SideMenu */; };
 		7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719DD4B2B936EC3003797F4 /* SideMenuController.swift */; };
@@ -221,6 +222,7 @@
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		56790F172B9D1B72003B4079 /* ShareDailyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDailyManager.swift; sourceTree = "<group>"; };
 		56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyViewModel.swift; sourceTree = "<group>"; };
+		56A267022BA67D8500A1A412 /* DailyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewModel.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		7719DD4B2B936EC3003797F4 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 			children = (
 				DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */,
 				56FD906F2B80F43B00AAD29B /* DailyView.swift */,
+				56A267022BA67D8500A1A412 /* DailyViewModel.swift */,
 				562351532B80FD61005B2071 /* DailyCollectionViewCell.swift */,
 				563E61872B89A0A8006FC307 /* CommentViewController.swift */,
 				563E61852B89A09F006FC307 /* CommentView.swift */,
@@ -883,6 +886,7 @@
 				33FE53392B89F49000BF1E98 /* InfoDetailContentView.swift in Sources */,
 				339937F72B8E4A8100E9CCA2 /* TopicInfo.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
+				56A267032BA67D8500A1A412 /* DailyViewModel.swift in Sources */,
 				77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */,
 				337D3BC32BAC07AB00431449 /* HashTagCell.swift in Sources */,
 				33FE532C2B89F49000BF1E98 /* InfoSearchCollectionView.swift in Sources */,

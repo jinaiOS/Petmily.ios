@@ -34,6 +34,24 @@ extension ShareDailyManager {
             return .failure(.firestoreError(Error: error))
         }
     }
+    
+    /// Firestore에서 ShareSection 데이터를 가져오기 위한 메서드
+    /// - Parameters:
+    ///   - breed: 동물 타입(종)
+    ///   - createTime: 커서의 기준이 되는 시간
+    ///   - limitCount: 가져올 데이터 개수
+    /// - Returns: **성공**: success([ShareDaily]), **실패**: failure(FireStoreError)
+    func getShareData(breed: Breed, createTime: Date, limitCount: Int) async -> Result<[ShareDaily], FireStoreError> {
+        do {
+            let collectionRef = makeCollectionReference(breed)
+            let query = makeShareDailyQuery(collectionRef, createTime, limitCount)
+            
+            let shareDailyList = try await getShareDaily(query)
+            return .success(shareDailyList)
+        } catch {
+            return .failure(.firestoreError(Error: error))
+        }
+    }
 }
 private extension ShareDailyManager {
     /// ShareDaily CRUD를 위한 경로를 만드는 메서드
@@ -41,6 +59,14 @@ private extension ShareDailyManager {
     /// - Returns: ShareDaily의 FireStore 경로
     func makeCollectionReference(_ breed: Breed) -> CollectionReference {
         return userDB.document("Breed").collection(breed.name)
+    }
+    
+    func makeShareDailyQuery(_ collectionRef: CollectionReference, _ createTime: Date, _ limitCount: Int) -> Query {
+        let query = collectionRef
+            .order(by: orderbyCreateTime, descending: true)
+            .start(after: [createTime])
+            .limit(to: limitCount)
+        return query
     }
 }
 
@@ -52,9 +78,9 @@ private extension ShareDailyManager {
         return shareDailyList
     }
     
-    /// Firestore에서 받은 Snapshot을 ShareInfo로 디코딩 하는 메서드
+    /// Firestore에서 받은 Snapshot을 ShareDaily로 디코딩 하는 메서드
     /// - Parameter queryDocumentSnapshot: Documents의 queryDocumentSnapshot
-    /// - Returns: ShareInfo 배열을 반환
+    /// - Returns: ShareDaily 배열을 반환
     func decodeDocSnapshotToShareDaily(_ queryDocumentSnapshot: [QueryDocumentSnapshot]) throws -> [ShareDaily] {
         var shareDailyList: [ShareDaily] = []
         

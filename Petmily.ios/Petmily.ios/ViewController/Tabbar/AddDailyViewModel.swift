@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-class AddDailyViewModel {
+@MainActor
+class AddDailyViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var isCreateSuccess: Bool = false
     
-    private var cancellables = Set<AnyCancellable>()
     private let shareDailyManager = ShareDailyManager.shared
     private let storageManager = StorageManager.shared
     
@@ -21,7 +21,7 @@ class AddDailyViewModel {
             let convertURL = try copyFileToDocumentsDirectory(fileURL: data.contentVideoUrl)
             
             let videoResult = try await storageManager
-                .createContentVideo(storageRefName: storageManager.shareDailyPath,
+                .createContentVideo(storageRefName: StorageManager.ImagePath.shareDailyVideos,
                                     spaceRefName: data.shareID.uuidString,
                                     contentVideo: convertURL)
             
@@ -32,9 +32,9 @@ class AddDailyViewModel {
             
             switch result {
             case .success(let success):
-                print("ShareDaily 생성 성공: \(success)")
+                isCreateSuccess = true
             case .failure(let error):
-                print("ShareDaily 생성 실패: \(error)")
+                errorMessage = "ShareDaily 생성 실패"
             }
         } catch {
             DispatchQueue.main.async {
