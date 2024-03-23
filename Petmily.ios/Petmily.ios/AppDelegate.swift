@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import KakaoMapsSDK
 //import Gifu
 
 @UIApplicationMain
