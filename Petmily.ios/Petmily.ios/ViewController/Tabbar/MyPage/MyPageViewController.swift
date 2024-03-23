@@ -153,6 +153,7 @@ private extension MyPageViewController {
         myPageProfileView.settingButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
             let vc = SideMenuController()
+            vc.delegate = self
             let sideMenu = SideMenuNavigationController(rootViewController: vc)
             self.setUpSideMenuNavigationVC(vc: self, menu: sideMenu)
             self.present(sideMenu, animated: true)
@@ -286,6 +287,23 @@ extension Int {
             return self + 2
         default:
             return self + 1
+        }
+    }
+}
+
+extension MyPageViewController: SideMenuControllerDelegate {
+    func tappedSideMenu(type: SideMenu) {
+        switch type {
+        case .savePosts:
+            let vc = SavePostViewController()
+//            navigationPushController(viewController: vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
+        case .account:
+            let vc = AccountViewController()
+            navigationPushController(viewController: vc, animated: true)
+        case .settings:
+            let vc = SettingViewController()
+            navigationPushController(viewController: vc, animated: true)
         }
     }
 }

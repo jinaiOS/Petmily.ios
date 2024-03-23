@@ -83,6 +83,9 @@
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
 		7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7719DD492B936CB5003797F4 /* SideMenu */; };
 		7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719DD4B2B936EC3003797F4 /* SideMenuController.swift */; };
+		779F5CFE2BAF183D005B682C /* SavePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779F5CFD2BAF183D005B682C /* SavePostViewController.swift */; };
+		779F5D002BAF1847005B682C /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779F5CFF2BAF1847005B682C /* AccountViewController.swift */; };
+		779F5D022BAF1850005B682C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779F5D012BAF1850005B682C /* SettingViewController.swift */; };
 		77CC08092BAB1C5B00A5C966 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */; };
 		77CC080B2BAB1EBF00A5C966 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC080A2BAB1EBF00A5C966 /* UITableViewCell+.swift */; };
 		77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */; };
@@ -201,6 +204,9 @@
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		7719DD4B2B936EC3003797F4 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		779F5CFD2BAF183D005B682C /* SavePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePostViewController.swift; sourceTree = "<group>"; };
+		779F5CFF2BAF1847005B682C /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		779F5D012BAF1850005B682C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		77CC080A2BAB1EBF00A5C966 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		77CC30492B8C2DCE00FDF6FB /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -496,15 +502,50 @@
 			name = Daily;
 			sourceTree = "<group>";
 		};
+		779F5CF92BAF17F0005B682C /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				7719DD4B2B936EC3003797F4 /* SideMenuController.swift */,
+				77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */,
+				779F5CFA2BAF1813005B682C /* SavePost */,
+				779F5CFB2BAF1822005B682C /* Account */,
+				779F5CFC2BAF1826005B682C /* Settings */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		779F5CFA2BAF1813005B682C /* SavePost */ = {
+			isa = PBXGroup;
+			children = (
+				779F5CFD2BAF183D005B682C /* SavePostViewController.swift */,
+			);
+			path = SavePost;
+			sourceTree = "<group>";
+		};
+		779F5CFB2BAF1822005B682C /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				779F5CFF2BAF1847005B682C /* AccountViewController.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		779F5CFC2BAF1826005B682C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				779F5D012BAF1850005B682C /* SettingViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		77DAE4F62B8A340D0020B4AA /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
 				77DAE4EA2B8A33CD0020B4AA /* MyPageViewController.swift */,
-				7719DD4B2B936EC3003797F4 /* SideMenuController.swift */,
 				77DAE4FA2B8A34310020B4AA /* MyPageSetting */,
 				77DAE4F82B8A34240020B4AA /* Cell */,
 				77DAE4F72B8A34170020B4AA /* View */,
-				77CC08082BAB1C5B00A5C966 /* SideMenuTableViewCell.swift */,
+				779F5CF92BAF17F0005B682C /* SideMenu */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -804,6 +845,7 @@
 				33FE53262B89F49000BF1E98 /* InfoSearchCategoryCell.swift in Sources */,
 				DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */,
 				33FE533E2B89F4B400BF1E98 /* ThemeFont.swift in Sources */,
+				779F5D002BAF1847005B682C /* AccountViewController.swift in Sources */,
 				33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */,
 				335F5BAA2B9A0F2C002D7F75 /* Timer.swift in Sources */,
 				CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */,
@@ -828,6 +870,7 @@
 				563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */,
 				CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */,
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
+				779F5CFE2BAF183D005B682C /* SavePostViewController.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
 				3336ED892B930C1300658729 /* Breed.swift in Sources */,
 				77DAE4F52B8A33D80020B4AA /* MyPagePostView.swift in Sources */,
@@ -846,6 +889,7 @@
 				331C6E6E2B9B51C5007D8EFE /* AlertFactory.swift in Sources */,
 				33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */,
 				339937F52B8DE57A00E9CCA2 /* UITextField+.swift in Sources */,
+				779F5D022BAF1850005B682C /* SettingViewController.swift in Sources */,
 				DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */,
 				33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */,
 			);

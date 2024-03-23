@@ -10,8 +10,13 @@ import UIKit
 import SideMenu
 import SnapKit
 
+protocol SideMenuControllerDelegate: BaseViewController {
+    func tappedSideMenu(type: SideMenu)
+}
+
 class SideMenuController: BaseViewController {
     // MARK: Properties
+    weak var delegate: SideMenuControllerDelegate?
     private let sideMenus = [SideMenu.savePosts, SideMenu.account, SideMenu.settings]
     
     // MARK: Components
@@ -61,15 +66,30 @@ extension SideMenuController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SideMenuTableViewCell.identifier) as? SideMenuTableViewCell else { return UITableViewCell() }
         cell.bind(title: sideMenus[indexPath.row].rawValue)
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch sideMenus[indexPath.row] {
+        case .savePosts:
+//            let vc = SavePostViewController()
+//            navigationPushController(viewController: vc, animated: true)
+            delegate?.tappedSideMenu(type: .savePosts)
+        case .account:
+//            let vc = AccountViewController()
+//            navigationPushController(viewController: vc, animated: true)
+            delegate?.tappedSideMenu(type: .account)
+        case .settings:
+//            let vc = SettingViewController()
+//            navigationPushController(viewController: vc, animated: true)
+            delegate?.tappedSideMenu(type: .settings)
+        }
     }
 }
 
-// MARK: Struct
-extension SideMenuController {
-    enum SideMenu: String {
-        case savePosts = "저장된 글"
-        case account = "계정"
-        case settings = "설정"
-    }
+enum SideMenu: String {
+    case savePosts = "저장된 글"
+    case account = "계정"
+    case settings = "설정"
 }
