@@ -28,6 +28,7 @@ extension Constants {
     }
     
     enum Spacing {
+        static let spacing1: CGFloat = 1
         static let spacing2: CGFloat = 2
         static let spacing3: CGFloat = 3
         static let spacing4: CGFloat = 4

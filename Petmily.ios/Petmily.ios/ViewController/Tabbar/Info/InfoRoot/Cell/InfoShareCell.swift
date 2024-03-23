@@ -22,18 +22,8 @@ final class InfoShareCell: UICollectionViewCell {
         return makeLabel(font: font, textColor: ThemeColor.label)
     }()
     
-    private lazy var contentVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing8
-        
-        [titleLabel, contentLabel].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var contentVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing8,
+                                                                subViews: [titleLabel, contentLabel])
     
     private let spacerView = UIView()
     
@@ -61,30 +51,10 @@ final class InfoShareCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var infoVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing2
-        
-        [authorLabel, tagView].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var infoVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing2,
+                                                             subViews: [authorLabel, tagView])
     
-    private lazy var labelVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        
-        [contentVStack, spacerView, infoVStack].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var labelVStack = StackFactory.makeStackView(subViews: [contentVStack, spacerView, infoVStack])
     
     private lazy var contentImageView: UIImageView = {
         let view = UIImageView()
@@ -99,18 +69,9 @@ final class InfoShareCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var contentViewHStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing20
-        
-        [labelVStack, contentImageView].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var contentViewHStack = StackFactory.makeStackView(axis: .horizontal,
+                                                                    spacing: Constants.Spacing.spacing20,
+                                                                    subViews: [labelVStack, contentImageView])
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -19,10 +19,6 @@ final class InfoSearchContentView: UIView {
     private let searchButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(PetmilyImage.search, for: .normal)
-        
-        button.snp.makeConstraints {
-            $0.width.height.equalTo(Constants.Size.size33)
-        }
         return button
     }()
     
@@ -41,7 +37,7 @@ final class InfoSearchContentView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillProportionally
-        stack.spacing = Constants.Spacing.spacing5
+        stack.spacing = Constants.Spacing.spacing8
         
         [searchTextField, searchButton].forEach {
             stack.addArrangedSubview($0)
@@ -49,18 +45,8 @@ final class InfoSearchContentView: UIView {
         return stack
     }()
     
-    private lazy var vStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = Constants.Spacing.spacing6
-        
-        [hStack, underLine].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var vStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing8,
+                                                         subViews: [hStack, underLine])
     
     override init(frame: CGRect) {
         super.init(frame: frame)

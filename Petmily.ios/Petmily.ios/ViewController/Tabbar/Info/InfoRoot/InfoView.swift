@@ -62,7 +62,8 @@ private extension InfoView {
      @brief Section에 따른 Layout 설정
      */
     func collectionViewLayout() -> UICollectionViewCompositionalLayout {
-        UICollectionViewCompositionalLayout { sectionNum, _ in
+        UICollectionViewCompositionalLayout { [weak self] sectionNum, _ in
+            guard let self else { return nil }
             switch InfoSection(rawValue: sectionNum) {
             case .spacer:
                 return SpacerCell.spacerSection()
@@ -73,8 +74,7 @@ private extension InfoView {
             case .share:
                 return InfoShareCell.shareSection()
                 
-            case .none:
-                return nil
+            case .none: return nil
             }
         }
     }

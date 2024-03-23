@@ -66,12 +66,12 @@ private extension InfoSearchView {
         
         introLabel.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().offset(Constants.Size.size30)
-            $0.leading.equalToSuperview().inset(Constants.Size.size24)
+            $0.leading.equalToSuperview().inset(Constants.Size.size16)
         }
         
         searchContentView.snp.makeConstraints {
             $0.top.equalTo(introLabel.snp.bottom).offset(Constants.Size.size50)
-            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size24)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size16)
             $0.height.equalTo(Constants.Size.size41)
         }
         

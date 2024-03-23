@@ -27,18 +27,8 @@ final class InfoSearchTopicHeader: UICollectionReusableView {
         return label
     }()
     
-    private lazy var labelVStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = 1
-        
-        [mainTitleLabel, subTitleLabel].forEach {
-            stack.addArrangedSubview($0)
-        }
-        return stack
-    }()
+    private lazy var labelVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing1,
+                                                              subViews: [mainTitleLabel, subTitleLabel])
     
     override init(frame: CGRect) {
         super.init(frame: frame)

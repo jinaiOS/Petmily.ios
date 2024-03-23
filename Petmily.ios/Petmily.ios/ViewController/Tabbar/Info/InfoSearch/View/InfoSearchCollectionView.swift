@@ -37,7 +37,8 @@ private extension InfoSearchCollectionView {
     }
     
     func collectionViewLayout() -> UICollectionViewCompositionalLayout {
-        UICollectionViewCompositionalLayout { sectionNum, _ in
+        UICollectionViewCompositionalLayout { [weak self] sectionNum, _ in
+            guard let self else { return nil }
             switch InfoSearchSection(rawValue: sectionNum) {
             case .category:
                 return InfoSearchCategoryCell.categorySection()
