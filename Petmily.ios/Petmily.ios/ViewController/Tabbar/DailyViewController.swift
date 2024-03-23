@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class DailyViewController: BaseViewController {
 
     private let dailyView = DailyView()
+    private var vm = DailyViewModel()
+    private var cancellables = Set<AnyCancellable>()
+    var shareDailies: [ShareDaily]?
     
     override func loadView() {
         super.loadView()
@@ -24,8 +28,10 @@ class DailyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        getDailies()
         dailyView.btnLike.addTarget(self, action: #selector(toggleLikeButton), for: .touchUpInside)
         dailyView.btnApply.addTarget(self, action: #selector(commentButtonPressed), for: .touchUpInside)
+        dailyView.btnMore.addTarget(self, action: #selector(menuButtonPressed), for: .touchUpInside)
     }
     
 }
@@ -51,11 +57,34 @@ private extension DailyViewController {
         sheet.prefersGrabberVisible = true
         self.present(vc, animated: true, completion: nil)
     }
+    
+    @objc func menuButtonPressed() {
+        let vc = AddDailyViewController()
+        navigationPushController(viewController: vc, animated: true)
+    }
+}
+
+extension DailyViewController {
+    private func getDailies() {
+        Task {
+            await vm.getShareDaily(breed: .cat, lastData: nil, limitCount: 10)
+        }
+    }
+    
+    private func bindViewModel() {
+        vm.$shareDailies
+            .receive(on: RunLoop.main)
+            .sink { shareDailies in
+                self.shareDailies = shareDailies
+                self.dailyView.cvMain.reloadData()
+            }
+            .store(in: &cancellables)
+    }
 }
 
 extension DailyViewController: UICollectionViewDataSource, UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return shareDailies?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,6 +92,8 @@ extension DailyViewController: UICollectionViewDataSource, UICollectionViewDeleg
             withReuseIdentifier: DailyCollectionViewCell.identifier,
             for: indexPath) as? DailyCollectionViewCell else { return UICollectionViewCell() }
         cell.backgroundColor = .red
+        guard let shareDaily = shareDailies?[indexPath.row] else { return cell }
+        updateUI(shareDaily)
         return cell
     }
     
@@ -72,5 +103,11 @@ extension DailyViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
+    
+    private func updateUI(_ data: ShareDaily) {
+        dailyView.lblProfile.text = data.author
+        dailyView.lblContent.text = data.content
+        dailyView.lblTag.text = data.hashtag[0]
     }
 }

@@ -11,6 +11,8 @@ class AddDailyView: UIView {
     /** @brief video imageview */
     lazy var imgVideo: UIImageView = {
        let imageview = UIImageView()
+        imageview.cornerRadius = 8
+        imageview.clipsToBounds = true
         return imageview
     }()
     /** @brief back button */
@@ -56,7 +58,7 @@ class AddDailyView: UIView {
         }
         
         btnBack.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(13)
+            $0.top.equalToSuperview().inset(20)
             $0.leading.equalToSuperview().inset(23)
             $0.width.equalTo(30)
             $0.height.equalTo(56)
