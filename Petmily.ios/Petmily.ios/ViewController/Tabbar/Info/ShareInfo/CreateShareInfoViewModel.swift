@@ -43,14 +43,16 @@ final class CreateShareInfoViewModel: ObservableObject {
 }
 
 extension CreateShareInfoViewModel {
-    /// Cell Section 변경되면 Size 변경해줘야 함
-    func getCollectionViewHeight() -> CGFloat {
+    /// - Returns: Scroll 필요 유무, collectionView 높이
+    /// - Warning: Cell의 Section이 변경되면 현재 메서드의 Size 변경해 줘야 함
+    func getCollectionViewHeight() -> (Bool, CGFloat) {
         let hashtagItems = collectionViewModels.hashtagItems
         let photoItems = collectionViewModels.photoItems
         
         let hashTagSectionHeight = hashtagItems.isEmpty == true ? 0 : Constants.Size.size30 + Constants.Size.size16
         let photoSectionHeight = photoItems.isEmpty == true ? 0 : Constants.Size.size80 + Constants.Size.size16
-        return hashTagSectionHeight + photoSectionHeight
+        let needToScroll: Bool = photoSectionHeight == 0 ? false : true
+        return (needToScroll, hashTagSectionHeight + photoSectionHeight)
     }
     
     func removeItem(indexPath: IndexPath) {

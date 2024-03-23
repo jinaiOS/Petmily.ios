@@ -56,8 +56,12 @@ private extension CreateShareInfoViewController {
                 guard let self else { return }
                 applyItems()
                 Task {
-                    let height = self.createShareInfoViewModel.getCollectionViewHeight()
-                    await self.createShareInfoView.remakeHashTagConstraints(collectionHeight: height)
+                    let (needToScroll, height) = self.createShareInfoViewModel.getCollectionViewHeight()
+                    if needToScroll {
+                        await self.createShareInfoView.remakeConstraints(isScrollEnabled: needToScroll, height)
+                        return
+                    }
+                    await self.createShareInfoView.remakeConstraints(height)
                 }
             }.store(in: &cancellables)
         

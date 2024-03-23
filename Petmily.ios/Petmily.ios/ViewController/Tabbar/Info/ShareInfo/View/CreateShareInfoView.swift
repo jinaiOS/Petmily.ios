@@ -102,14 +102,24 @@ final class CreateShareInfoView: UIView {
 
 extension CreateShareInfoView {
     @MainActor
-    func remakeHashTagConstraints(collectionHeight: CGFloat) async {
+    func remakeConstraints(isScrollEnabled: Bool = false, _ collectionHeight: CGFloat) async {
+        let constraintRelatableTarget: ConstraintRelatableTarget =
+        isScrollEnabled == true ? UIScreen.main.bounds.height : scrollView.snp.height
+        
+        containerView.snp.remakeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size16)
+            $0.height.equalTo(constraintRelatableTarget)
+        }
+        
         collectionView.snp.remakeConstraints {
             $0.height.equalTo(collectionHeight)
         }
         
         UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self else { return }
-            layoutIfNeeded()
+            guard let self = self else { return }
+            self.layoutIfNeeded()
         }
     }
     
@@ -138,12 +148,14 @@ private extension CreateShareInfoView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(Constants.Size.size16)
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview().inset(Constants.Size.size16)
         }
         
         containerView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.edges.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size16)
             $0.height.equalToSuperview()
         }
         
