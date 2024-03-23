@@ -47,11 +47,15 @@ extension HashTagCell {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(Constants.Size.size100),
-                                               heightDimension: .estimated(Constants.Size.size30))
+                                               heightDimension: .absolute(Constants.Size.size30))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = .init(top: 0,
+                                      leading: 0,
+                                      bottom: Constants.Size.size16,
+                                      trailing: 0)
         section.interGroupSpacing = Constants.Spacing.spacing8
         return section
     }

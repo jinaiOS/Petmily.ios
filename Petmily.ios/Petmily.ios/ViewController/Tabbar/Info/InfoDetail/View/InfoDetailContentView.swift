@@ -189,7 +189,7 @@ private extension InfoDetailContentView {
         
         vStack.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Size.size16)
         }
         
         spacerView1.snp.makeConstraints {

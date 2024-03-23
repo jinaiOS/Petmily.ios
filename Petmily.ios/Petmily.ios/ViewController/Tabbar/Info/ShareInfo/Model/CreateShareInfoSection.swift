@@ -9,8 +9,10 @@ import Foundation
 
 enum CreateShareInfoSection: Int, CaseIterable {
     case hashtag
+    case photo
 }
 
 enum CreateShareInfoItem: Hashable {
     case hashtag(String)
+    case photo(SelectPhoto)
 }

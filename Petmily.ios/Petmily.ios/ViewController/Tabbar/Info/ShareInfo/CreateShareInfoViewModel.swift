@@ -6,11 +6,12 @@
 //
 
 import Combine
-import Foundation
+import UIKit
 
 final class CreateShareInfoViewModel: ObservableObject {
     struct CollectionViewModels {
         var hashtagItems: [CreateShareInfoItem] = []
+        var photoItems: [CreateShareInfoItem] = []
     }
     
     @Published private(set) var collectionViewModels = CollectionViewModels()
@@ -20,13 +21,21 @@ final class CreateShareInfoViewModel: ObservableObject {
     let baseHeaderTitle = "정보 공유 글쓰기"
     let textViewPlaceholder = "반려동물에 관련된 질문이나 이야기를 해보세요."
     
-    private(set) lazy var textFieldOutput: AnyPublisher<Bool, Never> = Publishers.CombineLatest3($collectionViewModels, $titleStr, $contentStr)
+    private(set) lazy var isFormValidPublisher: AnyPublisher<Bool, Never> = Publishers.CombineLatest3($collectionViewModels, $titleStr, $contentStr)
         .map { collectionVM, title, content in
             if collectionVM.hashtagItems.isEmpty || title == "" || content == "" {
                 return false
             }
             return true
         }.eraseToAnyPublisher()
+    private(set) var readOnlyCurrentSections: (() -> [CreateShareInfoSection])?
+    
+    init() {
+        readOnlyCurrentSections = { [weak self] in
+            guard let self else { return [] }
+            return getCurrentSections()
+        }
+    }
     
     deinit {
         print("deinit - CreateShareInfoVM")
@@ -34,20 +43,43 @@ final class CreateShareInfoViewModel: ObservableObject {
 }
 
 extension CreateShareInfoViewModel {
-    func inputHashTag(hashtagStr: String) {
-        let newStr = replacingString(hashtagStr)
-        let isDuplicate = checkDuplication(newStr)
-        let isEmpty = checkEmpty(newStr)
+    /// Cell Section 변경되면 Size 변경해줘야 함
+    func getCollectionViewHeight() -> CGFloat {
+        let hashtagItems = collectionViewModels.hashtagItems
+        let photoItems = collectionViewModels.photoItems
         
-        if isDuplicate == false && isEmpty == false {
+        let hashTagSectionHeight = hashtagItems.isEmpty == true ? 0 : Constants.Size.size30 + Constants.Size.size16
+        let photoSectionHeight = photoItems.isEmpty == true ? 0 : Constants.Size.size80 + Constants.Size.size16
+        return hashTagSectionHeight + photoSectionHeight
+    }
+    
+    func removeItem(indexPath: IndexPath) {
+        let currentSections = getCurrentSections()
+        switch currentSections[indexPath.section] {
+        case .hashtag:
+            collectionViewModels.hashtagItems.remove(at: indexPath.item)
+            
+        case .photo:
+            collectionViewModels.photoItems.remove(at: indexPath.item)
+        }
+    }
+}
+
+extension CreateShareInfoViewModel {
+    func inputHashTagItem(hashtagStr: String) {
+        let newStr = replacingString(hashtagStr)
+        if checkDuplication(newStr) == false && checkEmpty(newStr) == false {
             Task {
-                await makeItem(newStr)
+                await resultProcess(item: .hashtag(newStr))
             }
         }
     }
     
-    func removeHashTag(index: Int) {
-        collectionViewModels.hashtagItems.remove(at: index)
+    func inputPhotoItem(photo: UIImage) {
+        let selectPhoto = SelectPhoto(image: photo)
+        Task {
+            await resultProcess(item: .photo(selectPhoto))
+        }
     }
 }
 
@@ -73,13 +105,37 @@ private extension CreateShareInfoViewModel {
             case .hashtag(let string):
                 if string == checkStr { return true }
                 return false
+                
+            case .photo(_):
+                return false
             }
         }
     }
     
+    func getCurrentSections() -> [CreateShareInfoSection] {
+        var currentSection: [CreateShareInfoSection] = []
+        
+        if collectionViewModels.hashtagItems.isEmpty != true {
+            currentSection.append(.hashtag)
+        }
+        if collectionViewModels.photoItems.isEmpty != true {
+            currentSection.append(.photo)
+        }
+        return currentSection
+    }
+}
+
+private extension CreateShareInfoViewModel {
     @MainActor
-    func makeItem(_ str: String) async {
-        let item = CreateShareInfoItem.hashtag(str)
-        collectionViewModels.hashtagItems.append(item)
+    func resultProcess(item: CreateShareInfoItem) async {
+        switch item {
+        case .hashtag(let str):
+            let hashtagItem = CreateShareInfoItem.hashtag(str)
+            collectionViewModels.hashtagItems.append(hashtagItem)
+            
+        case .photo(let photo):
+            let photoItem = CreateShareInfoItem.photo(photo)
+            collectionViewModels.photoItems.append(photoItem)
+        }
     }
 }

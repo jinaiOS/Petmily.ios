@@ -11,7 +11,7 @@ import SwiftUI
 import UIKit
 
 final class CreateShareInfoViewController: BaseHeaderViewController {
-    private let createShareInfoView = CreateShareInfoView()
+    private lazy var createShareInfoView = CreateShareInfoView(createShareInfoViewModel.readOnlyCurrentSections)
     private let createShareInfoViewModel = CreateShareInfoViewModel()
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     
@@ -31,6 +31,7 @@ final class CreateShareInfoViewController: BaseHeaderViewController {
         
         configure()
         setBaseHeaderView()
+        setButtonTarget()
         setKeyboardObserver()
         setDataSource()
         bindViewModel()
@@ -54,19 +55,13 @@ private extension CreateShareInfoViewController {
             .sink { [weak self] items in
                 guard let self else { return }
                 applyItems()
-                if items.hashtagItems.isEmpty != true {
-                    Task {
-                        await self.createShareInfoView.remakeHashTagConstraints(collectionHeight: Constants.Size.size30)
-                    }
-                    return
-                }
                 Task {
-                    await self.createShareInfoView.remakeHashTagConstraints()
+                    let height = self.createShareInfoViewModel.getCollectionViewHeight()
+                    await self.createShareInfoView.remakeHashTagConstraints(collectionHeight: height)
                 }
             }.store(in: &cancellables)
         
-        // TODO: - 수정해야 함
-        createShareInfoViewModel.textFieldOutput
+        createShareInfoViewModel.isFormValidPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 guard let self else { return }
@@ -75,8 +70,7 @@ private extension CreateShareInfoViewController {
                     return
                 }
                 createShareInfoView.doneButton.isEnabled = false
-            }
-            .store(in: &cancellables)
+            }.store(in: &cancellables)
     }
 }
 
@@ -106,10 +100,6 @@ private extension CreateShareInfoViewController {
             string: createShareInfoViewModel.baseHeaderTitle,
             attributes: [.font: ThemeFont.b24])
         headerView.titleLabel.attributedText = title
-        
-        createShareInfoView.doneButton.addTarget(self,
-                                        action: #selector(didTapDoneButton),
-                                        for: .touchUpInside)
         headerView.addSubview(createShareInfoView.doneButton)
         
         createShareInfoView.doneButton.snp.makeConstraints {
@@ -117,11 +107,21 @@ private extension CreateShareInfoViewController {
             $0.trailing.equalToSuperview().inset(Constants.Size.size16)
         }
     }
+    
+    func setButtonTarget() {
+        createShareInfoView.doneButton.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
+        createShareInfoView.photoButton.addTarget(self, action: #selector(didTapPhotoButton), for: .touchUpInside)
+    }
 }
 
 private extension CreateShareInfoViewController {
     @objc func didTapDoneButton() {
         
+    }
+    
+    @objc func didTapPhotoButton() {
+        let image = UIImage(named: "sample")!
+        createShareInfoViewModel.inputPhotoItem(photo: image)
     }
 }
 
@@ -134,6 +134,9 @@ private extension CreateShareInfoViewController {
                 switch itemIdentifier {
                 case .hashtag(let item):
                     return setHashTagCell(collectionView, indexPath, item)
+                    
+                case .photo(let item):
+                    return setPhotoCell(collectionView, indexPath, item)
                 }
             })
     }
@@ -141,13 +144,15 @@ private extension CreateShareInfoViewController {
     func applyItems() {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Item>()
         let hashtagItems = createShareInfoViewModel.collectionViewModels.hashtagItems
-        
-        Section.allCases.forEach {
-            snapShot.appendSections([$0])
-        }
+        let photoItems = createShareInfoViewModel.collectionViewModels.photoItems
         
         if hashtagItems.isEmpty != true {
+            snapShot.appendSections([.hashtag])
             snapShot.appendItems(hashtagItems, toSection: .hashtag)
+        }
+        if photoItems.isEmpty != true {
+            snapShot.appendSections([.photo])
+            snapShot.appendItems(photoItems, toSection: .photo)
         }
         dataSource?.apply(snapShot)
     }
@@ -163,18 +168,22 @@ private extension CreateShareInfoViewController {
         cell.setViewModel(hashtagStr: item)
         return cell
     }
+    
+    func setPhotoCell(_ collectionView: UICollectionView,
+                      _ indexPath: IndexPath,
+                      _ item: SelectPhoto) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: PhotoCell.identifier,
+            for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
+        cell.setViewModel(photo: item)
+        return cell
+    }
 }
 
 extension CreateShareInfoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        switch CreateShareInfoSection(rawValue: indexPath.section) {
-        case .hashtag:
-            createShareInfoViewModel.removeHashTag(index: indexPath.item)
-            
-        case .none:
-            return
-        }
+        createShareInfoViewModel.removeItem(indexPath: indexPath)
     }
 }
 
@@ -183,7 +192,7 @@ extension CreateShareInfoViewController: UITextFieldDelegate {
         if textField == createShareInfoView.hashtagTextField {
             guard let hashText = textField.text else { return }
             if hashText.last == " " {
-                createShareInfoViewModel.inputHashTag(hashtagStr: hashText)
+                createShareInfoViewModel.inputHashTagItem(hashtagStr: hashText)
                 textField.text?.removeAll()
             }
         }
@@ -196,7 +205,7 @@ extension CreateShareInfoViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let str = textField.text,
            str.isEmpty != true {
-            createShareInfoViewModel.inputHashTag(hashtagStr: str)
+            createShareInfoViewModel.inputHashTagItem(hashtagStr: str)
         }
         textField.text?.removeAll()
         return true

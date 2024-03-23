@@ -41,7 +41,7 @@ final class CreateShareInfoView: UIView {
         return view
     }()
     
-    let collectionView = HashTagCollectionView(frame: .zero, collectionViewLayout: .init())
+    let collectionView: DynamicCollectionView
     
     let titleTextField: UITextField = {
         let textField = UITextField()
@@ -53,8 +53,8 @@ final class CreateShareInfoView: UIView {
         return textField
     }()
     
-    private lazy var textFieldVStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing16,
-                                                                  subViews: [hashtagTextField, underLine, collectionView, titleTextField])
+    private lazy var vStack = StackFactory.makeStackView(spacing: Constants.Spacing.spacing16,
+                                                         subViews: [hashtagTextField, underLine, collectionView, titleTextField])
     
     let contentTextView: UITextView = {
         let view = UITextView()
@@ -82,14 +82,15 @@ final class CreateShareInfoView: UIView {
         return label
     }()
     
-    private lazy var photoHStack = StackFactory.makeStackView(axis: .horizontal,
-                                                              spacing: Constants.Spacing.spacing8,
-                                                              subViews: [photoButton, photoLabel, UIView()])
+    private lazy var photoSelectHStack = StackFactory.makeStackView(axis: .horizontal,
+                                                                    spacing: Constants.Spacing.spacing8,
+                                                                    subViews: [photoButton, photoLabel, UIView()])
     
     private let spacerView = UIView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(_ readOnlyCurrentSections: (() -> [CreateShareInfoSection])?) {
+        collectionView = DynamicCollectionView(readOnlyCurrentSections)
+        super.init(frame: .zero)
         
         setLayout()
     }
@@ -101,12 +102,12 @@ final class CreateShareInfoView: UIView {
 
 extension CreateShareInfoView {
     @MainActor
-    func remakeHashTagConstraints(collectionHeight: CGFloat = 0) async {
+    func remakeHashTagConstraints(collectionHeight: CGFloat) async {
         collectionView.snp.remakeConstraints {
             $0.height.equalTo(collectionHeight)
         }
         
-        UIView.animate(withDuration: 0.2) { [weak self] in
+        UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
             layoutIfNeeded()
         }
@@ -132,12 +133,12 @@ private extension CreateShareInfoView {
         
         scrollView.addSubview(containerView)
         
-        [textFieldVStack, contentTextView, photoHStack].forEach {
+        [vStack, contentTextView, photoSelectHStack].forEach {
             containerView.addSubview($0)
         }
         
         scrollView.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.leading.top.trailing.equalToSuperview().inset(Constants.Size.size16)
         }
         
         containerView.snp.makeConstraints {
@@ -146,17 +147,17 @@ private extension CreateShareInfoView {
             $0.height.equalToSuperview()
         }
         
-        textFieldVStack.snp.makeConstraints {
+        vStack.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
         }
         
         contentTextView.snp.makeConstraints {
-            $0.top.equalTo(textFieldVStack.snp.bottom).offset(Constants.Spacing.spacing16)
+            $0.top.equalTo(vStack.snp.bottom).offset(Constants.Size.size16)
             $0.leading.trailing.equalToSuperview()
         }
         
-        photoHStack.snp.makeConstraints {
-            $0.top.equalTo(contentTextView.snp.bottom).offset(Constants.Spacing.spacing16)
+        photoSelectHStack.snp.makeConstraints {
+            $0.top.equalTo(contentTextView.snp.bottom).offset(Constants.Size.size16)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
