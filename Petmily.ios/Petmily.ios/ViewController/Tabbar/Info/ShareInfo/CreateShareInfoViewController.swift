@@ -189,25 +189,37 @@ extension CreateShareInfoViewController: UICollectionViewDelegate {
 
 extension CreateShareInfoViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField == createShareInfoView.hashtagTextField {
-            guard let hashText = textField.text else { return }
-            if hashText.last == " " {
-                createShareInfoViewModel.inputHashTagItem(hashtagStr: hashText)
+        guard let text = textField.text else { return }
+        
+        switch textField {
+        case createShareInfoView.hashtagTextField:
+            if text.last == " " {
+                createShareInfoViewModel.inputHashTagItem(hashtagStr: text)
                 textField.text?.removeAll()
             }
-        }
-        
-        if textField == createShareInfoView.titleTextField {
-            createShareInfoViewModel.titleStr = textField.text ?? ""
+            
+        case createShareInfoView.titleTextField:
+            createShareInfoViewModel.titleStr = text
+            
+        default: return
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let str = textField.text,
-           str.isEmpty != true {
-            createShareInfoViewModel.inputHashTagItem(hashtagStr: str)
+        guard let text = textField.text else { return true }
+        
+        switch textField {
+        case createShareInfoView.hashtagTextField:
+            if text.isEmpty != true {
+                createShareInfoViewModel.inputHashTagItem(hashtagStr: text)
+                textField.text?.removeAll()
+            }
+            
+        case createShareInfoView.titleTextField:
+            createShareInfoViewModel.titleStr = text
+            
+        default: break
         }
-        textField.text?.removeAll()
         return true
     }
 }
