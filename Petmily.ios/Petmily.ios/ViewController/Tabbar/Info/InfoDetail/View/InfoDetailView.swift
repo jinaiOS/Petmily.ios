@@ -11,7 +11,7 @@ import UIKit
 
 final class InfoDetailView: UIView {
     private let scrollView = UIScrollView()
-    private let contentView = UIView()
+    private let containerView = UIView()
     private let spacerView = UIView()
     private let infoDetailShareView: InfoDetailContentView
     
@@ -32,10 +32,10 @@ final class InfoDetailView: UIView {
 private extension InfoDetailView {
     func setLayout() {
         addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        scrollView.addSubview(containerView)
         
         [spacerView, infoDetailShareView].forEach {
-            contentView.addSubview($0)
+            containerView.addSubview($0)
         }
         
         scrollView.snp.makeConstraints {
@@ -43,7 +43,7 @@ private extension InfoDetailView {
             $0.leading.bottom.trailing.equalToSuperview()
         }
         
-        contentView.snp.makeConstraints {
+        containerView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.edges.equalToSuperview()
         }

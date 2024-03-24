@@ -69,7 +69,6 @@ private extension InfoViewController {
         infoView.searchButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(Constants.Size.size16)
-            $0.width.height.equalTo(Constants.Size.size30)
         }
     }
     
@@ -113,8 +112,11 @@ private extension InfoViewController {
 
 private extension InfoViewController {
     @objc func didTapSearchButton() {
-        let searchVC = InfoSearchViewController()
-        present(searchVC, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let searchVC = InfoSearchViewController()
+            present(searchVC, animated: true)
+        }
     }
 }
 

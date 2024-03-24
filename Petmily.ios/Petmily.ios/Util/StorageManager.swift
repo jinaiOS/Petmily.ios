@@ -18,6 +18,8 @@ final class StorageManager {
     static let shared = StorageManager()
     private let storage = Storage.storage()
     
+    let shareInfoPath = "ShareInfoImages"
+    let shareDailyPath = "ShareDailyVideos"
     private let compressionQuality: CGFloat = 1
     let progressSubject = PassthroughSubject<Double, Never>()
     
@@ -59,6 +61,23 @@ extension StorageManager {
             throw error
         }
     }
+    
+    /// Storage에 비디오를 저장하기 위한 메서드
+    /// - Parameters:
+    ///   - storageRefName: Path1 (파일 경로)
+    ///   - spaceRefName: Path2 (파일 경로)
+    ///   - contentVideo: 저장할 비디오
+    /// - Tip: 사진 저장 경로: storageRefName/spaceRefName
+    /// - Returns: **성공**: 비디오 URL, **실패**: Error
+    func createContentVideo(storageRefName: ImagePath, spaceRefName: String, contentVideo: URL) async throws -> URL {
+        let storageRef = makeStorageRef(storageRefName, spaceRefName)
+        do {
+            let videoUrl = try await putFileData(storageRef, contentVideo)
+            return videoUrl
+        } catch {
+            throw error
+        }
+    }
 }
 
 extension StorageManager {
@@ -93,6 +112,22 @@ private extension StorageManager {
     func putImageData(_ storageRef: StorageReference, _ imageData: Data) async throws -> URL {
         do {
             let _ = try await storageRef.putDataAsync(imageData) { [weak self] progress in
+                guard let self,
+                      let progress else { return }
+                Task {
+                    await self.updateProgressBar(fractionCompleted: progress.fractionCompleted)
+                }
+            }
+            let downloadUrl = try await storageRef.downloadURL()
+            return downloadUrl
+        } catch {
+            throw error
+        }
+    }
+    
+    func putFileData(_ storageRef: StorageReference, _ fileURL: URL) async throws -> URL {
+        do {
+            let _ = try await storageRef.putFileAsync(from: fileURL) { [weak self] progress in
                 guard let self,
                       let progress else { return }
                 Task {

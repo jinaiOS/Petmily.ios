@@ -18,6 +18,13 @@
 		3349CABB2B8DD6A800C48362 /* SocialButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3349CABA2B8DD6A800C48362 /* SocialButtonType.swift */; };
 		335F5BA82B997AD7002D7F75 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F5BA72B997AD7002D7F75 /* StorageManager.swift */; };
 		335F5BAA2B9A0F2C002D7F75 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F5BA92B9A0F2C002D7F75 /* Timer.swift */; };
+		337D3BB72BA6F1FD00431449 /* CreateShareInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */; };
+		337D3BB92BA6F23600431449 /* CreateShareInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */; };
+		337D3BBB2BA80EE900431449 /* StackFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BBA2BA80EE900431449 /* StackFactory.swift */; };
+		337D3BBD2BA819A700431449 /* CreateShareInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */; };
+		337D3BC12BAC062E00431449 /* DynamicCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BC02BAC062E00431449 /* DynamicCollectionView.swift */; };
+		337D3BC32BAC07AB00431449 /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BC22BAC07AB00431449 /* HashTagCell.swift */; };
+		337D3BC72BAC21DA00431449 /* CreateShareInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D3BC62BAC21DA00431449 /* CreateShareInfoSection.swift */; };
 		33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33946F892B89F56E00C0EDF3 /* Kingfisher */; };
 		33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8B2B89F59B00C0EDF3 /* Constants.swift */; };
 		33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */; };
@@ -25,6 +32,8 @@
 		339937F72B8E4A8100E9CCA2 /* TopicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339937F62B8E4A8100E9CCA2 /* TopicInfo.swift */; };
 		33BA6C4E2B7E629D004AA232 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */; };
 		33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6C502B7E631B004AA232 /* UIColor+.swift */; };
+		33E466962BAD81F90078E82B /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E466952BAD81F90078E82B /* PhotoCell.swift */; };
+		33E466992BAD83C40078E82B /* SelectPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E466982BAD83C40078E82B /* SelectPhoto.swift */; };
 		33F7746B2B8059D60044DF28 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 33F7746A2B8059D60044DF28 /* FirebaseAnalytics */; };
 		33F7746D2B8059D60044DF28 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 33F7746C2B8059D60044DF28 /* FirebaseAnalyticsOnDeviceConversion */; };
 		33F7746F2B8059D60044DF28 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33F7746E2B8059D60044DF28 /* FirebaseAnalyticsSwift */; };
@@ -75,11 +84,15 @@
 		562380952B936027006F194E /* AddDailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562380942B936027006F194E /* AddDailyViewController.swift */; };
 		562380972B93603B006F194E /* AddDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562380962B93603B006F194E /* AddDailyView.swift */; };
 		5623809B2B9423F5006F194E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5623809A2B9423F5006F194E /* GoogleService-Info.plist */; };
+		562380A62B959802006F194E /* ShareDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562380A52B959802006F194E /* ShareDaily.swift */; };
 		563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617D2B896850006FC307 /* UIImage+Extension.swift */; };
 		563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E617F2B896B88006FC307 /* UIColor+Extension.swift */; };
 		563E61862B89A0A0006FC307 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61852B89A09F006FC307 /* CommentView.swift */; };
 		563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61872B89A0A8006FC307 /* CommentViewController.swift */; };
 		563E618A2B89A2ED006FC307 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */; };
+		56790F182B9D1B72003B4079 /* ShareDailyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56790F172B9D1B72003B4079 /* ShareDailyManager.swift */; };
+		56790F1A2B9D1CB0003B4079 /* AddDailyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */; };
+		56A267032BA67D8500A1A412 /* DailyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A267022BA67D8500A1A412 /* DailyViewModel.swift */; };
 		56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD906F2B80F43B00AAD29B /* DailyView.swift */; };
 		7719DD4A2B936CB5003797F4 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7719DD492B936CB5003797F4 /* SideMenu */; };
 		7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719DD4B2B936EC3003797F4 /* SideMenuController.swift */; };
@@ -158,12 +171,21 @@
 		3349CABA2B8DD6A800C48362 /* SocialButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButtonType.swift; sourceTree = "<group>"; };
 		335F5BA72B997AD7002D7F75 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		335F5BA92B9A0F2C002D7F75 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoViewController.swift; sourceTree = "<group>"; };
+		337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoView.swift; sourceTree = "<group>"; };
+		337D3BBA2BA80EE900431449 /* StackFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackFactory.swift; sourceTree = "<group>"; };
+		337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoViewModel.swift; sourceTree = "<group>"; };
+		337D3BC02BAC062E00431449 /* DynamicCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCollectionView.swift; sourceTree = "<group>"; };
+		337D3BC22BAC07AB00431449 /* HashTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
+		337D3BC62BAC21DA00431449 /* CreateShareInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShareInfoSection.swift; sourceTree = "<group>"; };
 		33946F8B2B89F59B00C0EDF3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		33946F8D2B89F5F600C0EDF3 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		339937F42B8DE57A00E9CCA2 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		339937F62B8E4A8100E9CCA2 /* TopicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicInfo.swift; sourceTree = "<group>"; };
 		33BA6C4D2B7E629D004AA232 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		33BA6C502B7E631B004AA232 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		33E466952BAD81F90078E82B /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		33E466982BAD83C40078E82B /* SelectPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhoto.swift; sourceTree = "<group>"; };
 		33FE52FB2B89F49000BF1E98 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		33FE52FD2B89F49000BF1E98 /* InfoPopularCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPopularCell.swift; sourceTree = "<group>"; };
 		33FE52FE2B89F49000BF1E98 /* InfoShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoShareCell.swift; sourceTree = "<group>"; };
@@ -197,11 +219,15 @@
 		562380942B936027006F194E /* AddDailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyViewController.swift; sourceTree = "<group>"; };
 		562380962B93603B006F194E /* AddDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyView.swift; sourceTree = "<group>"; };
 		5623809A2B9423F5006F194E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		562380A52B959802006F194E /* ShareDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDaily.swift; sourceTree = "<group>"; };
 		563E617D2B896850006FC307 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		563E617F2B896B88006FC307 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		563E61852B89A09F006FC307 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		563E61872B89A0A8006FC307 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		56790F172B9D1B72003B4079 /* ShareDailyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDailyManager.swift; sourceTree = "<group>"; };
+		56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyViewModel.swift; sourceTree = "<group>"; };
+		56A267022BA67D8500A1A412 /* DailyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewModel.swift; sourceTree = "<group>"; };
 		56FD906F2B80F43B00AAD29B /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		7719DD4B2B936EC3003797F4 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		779F5CFD2BAF183D005B682C /* SavePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePostViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +349,36 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		337D3BB52BA6F01C00431449 /* ShareInfo */ = {
+			isa = PBXGroup;
+			children = (
+				33E466972BAD83A30078E82B /* Model */,
+				337D3BC52BAC0D6200431449 /* Cell */,
+				337D3BC42BAC0C7100431449 /* View */,
+				337D3BBC2BA819A700431449 /* CreateShareInfoViewModel.swift */,
+				337D3BB62BA6F1FD00431449 /* CreateShareInfoViewController.swift */,
+			);
+			path = ShareInfo;
+			sourceTree = "<group>";
+		};
+		337D3BC42BAC0C7100431449 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				337D3BB82BA6F23600431449 /* CreateShareInfoView.swift */,
+				337D3BC02BAC062E00431449 /* DynamicCollectionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		337D3BC52BAC0D6200431449 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				337D3BC22BAC07AB00431449 /* HashTagCell.swift */,
+				33E466952BAD81F90078E82B /* PhotoCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		33BA6C4F2B7E6309004AA232 /* DesignSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,9 +398,19 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		33E466972BAD83A30078E82B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				337D3BC62BAC21DA00431449 /* CreateShareInfoSection.swift */,
+				33E466982BAD83C40078E82B /* SelectPhoto.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		33FE52FA2B89F49000BF1E98 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				337D3BB52BA6F01C00431449 /* ShareInfo */,
 				33FE53142B89F49000BF1E98 /* InfoDetail */,
 				3326075D2B8A43AF00A66DC5 /* InfoRoot */,
 				33FE53002B89F49000BF1E98 /* InfoSearch */,
@@ -492,12 +558,14 @@
 			children = (
 				DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */,
 				56FD906F2B80F43B00AAD29B /* DailyView.swift */,
+				56A267022BA67D8500A1A412 /* DailyViewModel.swift */,
 				562351532B80FD61005B2071 /* DailyCollectionViewCell.swift */,
 				563E61872B89A0A8006FC307 /* CommentViewController.swift */,
 				563E61852B89A09F006FC307 /* CommentView.swift */,
 				563E61892B89A2ED006FC307 /* CommentTableViewCell.swift */,
 				562380942B936027006F194E /* AddDailyViewController.swift */,
 				562380962B93603B006F194E /* AddDailyView.swift */,
+				56790F192B9D1CB0003B4079 /* AddDailyViewModel.swift */,
 			);
 			name = Daily;
 			sourceTree = "<group>";
@@ -600,6 +668,7 @@
 				3336ED882B930C1300658729 /* Breed.swift */,
 				DBA97AF92B7EF25F00C4D6BB /* Pet.swift */,
 				DBA97AF72B7EF23400C4D6BB /* UserModel.swift */,
+				562380A52B959802006F194E /* ShareDaily.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -612,8 +681,10 @@
 				DBA97B012B7EF47600C4D6BB /* Common.swift */,
 				DBA97B052B7EF86600C4D6BB /* CommonUtil.swift */,
 				DBA97AF52B7EF20F00C4D6BB /* DataManager.swift */,
+				337D3BBA2BA80EE900431449 /* StackFactory.swift */,
 				3336ED862B930A2900658729 /* ShareInfoManager.swift */,
 				335F5BA72B997AD7002D7F75 /* StorageManager.swift */,
+				56790F172B9D1B72003B4079 /* ShareDailyManager.swift */,
 				335F5BA92B9A0F2C002D7F75 /* Timer.swift */,
 				DBDBA4102B7F0244004C10C3 /* Extension */,
 			);
@@ -812,6 +883,8 @@
 			files = (
 				33FE532D2B89F49000BF1E98 /* InfoSearchViewController.swift in Sources */,
 				7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */,
+				562380A62B959802006F194E /* ShareDaily.swift in Sources */,
+				337D3BB92BA6F23600431449 /* CreateShareInfoView.swift in Sources */,
 				33FE53332B89F49000BF1E98 /* InfoSection.swift in Sources */,
 				562380952B936027006F194E /* AddDailyViewController.swift in Sources */,
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
@@ -823,15 +896,18 @@
 				33FE53252B89F49000BF1E98 /* InfoViewController.swift in Sources */,
 				DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */,
 				562351542B80FD61005B2071 /* DailyCollectionViewCell.swift in Sources */,
+				33E466962BAD81F90078E82B /* PhotoCell.swift in Sources */,
 				3336ED872B930A2900658729 /* ShareInfoManager.swift in Sources */,
 				DBA97AB22B7EEC8900C4D6BB /* DailyViewController.swift in Sources */,
 				33FE53232B89F49000BF1E98 /* InfoPopularCell.swift in Sources */,
+				33E466992BAD83C40078E82B /* SelectPhoto.swift in Sources */,
 				562380972B93603B006F194E /* AddDailyView.swift in Sources */,
 				33FE53352B89F49000BF1E98 /* DetailViewModel.swift in Sources */,
 				33FE532F2B89F49000BF1E98 /* InfoSearchCategoryHeader.swift in Sources */,
 				33FE53222B89F49000BF1E98 /* InfoView.swift in Sources */,
 				33FE532A2B89F49000BF1E98 /* InfoSearchView.swift in Sources */,
 				DBA97AF82B7EF23400C4D6BB /* UserModel.swift in Sources */,
+				337D3BC72BAC21DA00431449 /* CreateShareInfoSection.swift in Sources */,
 				3349CABB2B8DD6A800C48362 /* SocialButtonType.swift in Sources */,
 				CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */,
 				33FE53342B89F49000BF1E98 /* InfoDetailView.swift in Sources */,
@@ -840,6 +916,7 @@
 				33FE53312B89F49000BF1E98 /* ShareInfo.swift in Sources */,
 				DBA97AFA2B7EF25F00C4D6BB /* Pet.swift in Sources */,
 				33FE53242B89F49000BF1E98 /* InfoShareCell.swift in Sources */,
+				337D3BBD2BA819A700431449 /* CreateShareInfoViewModel.swift in Sources */,
 				563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */,
 				DB4E6A5B2B8A01BF00624E8C /* KakaoMapViewController.swift in Sources */,
 				33FE53262B89F49000BF1E98 /* InfoSearchCategoryCell.swift in Sources */,
@@ -854,20 +931,25 @@
 				33FE53282B89F49000BF1E98 /* InfoSearchViewModel.swift in Sources */,
 				560DFC042B7E5B6B00487736 /* AppDelegate.swift in Sources */,
 				335F5BA82B997AD7002D7F75 /* StorageManager.swift in Sources */,
+				337D3BBB2BA80EE900431449 /* StackFactory.swift in Sources */,
 				33FE53392B89F49000BF1E98 /* InfoDetailContentView.swift in Sources */,
 				339937F72B8E4A8100E9CCA2 /* TopicInfo.swift in Sources */,
 				DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */,
+				56A267032BA67D8500A1A412 /* DailyViewModel.swift in Sources */,
 				77CC304A2B8C2DCE00FDF6FB /* CustomTextField.swift in Sources */,
+				337D3BC32BAC07AB00431449 /* HashTagCell.swift in Sources */,
 				33FE532C2B89F49000BF1E98 /* InfoSearchCollectionView.swift in Sources */,
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,
 				77DAE4F42B8A33D80020B4AA /* MyPageProfileView.swift in Sources */,
+				56790F1A2B9D1CB0003B4079 /* AddDailyViewModel.swift in Sources */,
 				33946F8C2B89F59B00C0EDF3 /* Constants.swift in Sources */,
 				33FE53292B89F49000BF1E98 /* InfoSearchSection.swift in Sources */,
 				DBA97B042B7EF82C00C4D6BB /* UIView+Extension.swift in Sources */,
 				77DAE4EC2B8A33CD0020B4AA /* MyPageSettingViewController.swift in Sources */,
 				33FE53272B89F49000BF1E98 /* InfoSearchTopicCell.swift in Sources */,
 				563E61802B896B88006FC307 /* UIColor+Extension.swift in Sources */,
+				56790F182B9D1B72003B4079 /* ShareDailyManager.swift in Sources */,
 				CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */,
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
 				779F5CFE2BAF183D005B682C /* SavePostViewController.swift in Sources */,
@@ -887,9 +969,11 @@
 				77DAE4ED2B8A33CD0020B4AA /* MyPageViewController.swift in Sources */,
 				56FD90702B80F43B00AAD29B /* DailyView.swift in Sources */,
 				331C6E6E2B9B51C5007D8EFE /* AlertFactory.swift in Sources */,
+				337D3BB72BA6F1FD00431449 /* CreateShareInfoViewController.swift in Sources */,
 				33946F8E2B89F5F600C0EDF3 /* UIViewController+.swift in Sources */,
 				339937F52B8DE57A00E9CCA2 /* UITextField+.swift in Sources */,
 				779F5D022BAF1850005B682C /* SettingViewController.swift in Sources */,
+				337D3BC12BAC062E00431449 /* DynamicCollectionView.swift in Sources */,
 				DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */,
 				33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */,
 			);

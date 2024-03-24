@@ -13,10 +13,13 @@ final class TabBarController: UIViewController {
     let dailyVC = DailyViewController()
     let infoVC = InfoViewController()
     // 기존 펫스티벌 뷰컨트롤러 주석 처리
-//    let locationVC = AdoptViewController(nibName: "AdoptViewController", bundle: nil)
+    let AddDailyVC = AddDailyViewController()
     let locationVC = LocationViewController()
     let mypageVC = MyPageViewController()
     private let tabBarView = TabBarView(frame: .zero)
+    
+    let imagePickerController = UIImagePickerController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ final class TabBarController: UIViewController {
 
 private extension TabBarController {
     func configure() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ThemeColor.systemBackground
         view.addSubview(dailyVC.view)
         changeTintColor(buttonType: tabBarView.dailyBtn)
     }
@@ -63,6 +66,10 @@ private extension TabBarController {
         changeTintColor(buttonType: tabBarView.infoBtn)
     }
     
+    @objc func didTappedAdd() {
+        videoPicker()
+    }
+    
     @objc func didTappedLocation() {
         for view in self.view.subviews {
             view.removeFromSuperview()
@@ -86,6 +93,7 @@ private extension TabBarController {
     func configTabBarBtn() {
         tabBarView.dailyBtn.addTarget(self, action: #selector(didTappedDaily), for: .touchUpInside)
         tabBarView.infoBtn.addTarget(self, action: #selector(didTappedInfo), for: .touchUpInside)
+        tabBarView.addBtn.addTarget(self, action: #selector(didTappedAdd), for: .touchUpInside)
         tabBarView.locationBtn.addTarget(self, action: #selector(didTappedLocation), for: .touchUpInside)
         tabBarView.myBtn.addTarget(self, action: #selector(didTappedMyPage), for: .touchUpInside)
     }
@@ -95,5 +103,32 @@ private extension TabBarController {
         tabBarView.infoBtn.isSelected = (buttonType == tabBarView.infoBtn)
         tabBarView.locationBtn.isSelected = (buttonType == tabBarView.locationBtn)
         tabBarView.myBtn.isSelected = (buttonType == tabBarView.myBtn)
+    }
+    
+    private func videoPicker() {
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.mediaTypes = ["public.movie"]
+        imagePickerController.allowsEditing = true
+        
+        present(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+extension TabBarController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        CommonUtil.print(output: info)
+        
+        if let videoURL = info[.mediaURL] as? URL {
+            AddDailyVC.modalPresentationStyle = .fullScreen
+            AddDailyVC.videoURL = videoURL
+            AppDelegate.applicationDelegate().navigationController?.pushViewController(AddDailyVC, animated: true)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

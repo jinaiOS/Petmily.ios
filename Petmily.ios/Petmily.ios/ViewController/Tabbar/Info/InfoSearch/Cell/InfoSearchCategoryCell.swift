@@ -56,9 +56,9 @@ extension InfoSearchCategoryCell {
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: Constants.Size.size16,
-                                      leading: Constants.Size.size24,
+                                      leading: Constants.Size.size16,
                                       bottom: Constants.Size.size24,
-                                      trailing: Constants.Size.size24)
+                                      trailing: Constants.Size.size16)
         section.interGroupSpacing = Constants.Spacing.spacing8
         
         let sectionHeader = InfoSearchCategoryHeader.categoryHeader()
