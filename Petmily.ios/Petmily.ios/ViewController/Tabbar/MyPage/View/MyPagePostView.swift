@@ -12,14 +12,14 @@ import SnapKit
 class MyPagePostView: UIView {
     var postView: UIView = {
         var view = UIView()
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = Constants.Radius.radius9
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
         return view
     }()
     
     var postSegmentControl: UISegmentedControl = {
         var control = UISegmentedControl(items: ["데일리", "정보공유"])
-        let font = UIFont.boldSystemFont(ofSize: 20)
+        let font = ThemeFont.b20
         control.setTitleTextAttributes([NSAttributedString.Key.font: font],for: .normal)
         control.selectedSegmentTintColor = .gray
         control.backgroundColor = .white
