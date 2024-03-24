@@ -112,13 +112,17 @@
 		CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */; };
 		CC7AC6B42B89EB4F00FA1F8B /* registViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */; };
 		CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7AC6B72B9404BD00FA1F8B /* InfoUseViewController.swift */; };
-		DB4E6A592B8A016B00624E8C /* KakaoMapsSDK_SPM in Frameworks */ = {isa = PBXBuildFile; productRef = DB4E6A582B8A016B00624E8C /* KakaoMapsSDK_SPM */; };
-		DB4E6A5B2B8A01BF00624E8C /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E6A5A2B8A01BF00624E8C /* KakaoMapViewController.swift */; };
+		DB408ED82BAF6D86007B7AF2 /* KakaoMapsSDK_SPM in Frameworks */ = {isa = PBXBuildFile; productRef = DB408ED72BAF6D86007B7AF2 /* KakaoMapsSDK_SPM */; };
+		DB408EE02BAF6FE8007B7AF2 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB408EDF2BAF6FE8007B7AF2 /* LocationView.swift */; };
+		DB408EE22BAF6FF2007B7AF2 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB408EE12BAF6FF2007B7AF2 /* LocationViewController.swift */; };
+		DB408EE42BAF7000007B7AF2 /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB408EE32BAF7000007B7AF2 /* KakaoMapViewController.swift */; };
+		DB63299B2BAF83CD00740DCD /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63299A2BAF83CD00740DCD /* LocationDetailViewController.swift */; };
+		DB63299D2BAF8A7400740DCD /* LocationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */; };
+		DB6329A12BAF923200740DCD /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6329A02BAF923200740DCD /* ImageCollectionViewCell.swift */; };
 		DBA97AAC2B7E670600C4D6BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97AAB2B7E670600C4D6BB /* SnapKit */; };
 		DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */; };
 		DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */; };
 		DBA97AB22B7EEC8900C4D6BB /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */; };
-		DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB52B7EECAB00C4D6BB /* LocationViewController.swift */; };
 		DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */; };
 		DBA97ABD2B7EEF5300C4D6BB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97ABC2B7EEF5300C4D6BB /* FirebaseAnalytics */; };
 		DBA97ABF2B7EEF5300C4D6BB /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97ABE2B7EEF5300C4D6BB /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -246,11 +250,15 @@
 		CC7AC6B12B89DF0800FA1F8B /* addpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addpageViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B32B89EB4F00FA1F8B /* registViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registViewController.swift; sourceTree = "<group>"; };
 		CC7AC6B72B9404BD00FA1F8B /* InfoUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUseViewController.swift; sourceTree = "<group>"; };
-		DB4E6A5A2B8A01BF00624E8C /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
+		DB408EDF2BAF6FE8007B7AF2 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		DB408EE12BAF6FF2007B7AF2 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		DB408EE32BAF7000007B7AF2 /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
+		DB63299A2BAF83CD00740DCD /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
+		DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailTableViewCell.swift; sourceTree = "<group>"; };
+		DB6329A02BAF923200740DCD /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
-		DBA97AB52B7EECAB00C4D6BB /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DBA97AF32B7EF1BA00C4D6BB /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		DBA97AF52B7EF20F00C4D6BB /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -289,6 +297,7 @@
 				33F774872B8059D60044DF28 /* FirebaseFirestoreSwift in Frameworks */,
 				DBA97AC32B7EEF5300C4D6BB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				DBA97ABD2B7EEF5300C4D6BB /* FirebaseAnalytics in Frameworks */,
+				DB408ED82BAF6D86007B7AF2 /* KakaoMapsSDK_SPM in Frameworks */,
 				DBA97AD92B7EEF5300C4D6BB /* FirebaseFirestoreSwift in Frameworks */,
 				33F7747D2B8059D60044DF28 /* FirebaseDatabase in Frameworks */,
 				DBA97ABF2B7EEF5300C4D6BB /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
@@ -308,7 +317,6 @@
 				DBA97AEF2B7EEF5300C4D6BB /* FirebaseStorage in Frameworks */,
 				33F7748D2B8059D60044DF28 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				33F7747B2B8059D60044DF28 /* FirebaseCrashlytics in Frameworks */,
-				DB4E6A592B8A016B00624E8C /* KakaoMapsSDK_SPM in Frameworks */,
 				33946F8A2B89F56E00C0EDF3 /* Kingfisher in Frameworks */,
 				DBA97ACF2B7EEF5300C4D6BB /* FirebaseDatabase in Frameworks */,
 				33F774772B8059D60044DF28 /* FirebaseAuth in Frameworks */,
@@ -662,6 +670,35 @@
 			path = Addpage;
 			sourceTree = "<group>";
 		};
+		DB4F7E082BAF69ED00F3022B /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				DB408EE12BAF6FF2007B7AF2 /* LocationViewController.swift */,
+				DB408EE32BAF7000007B7AF2 /* KakaoMapViewController.swift */,
+				DB63299A2BAF83CD00740DCD /* LocationDetailViewController.swift */,
+				DB63299F2BAF8E1200740DCD /* View */,
+				DB63299E2BAF8DFD00740DCD /* Cell */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		DB63299E2BAF8DFD00740DCD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */,
+				DB6329A02BAF923200740DCD /* ImageCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DB63299F2BAF8E1200740DCD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB408EDF2BAF6FE8007B7AF2 /* LocationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DBDBA40D2B7F020F004C10C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -736,13 +773,12 @@
 		DBDBA4132B7F032C004C10C3 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				DB4F7E082BAF69ED00F3022B /* Location */,
 				77DAE4F62B8A340D0020B4AA /* MyPage */,
 				56FD90712B80F44100AAD29B /* Daily */,
 				33FE52FA2B89F49000BF1E98 /* Info */,
-				DBA97AB52B7EECAB00C4D6BB /* LocationViewController.swift */,
 				DBA97AB92B7EEE3200C4D6BB /* BaseViewController.swift */,
 				DBA97AF32B7EF1BA00C4D6BB /* IntroViewController.swift */,
-				DB4E6A5A2B8A01BF00624E8C /* KakaoMapViewController.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -813,8 +849,8 @@
 				33F7748E2B8059D60044DF28 /* FirebaseInAppMessagingSwift-Beta */,
 				3302417F2B805A070045F56E /* SnapKit */,
 				33946F892B89F56E00C0EDF3 /* Kingfisher */,
-				DB4E6A582B8A016B00624E8C /* KakaoMapsSDK_SPM */,
 				7719DD492B936CB5003797F4 /* SideMenu */,
+				DB408ED72BAF6D86007B7AF2 /* KakaoMapsSDK_SPM */,
 			);
 			productName = Petmily.ios;
 			productReference = 560DFC002B7E5B6B00487736 /* Petmily.ios.app */;
@@ -849,8 +885,8 @@
 				DBA97ABB2B7EEF5300C4D6BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3302417E2B805A070045F56E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				33946F882B89F56E00C0EDF3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				DB4E6A572B8A016B00624E8C /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
 				7719DD482B936CB5003797F4 /* XCRemoteSwiftPackageReference "SideMenu" */,
+				DB408ED62BAF6D86007B7AF2 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
 			);
 			productRefGroup = 560DFC012B7E5B6B00487736 /* Products */;
 			projectDirPath = "";
@@ -881,12 +917,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB63299B2BAF83CD00740DCD /* LocationDetailViewController.swift in Sources */,
 				33FE532D2B89F49000BF1E98 /* InfoSearchViewController.swift in Sources */,
 				7719DD4C2B936EC3003797F4 /* SideMenuController.swift in Sources */,
 				562380A62B959802006F194E /* ShareDaily.swift in Sources */,
 				337D3BB92BA6F23600431449 /* CreateShareInfoView.swift in Sources */,
 				33FE53332B89F49000BF1E98 /* InfoSection.swift in Sources */,
 				562380952B936027006F194E /* AddDailyViewController.swift in Sources */,
+				DB408EE42BAF7000007B7AF2 /* KakaoMapViewController.swift in Sources */,
 				563E61882B89A0A8006FC307 /* CommentViewController.swift in Sources */,
 				332607602B8A46BE00A66DC5 /* PetmilyImage.swift in Sources */,
 				DBA97B022B7EF47600C4D6BB /* Common.swift in Sources */,
@@ -896,6 +934,7 @@
 				33FE53252B89F49000BF1E98 /* InfoViewController.swift in Sources */,
 				DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */,
 				562351542B80FD61005B2071 /* DailyCollectionViewCell.swift in Sources */,
+				DB408EE22BAF6FF2007B7AF2 /* LocationViewController.swift in Sources */,
 				33E466962BAD81F90078E82B /* PhotoCell.swift in Sources */,
 				3336ED872B930A2900658729 /* ShareInfoManager.swift in Sources */,
 				DBA97AB22B7EEC8900C4D6BB /* DailyViewController.swift in Sources */,
@@ -911,6 +950,7 @@
 				3349CABB2B8DD6A800C48362 /* SocialButtonType.swift in Sources */,
 				CC7AC6B22B89DF0800FA1F8B /* addpageViewController.swift in Sources */,
 				33FE53342B89F49000BF1E98 /* InfoDetailView.swift in Sources */,
+				DB408EE02BAF6FE8007B7AF2 /* LocationView.swift in Sources */,
 				33FE53302B89F49000BF1E98 /* InfoViewModel.swift in Sources */,
 				33FE53362B89F49000BF1E98 /* InfoDetailViewController.swift in Sources */,
 				33FE53312B89F49000BF1E98 /* ShareInfo.swift in Sources */,
@@ -918,7 +958,6 @@
 				33FE53242B89F49000BF1E98 /* InfoShareCell.swift in Sources */,
 				337D3BBD2BA819A700431449 /* CreateShareInfoViewModel.swift in Sources */,
 				563E617E2B896850006FC307 /* UIImage+Extension.swift in Sources */,
-				DB4E6A5B2B8A01BF00624E8C /* KakaoMapViewController.swift in Sources */,
 				33FE53262B89F49000BF1E98 /* InfoSearchCategoryCell.swift in Sources */,
 				DBA97ABA2B7EEE3200C4D6BB /* BaseViewController.swift in Sources */,
 				33FE533E2B89F4B400BF1E98 /* ThemeFont.swift in Sources */,
@@ -940,6 +979,7 @@
 				337D3BC32BAC07AB00431449 /* HashTagCell.swift in Sources */,
 				33FE532C2B89F49000BF1E98 /* InfoSearchCollectionView.swift in Sources */,
 				33FE533C2B89F49000BF1E98 /* InfoPopularHeader.swift in Sources */,
+				DB63299D2BAF8A7400740DCD /* LocationDetailTableViewCell.swift in Sources */,
 				77DAE4F02B8A33D10020B4AA /* MyPageCollectionViewCell.swift in Sources */,
 				77DAE4F42B8A33D80020B4AA /* MyPageProfileView.swift in Sources */,
 				56790F1A2B9D1CB0003B4079 /* AddDailyViewModel.swift in Sources */,
@@ -954,6 +994,7 @@
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
 				779F5CFE2BAF183D005B682C /* SavePostViewController.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
+				DB6329A12BAF923200740DCD /* ImageCollectionViewCell.swift in Sources */,
 				3336ED892B930C1300658729 /* Breed.swift in Sources */,
 				77DAE4F52B8A33D80020B4AA /* MyPagePostView.swift in Sources */,
 				CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */,
@@ -974,7 +1015,6 @@
 				339937F52B8DE57A00E9CCA2 /* UITextField+.swift in Sources */,
 				779F5D022BAF1850005B682C /* SettingViewController.swift in Sources */,
 				337D3BC12BAC062E00431449 /* DynamicCollectionView.swift in Sources */,
-				DBA97AB62B7EECAB00C4D6BB /* LocationViewController.swift in Sources */,
 				33BA6C512B7E631B004AA232 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1119,7 +1159,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YRZW7MZ3P5;
+				DEVELOPMENT_TEAM = NNZY5VCJT4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Petmily.ios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1147,7 +1187,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YRZW7MZ3P5;
+				DEVELOPMENT_TEAM = NNZY5VCJT4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Petmily.ios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1216,12 +1256,12 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		DB4E6A572B8A016B00624E8C /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
+		DB408ED62BAF6D86007B7AF2 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM";
+			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM.git";
 			requirement = {
-				kind = exactVersion;
-				version = 2.6.3;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.1;
 			};
 		};
 		DBA97AAA2B7E670600C4D6BB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -1330,9 +1370,9 @@
 			package = 7719DD482B936CB5003797F4 /* XCRemoteSwiftPackageReference "SideMenu" */;
 			productName = SideMenu;
 		};
-		DB4E6A582B8A016B00624E8C /* KakaoMapsSDK_SPM */ = {
+		DB408ED72BAF6D86007B7AF2 /* KakaoMapsSDK_SPM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DB4E6A572B8A016B00624E8C /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */;
+			package = DB408ED62BAF6D86007B7AF2 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */;
 			productName = KakaoMapsSDK_SPM;
 		};
 		DBA97AAB2B7E670600C4D6BB /* SnapKit */ = {
