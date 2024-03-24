@@ -15,6 +15,7 @@ extension ThemeColor {
     static let label: UIColor = .label
     static let lightGray: UIColor = .lightGray
     static let darkGray: UIColor = .darkGray
+    static let clear: UIColor = .clear
 }
 
 extension ThemeColor {

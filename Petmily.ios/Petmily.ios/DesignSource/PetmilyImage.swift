@@ -22,6 +22,8 @@ extension PetmilyImage {
     static var search = UIImage(named: "search")!
     static var like = UIImage(named: "btn_like")!
     static var unlike = UIImage(named: "btn_unlike")!
+    static var apply = UIImage(named: "btn_apply")!
+    static var more = UIImage(named: "btn_more")!
     static var union = UIImage(named: "Union")!
     static var back = UIImage(named: "btn_back")!
     static var next = UIImage(named: "btn_next")!

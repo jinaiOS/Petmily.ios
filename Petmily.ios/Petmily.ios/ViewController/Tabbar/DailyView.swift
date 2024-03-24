@@ -13,8 +13,8 @@ class DailyView: UIView {
     lazy var lblHeader: UILabel = {
        let label = UILabel()
         label.text = "펫스티벌"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = .white
+        label.font = ThemeFont.b24
+        label.textColor = ThemeColor.white
         return label
     }()
     /** @brief main collectionview */
@@ -42,16 +42,16 @@ class DailyView: UIView {
        let button = UIButton()
         var config = UIButton.Configuration.plain()
         config.imagePlacement = .top
-        config.image = UIImage(named: "btn_unlike")
+        config.image = PetmilyImage.unlike
         config.title = "0"
         config.imagePadding = 5
-        config.baseForegroundColor = .white
+        config.baseForegroundColor = ThemeColor.white
         button.contentVerticalAlignment = .bottom
-        button.tintColor = .clear
+        button.tintColor = ThemeColor.clear
         button.configuration = config
         
         /// select handler
-        let likeImg = UIImage(named: "btn_like")?.resize(newWidth: 40)
+        let likeImg = PetmilyImage.like.resize(newWidth: Constants.Size.size40)
         
         button.configurationUpdateHandler = { button in
             switch button.state {
@@ -59,7 +59,7 @@ class DailyView: UIView {
                 config.image = likeImg
                 config.title = "1"
             default:
-                config.image = UIImage(named: "btn_unlike")
+                config.image = PetmilyImage.unlike
                 config.title = "0"
             }
             button.configuration = config
@@ -69,14 +69,14 @@ class DailyView: UIView {
     /** @brief 댓글 button */
     lazy var btnApply: UIButton = {
        let button = UIButton()
-        button.setImage(UIImage(named: "btn_apply"), for: .normal)
+        button.setImage(PetmilyImage.apply, for: .normal)
         button.setTitle("0", for: .normal)
         return button
     }()
     /** @brief 더보기 button */
     lazy var btnMore: UIButton = {
        let button = UIButton()
-        button.setImage(UIImage(named: "btn_more"), for: .normal)
+        button.setImage(PetmilyImage.more, for: .normal)
         return button
     }()
     /** @brief 내용 stackview */
@@ -102,32 +102,32 @@ class DailyView: UIView {
     lazy var lblProfile: UILabel = {
        let label = UILabel()
         label.text = "상우네"
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = .white
+        label.font = ThemeFont.m18
+        label.textColor = ThemeColor.white
         return label
     }()
     /** @brief 펫 이름 label */
     lazy var lblPetName: UILabel = {
        let label = UILabel()
         label.text = "단지"
-        label.font = .boldSystemFont(ofSize: 20)
-        label.textColor = .primary
+        label.font = ThemeFont.b20
+        label.textColor = ThemeColor.appPink
         return label
     }()
     /** @brief 펫 종류 label */
     lazy var lblPetType: UILabel = {
        let label = UILabel()
         label.text = "멍뭉이"
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .white
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.white
         return label
     }()
     /** @brief 내용 label */
     lazy var lblContent: UILabel = {
        let label = UILabel()
         label.text = "이쁘죠? 귀엽죠? 못 참겠죠?"
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = .white
+        label.font = ThemeFont.m18
+        label.textColor = ThemeColor.white
         return label
     }()
     /** @brief 위치, 해시태그 view */
@@ -141,31 +141,31 @@ class DailyView: UIView {
        let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.8509803922, blue: 0.8509803922, alpha: 1)
         view.addSubview(lblLocation)
-        view.cornerRadius = 11
+        view.cornerRadius = Constants.Radius.radius13
         return view
     }()
     /** @brief 위치 label */
     lazy var lblLocation: UILabel = {
        let label = UILabel()
         label.text = "위치 - 부천"
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.6431372549, alpha: 1)
+        label.font = ThemeFont.m18
+        label.textColor = ThemeColor.mediumGray
         return label
     }()
     /** @brief 해시태그 view */
     lazy var vTag: UIView = {
        let view = UIView()
-        view.backgroundColor = .primary
+        view.backgroundColor = ThemeColor.appPink
         view.addSubview(lblTag)
-        view.cornerRadius = 11
+        view.cornerRadius = Constants.Radius.radius13
         return view
     }()
     /** @brief 해시태그 label */
     lazy var lblTag: UILabel = {
        let label = UILabel()
         label.text = "#태그"
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = .white
+        label.font = ThemeFont.m18
+        label.textColor = ThemeColor.white
         return label
     }()
     
@@ -184,21 +184,21 @@ class DailyView: UIView {
         if !Common.IS_IPHONE_SE() {
             lblHeader.snp.makeConstraints {
                 $0.top.equalToSuperview().inset(51)
-                $0.leading.equalToSuperview().inset(15)
+                $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
             }
             
             stvContent.snp.makeConstraints {
-                $0.leading.equalToSuperview().inset(15)
+                $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
                 $0.bottom.equalToSuperview().inset(145)
             }
         } else {
             lblHeader.snp.makeConstraints {
                 $0.top.equalToSuperview().inset(31)
-                $0.leading.equalToSuperview().inset(15)
+                $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
             }
             
             stvContent.snp.makeConstraints {
-                $0.leading.equalToSuperview().inset(15)
+                $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
                 $0.bottom.equalToSuperview().inset(125)
             }
         }
@@ -208,62 +208,62 @@ class DailyView: UIView {
         }
         
         btnLike.snp.makeConstraints {
-            $0.height.equalTo(56)
+            $0.height.equalTo(Constants.Size.size52)
         }
         
         stvButtons.snp.makeConstraints {
-            $0.width.equalTo(40)
-            $0.trailing.equalToSuperview().inset(25)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(160)
+            $0.width.equalTo(Constants.Size.size40)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(Constants.Spacing.spacing160)
         }
         
         vProfile.snp.makeConstraints {
-            $0.height.equalTo(98)
+            $0.height.equalTo(Constants.Size.size100)
         }
         
         imgProfile.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(Constants.Size.size50)
         }
         
         lblProfile.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
-            $0.leading.equalTo(imgProfile.snp.trailing).offset(16)
-            $0.trailing.equalToSuperview().inset(10)
+            $0.top.equalToSuperview().inset(Constants.Spacing.spacing4)
+            $0.leading.equalTo(imgProfile.snp.trailing).offset(Constants.Spacing.spacing16)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing10)
         }
         
         lblPetName.snp.makeConstraints {
-            $0.top.equalTo(lblProfile.snp.bottom).offset(2)
-            $0.leading.equalTo(imgProfile.snp.trailing).offset(16)
+            $0.top.equalTo(lblProfile.snp.bottom).offset(Constants.Spacing.spacing2)
+            $0.leading.equalTo(imgProfile.snp.trailing).offset(Constants.Spacing.spacing16)
         }
         
         lblPetType.snp.makeConstraints {
-            $0.leading.equalTo(lblPetName.snp.trailing).offset(2)
+            $0.leading.equalTo(lblPetName.snp.trailing).offset(Constants.Spacing.spacing2)
             $0.bottom.equalTo(lblPetName)
         }
         
         lblContent.snp.makeConstraints {
-            $0.top.equalTo(imgProfile.snp.bottom).offset(20)
+            $0.top.equalTo(imgProfile.snp.bottom).offset(Constants.Spacing.spacing20)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         
         vLocation.snp.makeConstraints {
-            $0.height.equalTo(32)
+            $0.height.equalTo(Constants.Size.minor35)
             $0.top.bottom.leading.equalToSuperview()
         }
         
         lblLocation.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(6)
+            $0.edges.equalToSuperview().inset(Constants.Spacing.spacing6)
         }
         
         vTag.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(vLocation.snp.trailing).offset(6)
+            $0.leading.equalTo(vLocation.snp.trailing).offset(Constants.Spacing.spacing6)
         }
         
         lblTag.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(6)
+            $0.edges.equalToSuperview().inset(Constants.Spacing.spacing6)
         }
     }
 }

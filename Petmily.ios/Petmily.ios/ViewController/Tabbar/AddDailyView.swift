@@ -11,7 +11,7 @@ class AddDailyView: UIView {
     /** @brief video imageview */
     lazy var imgVideo: UIImageView = {
        let imageview = UIImageView()
-        imageview.cornerRadius = 8
+        imageview.cornerRadius = Constants.Radius.radius7
         imageview.clipsToBounds = true
         return imageview
     }()
@@ -26,7 +26,7 @@ class AddDailyView: UIView {
        let button = UIButton()
         button.backgroundColor = ThemeColor.appPink
         button.titleLabel?.font = ThemeFont.b24
-        button.titleLabel?.textColor = .white
+        button.titleLabel?.textColor = ThemeColor.white
         button.cornerRadius = 30
         button.setTitle("설명 작성", for: .normal)
         return button
@@ -53,29 +53,29 @@ class AddDailyView: UIView {
         [imgVideo, btnBack, btnExplain, btnNext].forEach { addSubview($0) }
         
         imgVideo.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(13)
-            $0.leading.trailing.equalToSuperview().inset(23)
+            $0.top.equalToSuperview().inset(Constants.Spacing.spacing14)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
         }
         
         btnBack.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(23)
-            $0.width.equalTo(30)
-            $0.height.equalTo(56)
+            $0.top.equalToSuperview().inset(Constants.Spacing.spacing20)
+            $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.width.equalTo(Constants.Size.size30)
+            $0.height.equalTo(Constants.Size.size52)
         }
         
         btnExplain.snp.makeConstraints {
-            $0.top.equalTo(imgVideo.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().inset(23)
-            $0.bottom.equalToSuperview().inset(44)
-            $0.height.equalTo(60)
+            $0.top.equalTo(imgVideo.snp.bottom).offset(Constants.Spacing.spacing16)
+            $0.leading.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.bottom.equalToSuperview().inset(Constants.Spacing.spacing40)
+            $0.height.equalTo(Constants.Size.size52)
         }
         
         btnNext.snp.makeConstraints {
-            $0.top.equalTo(imgVideo.snp.bottom).offset(16)
-            $0.trailing.equalToSuperview().inset(23)
-            $0.leading.equalTo(btnExplain.snp.trailing).offset(9)
-            $0.width.height.equalTo(60)
+            $0.top.equalTo(imgVideo.snp.bottom).offset(Constants.Spacing.spacing16)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.leading.equalTo(btnExplain.snp.trailing).offset(Constants.Spacing.spacing10)
+            $0.width.height.equalTo(Constants.Size.size52)
         }
     }
 
