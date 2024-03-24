@@ -48,6 +48,7 @@ extension Constants {
         
         static let spacing40: CGFloat = 40
         static let spacing41: CGFloat = 41
+        static let spacing160: CGFloat = 160
     }
 }
 

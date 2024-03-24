@@ -19,7 +19,7 @@ final class CommentTableViewCell: UITableViewCell {
     /** @brief 베스트 view */
     lazy var vBest: UIView = {
        let view = UIView()
-        view.backgroundColor = .primary
+        view.backgroundColor = ThemeColor.appPink
         view.addSubview(lblBest)
         return view
     }()
@@ -28,16 +28,16 @@ final class CommentTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "BEST"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .white
+        label.font = ThemeFont.m12
+        label.textColor = ThemeColor.white
         return label
     }()
     /** @brief 댓글 헤더 label */
     lazy var lblHeader: UILabel = {
        let label = UILabel()
         label.text = "댓글"
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = #colorLiteral(red: 0.4823529412, green: 0.4823529412, blue: 0.4823529412, alpha: 1)
+        label.font = ThemeFont.m14
+        label.textColor = ThemeColor.darkGray
         return label
     }()
     /** @brief 댓글 label */
@@ -45,7 +45,7 @@ final class CommentTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "댓글"
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 14)
+        label.font = ThemeFont.m14
         return label
     }()
     /** @brief 댓글 label */
@@ -53,8 +53,8 @@ final class CommentTableViewCell: UITableViewCell {
        let label = UILabel()
         label.text = "1분 전"
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = #colorLiteral(red: 0.4823529412, green: 0.4823529412, blue: 0.4823529412, alpha: 1)
+        label.font = ThemeFont.m12
+        label.textColor = ThemeColor.darkGray
         return label
     }()
     
