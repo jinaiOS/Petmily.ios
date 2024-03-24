@@ -12,7 +12,7 @@ class CommentView: UIView {
     lazy var lblHeader: UILabel = {
        let label = UILabel()
         label.text = "댓글"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = ThemeFont.b24
         label.textColor = ThemeColor.black
         return label
     }()
@@ -65,15 +65,15 @@ class CommentView: UIView {
         [lblHeader, vHeaderLine, tvComment, vTxvComment].forEach { addSubview($0) }
         
         lblHeader.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(40)
-            $0.height.equalTo(20)
+            $0.top.equalToSuperview().inset(Constants.Spacing.spacing40)
+            $0.height.equalTo(Constants.Size.size20)
             $0.centerX.equalToSuperview()
         }
         
         vHeaderLine.snp.makeConstraints {
-            $0.top.equalTo(lblHeader.snp.bottom).offset(16)
+            $0.top.equalTo(lblHeader.snp.bottom).offset(Constants.Spacing.spacing16)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(1)
+            $0.height.equalTo(Constants.Size.size1)
         }
         
         tvComment.snp.makeConstraints {
@@ -82,10 +82,10 @@ class CommentView: UIView {
         }
         
         vTxvComment.snp.makeConstraints {
-            $0.height.equalTo(35)
-            $0.top.equalTo(tvComment.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview().inset(40)
+            $0.height.equalTo(Constants.Size.minor35)
+            $0.top.equalTo(tvComment.snp.bottom).offset(Constants.Spacing.spacing20)
+            $0.leading.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.bottom.equalToSuperview().inset(Constants.Spacing.spacing40)
         }
         
         txvComment.snp.makeConstraints {
@@ -94,7 +94,7 @@ class CommentView: UIView {
         
         btnComment.snp.makeConstraints {
             $0.top.trailing.bottom.equalToSuperview()
-            $0.width.equalTo(45)
+            $0.width.equalTo(Constants.Size.size45)
             $0.leading.equalTo(txvComment.snp.trailing)
         }
     }

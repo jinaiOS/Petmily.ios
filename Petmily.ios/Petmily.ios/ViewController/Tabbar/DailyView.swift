@@ -208,62 +208,62 @@ class DailyView: UIView {
         }
         
         btnLike.snp.makeConstraints {
-            $0.height.equalTo(56)
+            $0.height.equalTo(Constants.Size.size52)
         }
         
         stvButtons.snp.makeConstraints {
-            $0.width.equalTo(40)
-            $0.trailing.equalToSuperview().inset(25)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(160)
+            $0.width.equalTo(Constants.Size.size40)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(Constants.Spacing.spacing160)
         }
         
         vProfile.snp.makeConstraints {
-            $0.height.equalTo(98)
+            $0.height.equalTo(Constants.Size.size100)
         }
         
         imgProfile.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(Constants.Size.size50)
         }
         
         lblProfile.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(4)
+            $0.top.equalToSuperview().inset(Constants.Spacing.spacing4)
             $0.leading.equalTo(imgProfile.snp.trailing).offset(Constants.Spacing.spacing16)
-            $0.trailing.equalToSuperview().inset(10)
+            $0.trailing.equalToSuperview().inset(Constants.Spacing.spacing10)
         }
         
         lblPetName.snp.makeConstraints {
-            $0.top.equalTo(lblProfile.snp.bottom).offset(2)
-            $0.leading.equalTo(imgProfile.snp.trailing).offset(16)
+            $0.top.equalTo(lblProfile.snp.bottom).offset(Constants.Spacing.spacing2)
+            $0.leading.equalTo(imgProfile.snp.trailing).offset(Constants.Spacing.spacing16)
         }
         
         lblPetType.snp.makeConstraints {
-            $0.leading.equalTo(lblPetName.snp.trailing).offset(2)
+            $0.leading.equalTo(lblPetName.snp.trailing).offset(Constants.Spacing.spacing2)
             $0.bottom.equalTo(lblPetName)
         }
         
         lblContent.snp.makeConstraints {
-            $0.top.equalTo(imgProfile.snp.bottom).offset(20)
+            $0.top.equalTo(imgProfile.snp.bottom).offset(Constants.Spacing.spacing20)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         
         vLocation.snp.makeConstraints {
-            $0.height.equalTo(32)
+            $0.height.equalTo(Constants.Size.minor35)
             $0.top.bottom.leading.equalToSuperview()
         }
         
         lblLocation.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(6)
+            $0.edges.equalToSuperview().inset(Constants.Spacing.spacing6)
         }
         
         vTag.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(vLocation.snp.trailing).offset(6)
+            $0.leading.equalTo(vLocation.snp.trailing).offset(Constants.Spacing.spacing6)
         }
         
         lblTag.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(6)
+            $0.edges.equalToSuperview().inset(Constants.Spacing.spacing6)
         }
     }
 }
