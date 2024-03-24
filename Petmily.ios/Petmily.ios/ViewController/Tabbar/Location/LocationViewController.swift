@@ -26,6 +26,11 @@ class LocationViewController: UIViewController {
     
     @objc func modalButtonTapped() {
         let locationDetailVC = LocationDetailViewController()
+        locationDetailVC.modalPresentationStyle = .pageSheet
+        if let sheetPresentationController = locationDetailVC.presentationController as? UISheetPresentationController {
+            sheetPresentationController.prefersGrabberVisible = true
+            locationDetailVC.isModalInPresentation = false
+        }
         self.present(locationDetailVC, animated: true, completion: nil)
     }
 }

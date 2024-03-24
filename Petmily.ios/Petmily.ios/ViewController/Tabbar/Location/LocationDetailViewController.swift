@@ -7,44 +7,55 @@ class LocationDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         setupTableView()
     }
     
     private func setupTableView() {
-        // 테이블 뷰 초기화 및 설정
         tableView = UITableView()
         tableView.register(LocationDetailTableViewCell.self, forCellReuseIdentifier: "LocationDetailTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
         
-        // 테이블 뷰를 뷰에 추가
         view.addSubview(tableView)
         
-        // SnapKit을 사용하여 레이아웃 제약 조건 설정
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
     }
-
+        
+    @objc func commentButtonPressed() {
+        let vc = CommentViewController()
+        guard let sheet = vc.presentationController as? UISheetPresentationController else {
+            return
+        }
+        sheet.detents = [.medium(), .large()]
+        sheet.largestUndimmedDetentIdentifier = .large
+        sheet.prefersGrabberVisible = true
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 extension LocationDetailViewController: UITableViewDelegate, UITableViewDataSource {
-    // UITableViewDataSource 필수 메서드
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 여기에 섹션별 행 수를 반환합니다.
-        return 10 // 임시 데이터
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationDetailTableViewCell", for: indexPath) as! LocationDetailTableViewCell
-        cell.textLabel?.text = "Row \(indexPath.row)"
-        return cell
-    }
-
-    // UITableViewDelegate 메서드 (선택적)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LocationDetailTableViewCell", for: indexPath) as! LocationDetailTableViewCell
+            cell.commentButtonTapped = { [weak self] in
+                self?.commentButtonPressed()
+            }
+            return cell
+        }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 여기에 특정 행이 선택되었을 때의 처리 로직을 구현합니다.
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 610
     }
 }

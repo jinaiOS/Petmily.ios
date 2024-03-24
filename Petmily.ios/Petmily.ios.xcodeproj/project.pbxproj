@@ -113,6 +113,7 @@
 		DB408EE42BAF7000007B7AF2 /* KakaoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB408EE32BAF7000007B7AF2 /* KakaoMapViewController.swift */; };
 		DB63299B2BAF83CD00740DCD /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63299A2BAF83CD00740DCD /* LocationDetailViewController.swift */; };
 		DB63299D2BAF8A7400740DCD /* LocationDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */; };
+		DB6329A12BAF923200740DCD /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6329A02BAF923200740DCD /* ImageCollectionViewCell.swift */; };
 		DBA97AAC2B7E670600C4D6BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DBA97AAB2B7E670600C4D6BB /* SnapKit */; };
 		DBA97AAE2B7EEB9300C4D6BB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */; };
 		DBA97AB02B7EEBEA00C4D6BB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */; };
@@ -244,6 +245,7 @@
 		DB408EE32BAF7000007B7AF2 /* KakaoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapViewController.swift; sourceTree = "<group>"; };
 		DB63299A2BAF83CD00740DCD /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 		DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailTableViewCell.swift; sourceTree = "<group>"; };
+		DB6329A02BAF923200740DCD /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBA97AAD2B7EEB9300C4D6BB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DBA97AAF2B7EEBEA00C4D6BB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DBA97AB12B7EEC8900C4D6BB /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
@@ -624,13 +626,30 @@
 		DB4F7E082BAF69ED00F3022B /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				DB408EDF2BAF6FE8007B7AF2 /* LocationView.swift */,
 				DB408EE12BAF6FF2007B7AF2 /* LocationViewController.swift */,
 				DB408EE32BAF7000007B7AF2 /* KakaoMapViewController.swift */,
 				DB63299A2BAF83CD00740DCD /* LocationDetailViewController.swift */,
-				DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */,
+				DB63299F2BAF8E1200740DCD /* View */,
+				DB63299E2BAF8DFD00740DCD /* Cell */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		DB63299E2BAF8DFD00740DCD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB63299C2BAF8A7400740DCD /* LocationDetailTableViewCell.swift */,
+				DB6329A02BAF923200740DCD /* ImageCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DB63299F2BAF8E1200740DCD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB408EDF2BAF6FE8007B7AF2 /* LocationView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DBDBA40D2B7F020F004C10C3 /* Model */ = {
@@ -925,6 +944,7 @@
 				CC7AC6B82B9404BD00FA1F8B /* InfoUseViewController.swift in Sources */,
 				33FE532B2B89F49000BF1E98 /* InfoSearchContentView.swift in Sources */,
 				DBA97AFC2B7EF39400C4D6BB /* BaseHeaderViewController.swift in Sources */,
+				DB6329A12BAF923200740DCD /* ImageCollectionViewCell.swift in Sources */,
 				3336ED892B930C1300658729 /* Breed.swift in Sources */,
 				77DAE4F52B8A33D80020B4AA /* MyPagePostView.swift in Sources */,
 				CC7AC6B02B89A07100FA1F8B /* loginViewController.swift in Sources */,
