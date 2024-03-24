@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Combine
 import SideMenu
 import SnapKit
 
@@ -22,6 +23,7 @@ struct TempInfo {
 class MyPageViewController: BaseViewController {
     // MARK: Properties
     private var profileData = User(id: "id1", nickName: "user1", image: "image", pet: [Pet(id: "id1", name: "단지", age: "5살", gender: "남자", breed: "시츄"), Pet(id: "id2", name: "pet2", age: "age2", gender: "gender2", breed: "breed2"), Pet(id: "id3", name: "pet3", age: "age3", gender: "gender3", breed: "breed3")])
+    
     var dailyData: [TempDaily]?
     var infoData: [TempInfo]?
     var dailyThumbnail: UIImage?
@@ -32,6 +34,9 @@ class MyPageViewController: BaseViewController {
     lazy var totalHeight = (self.collectionViewHeight + 2) * CGFloat(self.dailyDummy.count.calculateCount() / 3)
     
     private let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let selectedIndexSubject = CurrentValueSubject<Int, Never>(0)
     
     private var currentProfileIndex = 0 {
         didSet {
@@ -87,6 +92,7 @@ private extension MyPageViewController {
         
         setUpConstraints()
         setUpActions()
+        observe()
     }
     
     func setUpConstraints() {
@@ -111,12 +117,12 @@ private extension MyPageViewController {
         }
         
         myPageProfileView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            $0.top.leading.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
         }
         
         myPagePostView.snp.makeConstraints {
             $0.top.equalTo(myPageProfileView.snp.bottom)
-            $0.leading.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(Constants.Spacing.spacing16)
             $0.bottom.equalTo(contentView.safeAreaLayoutGuide)
         }
         
@@ -134,10 +140,11 @@ private extension MyPageViewController {
     }
     
     private func setUpActions() {
-        myPagePostView.postSegmentControl.addAction(UIAction(handler: { [weak self] _ in
-            guard let segment = self?.myPagePostView.postSegmentControl else { return }
-            self?.didChangeValue(segment: segment)
-        }), for: .touchUpInside)
+        myPagePostView.postSegmentControl.addAction(UIAction { [weak self] action in
+            if let segmentControl = action.sender as? UISegmentedControl {
+                self?.selectedIndexSubject.send(segmentControl.selectedSegmentIndex)
+            }
+        }, for: .valueChanged)
         
         myPageProfileView.editProfileButton.addAction(UIAction(handler: { [weak self] _ in
             self?.tappedEditButton()
@@ -146,6 +153,7 @@ private extension MyPageViewController {
         myPageProfileView.settingButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
             let vc = SideMenuController()
+            vc.delegate = self
             let sideMenu = SideMenuNavigationController(rootViewController: vc)
             self.setUpSideMenuNavigationVC(vc: self, menu: sideMenu)
             self.present(sideMenu, animated: true)
@@ -159,6 +167,28 @@ private extension MyPageViewController {
             }
         }
     }
+    
+    func setUpSideMenuNavigationVC(vc: MyPageViewController, menu: SideMenuNavigationController) {
+        menu.dismissOnPresent = true
+        menu.dismissOnPush = true
+        menu.enableTapToDismissGesture = true
+        menu.enableSwipeToDismissGesture = true
+        menu.sideMenuDelegate = vc
+        menu.menuWidth = 240
+        menu.presentationStyle = .menuSlideIn
+        SideMenuManager.default.rightMenuNavigationController = menu
+    }
+}
+
+// MARK: Observe
+private extension MyPageViewController {
+    func observe() {
+        selectedIndexSubject
+            .sink { [weak self] _ in
+                self?.didTapSegmentController()
+            }
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: Methods
@@ -168,9 +198,9 @@ private extension MyPageViewController {
         navigationPushController(viewController: vc, animated: true)
     }
     
-    func didChangeValue(segment: UISegmentedControl) {
-        myPagePostView.shouldHideFirstView = segment.selectedSegmentIndex != 0
-        if segment.selectedSegmentIndex == 0 {
+    func didTapSegmentController() {
+        myPagePostView.shouldHideFirstView = myPagePostView.postSegmentControl.selectedSegmentIndex != 0
+        if myPagePostView.postSegmentControl.selectedSegmentIndex == 0 {
             myPagePostView.dailyCollectionView.snp.remakeConstraints {
                 $0.height.equalTo(totalHeight)
             }
@@ -183,17 +213,6 @@ private extension MyPageViewController {
             myPagePostView.infoCollectionView.collectionViewLayout.invalidateLayout()
             myPagePostView.infoCollectionView.layoutIfNeeded()
         }
-    }
-    
-    func setUpSideMenuNavigationVC(vc: MyPageViewController, menu: SideMenuNavigationController) {
-        menu.dismissOnPresent = true
-        menu.dismissOnPush = true
-        menu.enableTapToDismissGesture = true
-        menu.enableSwipeToDismissGesture = true
-        menu.sideMenuDelegate = vc
-        menu.menuWidth = 240
-        menu.presentationStyle = .menuSlideIn
-        SideMenuManager.default.rightMenuNavigationController = menu
     }
 }
 
@@ -220,12 +239,12 @@ extension MyPageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if myPagePostView.postSegmentControl.selectedSegmentIndex != 1 {
             let collectionViewWidth = collectionView.bounds.width
-            let cellWidth = (collectionViewWidth - 5) / 3
+            let cellWidth = (collectionViewWidth - Constants.Spacing.spacing16 / 2) / 3
             let cellHeight = cellWidth
             return CGSize(width: cellWidth, height: cellHeight)
         } else {
             let collectionViewWidth = collectionView.bounds.width
-            let cellWidth = collectionViewWidth - 10
+            let cellWidth = collectionViewWidth - Constants.Spacing.spacing16
             let cellHeight: CGFloat = 152
             return CGSize(width: cellWidth, height: cellHeight)
         }
@@ -257,8 +276,7 @@ extension MyPageViewController: UITextFieldDelegate {
     }
 }
 
-extension MyPageViewController: SideMenuNavigationControllerDelegate {
-}
+extension MyPageViewController: SideMenuNavigationControllerDelegate {}
 
 extension Int {
     func calculateCount() -> Int {
@@ -269,6 +287,23 @@ extension Int {
             return self + 2
         default:
             return self + 1
+        }
+    }
+}
+
+extension MyPageViewController: SideMenuControllerDelegate {
+    func tappedSideMenu(type: SideMenu) {
+        switch type {
+        case .savePosts:
+            let vc = SavePostViewController()
+//            navigationPushController(viewController: vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
+        case .account:
+            let vc = AccountViewController()
+            navigationPushController(viewController: vc, animated: true)
+        case .settings:
+            let vc = SettingViewController()
+            navigationPushController(viewController: vc, animated: true)
         }
     }
 }
